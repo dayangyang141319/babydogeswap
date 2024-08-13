@@ -458,6 +458,9 @@
 				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 				buttonRootId: 'ton-connect'
 			});
+			const walletsList = await tonConnectUI.getWallets();
+			console.log('tonConnectUI--------',tonConnectUI);
+			console.log('walletsList',walletsList);
 			async function connectToWallet() {
 				const connectedWallet = await tonConnectUI.connectWallet();
 				// Do something with connectedWallet if needed
@@ -468,8 +471,12 @@
 			connectToWallet().catch(error => {
 				console.error("Error connecting to wallet:", error);
 			});
+			tonConnectUI.uiOptions = {
+			      twaReturnUrl: 'https://t.me/babySwap'
+			  };
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
+				console.log('window.onclick10011111111111111');
 				if (event.target == popup) {
 					popup.style.display = "none";
 				} else if (event.target == popup1) {
