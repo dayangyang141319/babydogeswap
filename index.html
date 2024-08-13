@@ -426,16 +426,24 @@
 				</div>
 			</div>
 		</main>
-		<div id="viewport"></div>
+	<!-- 	<div id="viewport"></div>
 		<div id="viewport-params-size"></div>
-		<div id="viewport-params-expand"></div>
+		<div id="viewport-params-expand"></div> -->
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-		<script src="./js/jquery.js"></script>
+		<!-- <script src="./js/jquery.js"></script> -->
 		<script>
 			 const connector = new TonConnectSDK.TonConnect();
 			 console.log(44,connector);
+			 const unsubscribe = connector.onStatusChange(
+			     walletInfo => {
+					 console.log(99);
+			         // update state/reactive variables to show updates in the ui
+			     } 
+			 );
+			 const walletsList = await connector.getWallets();
+			 console.log('-----------',walletsList);
 			// Init TWA
 			Telegram.WebApp.ready();
 			console.log(1111,TON_CONNECT_UI);
