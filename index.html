@@ -430,30 +430,30 @@
 		<div id="viewport-params-size"></div>
 		<div id="viewport-params-expand"></div>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
-		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+		<!-- <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script> -->
 		<script src="./js/jquery.js"></script>
 		<script>
-			Telegram.WebApp.showAlert('33333333333333')
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/manifest.json',
-				buttonRootId: 'ton-connect'
-			});
-			const walletsList = await tonConnectUI.getWallets();
-			Telegram.WebApp.showAlert('tonConnectUI--------',tonConnectUI);
-			Telegram.WebApp.showAlert('walletsList',walletsList);
-			async function connectToWallet() {
-				const connectedWallet = await tonConnectUI.connectWallet();
-				// Do something with connectedWallet if needed
-				Telegram.WebApp.showAlert(connectedWallet);
-			}
+			// Telegram.WebApp.showAlert('33333333333333')
+			// const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+			// 	manifestUrl: 'https://slinadan.github.io/babySwap/manifest.json',
+			// 	buttonRootId: 'ton-connect'
+			// });
+			// const walletsList = await tonConnectUI.getWallets();
+			// Telegram.WebApp.showAlert('tonConnectUI--------',tonConnectUI);
+			// Telegram.WebApp.showAlert('walletsList',walletsList);
+			// async function connectToWallet() {
+			// 	const connectedWallet = await tonConnectUI.connectWallet();
+			// 	// Do something with connectedWallet if needed
+			// 	Telegram.WebApp.showAlert(connectedWallet);
+			// }
 			
-			// Call the function
-			connectToWallet().catch(error => {
-				console.error("Error connecting to wallet:", error);
-			});
-			tonConnectUI.uiOptions = {
-			      twaReturnUrl: 'https://t.me/babySwap'
-			  };
+			// // Call the function
+			// connectToWallet().catch(error => {
+			// 	console.error("Error connecting to wallet:", error);
+			// });
+			// tonConnectUI.uiOptions = {
+			//       twaReturnUrl: 'https://t.me/babySwap'
+			//   };
 			let popup = document.getElementById('popup')
 			let popup1 = document.getElementById('popup1')
 			let morePopup = document.getElementById('morePopup')
