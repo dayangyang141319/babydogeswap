@@ -284,7 +284,6 @@
 				</div>
 				<a href="deal.html" class="btn flex">点击进入</a>
 			</div>
-			<div>88888888888888</div>
 			<div class="flex-bw menuWrap">
 				<div class="flex1">
 					<img src="./images/icon1.png" alt="">
@@ -433,39 +432,50 @@
 		<!-- <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script> -->
 		<script src="./js/jquery.js"></script>
 		<script>
+			console.log(6666);
 			require("buffer");
-			import { TonClient, WalletContractV4, internal } from "@ton/ton";
-			import { mnemonicNew, mnemonicToPrivateKey } from "@ton/crypto";
-			
+			console.log(11111);
+			import {
+				TonClient,
+				WalletContractV4,
+				internal
+			} from "@ton/ton";
+			import {
+				mnemonicNew,
+				mnemonicToPrivateKey
+			} from "@ton/crypto";
+
 			// Create Client
 			const client = new TonClient({
-			  endpoint: 'https://toncenter.com/api/v2/jsonRPC',
+				endpoint: 'https://toncenter.com/api/v2/jsonRPC',
 			});
-			
+
 			// Generate new key
 			let mnemonics = await mnemonicNew();
 			let keyPair = await mnemonicToPrivateKey(mnemonics);
-			
+
 			// Create wallet contract
 			let workchain = 0; // Usually you need a workchain 0
-			let wallet = WalletContractV4.create({ workchain, publicKey: keyPair.publicKey });
+			let wallet = WalletContractV4.create({
+				workchain,
+				publicKey: keyPair.publicKey
+			});
 			let contract = client.open(wallet);
-			
+
 			// Get balance
 			let balance: bigint = await contract.getBalance();
-			
+
 			// Create a transfer
 			let seqno: number = await contract.getSeqno();
 			let transfer = await contract.createTransfer({
-			  seqno,
-			  secretKey: keyPair.secretKey,
-			  messages: [internal({
-			    value: '1.5',
-			    to: 'EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N',
-			    body: 'Hello world',
-			  })]
+				seqno,
+				secretKey: keyPair.secretKey,
+				messages: [internal({
+					value: '1.5',
+					to: 'EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N',
+					body: 'Hello world',
+				})]
 			});
-
 			// Telegram.WebApp.showAlert('33333333333333')
 			// const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 			// 	manifestUrl: 'https://slinadan.github.io/babySwap/manifest.json',
@@ -479,7 +489,7 @@
 			// 	// Do something with connectedWallet if needed
 			// 	Telegram.WebApp.showAlert(connectedWallet);
 			// }
-			
+
 			// // Call the function
 			// connectToWallet().catch(error => {
 			// 	console.error("Error connecting to wallet:", error);
@@ -509,7 +519,7 @@
 			receive.addEventListener('click', function() {
 				popup1.style.display = 'none';
 			});
-			
+
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				console.log('window.onclick10011111111111111');
