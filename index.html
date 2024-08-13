@@ -427,48 +427,20 @@
 				</div>
 			</div>
 		</main>
-	<!-- 	<div id="viewport"></div>
+		<!-- 	<div id="viewport"></div>
 		<div id="viewport-params-size"></div>
 		<div id="viewport-params-expand"></div> -->
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
-		
+
 		<!-- <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script> -->
 		<!-- <script src="./js/jquery.js"></script> -->
 		<script>
-		require("buffer");
-		import { TonClient, WalletContractV4, internal } from "ton";
-		import { mnemonicNew, mnemonicToPrivateKey } from "ton-crypto";
-		
-		// Create Client
-		const client = new TonClient({
-		  endpoint: 'https://toncenter.com/api/v2/jsonRPC',
-		});
-		
-		// Generate new key
-		let mnemonics = await mnemonicNew();
-		let keyPair = await mnemonicToPrivateKey(mnemonics);
-		
-		// Create wallet contract
-		let workchain = 0; // Usually you need a workchain 0
-		let wallet = WalletContractV4.create({ workchain, publicKey: keyPair.publicKey });
-		let contract = client.open(wallet);
-		
-		// Get balance
-		let balance: bigint = await contract.getBalance();
-		
-		// Create a transfer
-		let seqno: number = await contract.getSeqno();
-		let transfer = await contract.createTransfer({
-		  seqno,
-		  messages: [internal({
-		    value: '1.5',
-		    dest: 'EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N',
-		    body: 'Hello world'
-		  })]
-		});
+			import TonWeb from "tonweb";
 
+			const tonweb = new TonWeb();
+			console.log(66666);
 			// const connector = new TonConnect();
-			
+
 			// await connector.sendTransaction({
 			//      messages: [
 			//            {
@@ -478,8 +450,8 @@
 			//        ]
 			// })
 
-			
-			
+
+
 			// const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 			// 	manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 			// 	buttonRootId: 'ton-connect'
@@ -497,8 +469,8 @@
 			//  console.log('-----------',walletsList);
 			// Init TWA
 			Telegram.WebApp.ready();
-			console.log(1111,TON_CONNECT_UI);
-			
+			console.log(1111, TON_CONNECT_UI);
+
 			// const walletsList = await tonConnectUI.getWallets();
 			// Telegram.WebApp.showAlert('tonConnectUI--------',tonConnectUI);
 			// Telegram.WebApp.showAlert('walletsList',walletsList);
@@ -551,7 +523,7 @@
 			// 		morePopup.style.display = "none";
 			// 	}
 			// }
-			
+
 
 			// Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
 			Telegram.WebApp.onEvent('themeChanged', function() {
