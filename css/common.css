@@ -1,0 +1,224 @@
+body {
+	--bg-color: var(--tg-theme-bg-color);
+	/* font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif; */
+	background-color: var(--bg-color);
+	margin: 0;
+	padding: 0 20px;
+	box-sizing: border-box;
+	background-color: #161616;
+	color: #fff;
+	font-size: 15px;
+
+}
+
+* {
+	box-sizing: border-box;
+}
+a{
+	color: #fff;
+	text-decoration: none;
+}
+a:link,a:visited,a:hover,a:active,a:focus{
+	text-decoration: none;
+}
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.flex1 {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-bw {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* 加入我们 */
+.joinus {
+	margin-top: 44px;
+}
+
+.joinus .fs-20 {
+	font-size: 20px;
+}
+
+.joinus .flex-bw {
+	width: 100%;
+	margin-top: 38px;
+}
+
+.joinus .flex1 {
+	/* flex: 1; */
+	align-items: flex-start;
+	gap: 15px;
+	font-size: 18px;
+}
+
+.joinus .flex1 li {
+	margin-bottom: 15px;
+	font-size: 13px;
+	color: #888888;
+}
+
+/* 底部tabbar */
+.tabbar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 59.5px;
+	background: #262626;
+	border: 0.5px solid #1c2d3c;
+	font-size: 11px;
+	color: #888;
+	justify-content: space-around;
+}
+
+.tabbar .flex1 {
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	gap: 8px;
+	line-height: 1;
+}
+
+.tabbar img {
+	width: 20px;
+	height: 20px;
+}
+
+/* 头部 */
+.topNav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 44px;
+	z-index: 2;
+	padding: 0 22px;
+	background-color: #161616;
+}
+
+.topNav .notBind {
+
+	width: 82.5px;
+	height: 26.5px;
+	border: 0.5px solid #ffffff;
+	border-radius: 14px;
+	justify-content: center;
+	font-size: 12px;
+	margin-right: 18px;
+}
+
+.topNav .bind {
+	width: 82.5px;
+	height: 26.5px;
+	border: 0.5px solid #ffffff;
+	border-radius: 14px;
+	justify-content: center;
+	font-size: 12px;
+	margin-right: 18px;
+	color: #EC502C;
+}
+
+.topNav .menu {
+	width: 16px;
+	height: 14px;
+}
+
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	/* display: flex; */
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, .5);
+	animation-name: fadeIn;
+	animation-duration: 0.6s;
+	transition: all .5s;
+	z-index: 9;
+}
+
+.overlay {
+	display: none;
+	
+}
+
+.hide {
+	animation-name: fadeOut;
+	animation-duration: .6s;
+	transition: all .5s;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0
+	}
+
+	to {
+		opacity: 1
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1
+	}
+
+	to {
+		opacity: 0
+	}
+}
+
+@keyframes toLeftAnimate {
+	from {
+		transform: translateX(194px);
+
+	to {
+		transform: translateX(0);
+	}
+}
+@keyframes toRightAnimate {
+	from {
+		transform: translateX(0);
+
+	to {
+		transform: translateX(194px);
+	}
+}
+@keyframes zoom {
+	from {
+		transform: scale(0)
+	}
+
+	to {
+		transform: scale(1)
+	}
+}
+@keyframes closeZoom {
+	from {
+		transform: scale(1)
+	}
+
+	to {
+		transform: scale(0)
+	}
+}
