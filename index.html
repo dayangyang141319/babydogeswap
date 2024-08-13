@@ -432,6 +432,26 @@
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="./js/jquery.js"></script>
 		<script>
+			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
+				buttonRootId: 'ton-connect'
+			});
+			const walletsList = await tonConnectUI.getWallets();
+			console.log('tonConnectUI--------',tonConnectUI);
+			console.log('walletsList',walletsList);
+			async function connectToWallet() {
+				const connectedWallet = await tonConnectUI.connectWallet();
+				// Do something with connectedWallet if needed
+				console.log(connectedWallet);
+			}
+			
+			// Call the function
+			connectToWallet().catch(error => {
+				console.error("Error connecting to wallet:", error);
+			});
+			tonConnectUI.uiOptions = {
+			      twaReturnUrl: 'https://t.me/babySwap'
+			  };
 			let popup = document.getElementById('popup')
 			let popup1 = document.getElementById('popup1')
 			let morePopup = document.getElementById('morePopup')
@@ -454,26 +474,7 @@
 			receive.addEventListener('click', function() {
 				popup1.style.display = 'none';
 			});
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
-			const walletsList = await tonConnectUI.getWallets();
-			console.log('tonConnectUI--------',tonConnectUI);
-			console.log('walletsList',walletsList);
-			async function connectToWallet() {
-				const connectedWallet = await tonConnectUI.connectWallet();
-				// Do something with connectedWallet if needed
-				console.log(connectedWallet);
-			}
-
-			// Call the function
-			connectToWallet().catch(error => {
-				console.error("Error connecting to wallet:", error);
-			});
-			tonConnectUI.uiOptions = {
-			      twaReturnUrl: 'https://t.me/babySwap'
-			  };
+			
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				console.log('window.onclick10011111111111111');
