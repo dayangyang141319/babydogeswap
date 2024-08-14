@@ -485,42 +485,42 @@
 			// tonConnectUI.uiOptions = {
 			//       twaReturnUrl: 'https://t.me/babySwap'
 			//   };
-			// let popup = document.getElementById('popup')
-			// let popup1 = document.getElementById('popup1')
-			// let morePopup = document.getElementById('morePopup')
-			// let moreModal = document.getElementById('moreModal')
-			// let receive = document.getElementById('popup1')
-			// let menu = document.getElementById('menu')
-			// document.getElementById('linkWallet').addEventListener('click', function() {
-			// 	popup.style.display = 'flex';
-			// });
-			// document.getElementById('close-popup').addEventListener('click', function() {
-			// 	popup.style.display = 'none';
-			// });
-			// menu.addEventListener('click', function() {
-			// 	morePopup.style.display = 'flex';
-			// });
+			let popup = document.getElementById('popup')
+			let popup1 = document.getElementById('popup1')
+			let morePopup = document.getElementById('morePopup')
+			let moreModal = document.getElementById('moreModal')
+			let receive = document.getElementById('popup1')
+			let menu = document.getElementById('menu')
+			document.getElementById('linkWallet').addEventListener('click', function() {
+				popup.style.display = 'flex';
+			});
+			document.getElementById('close-popup').addEventListener('click', function() {
+				popup.style.display = 'none';
+			});
+			menu.addEventListener('click', function() {
+				morePopup.style.display = 'flex';
+			});
 			// 签到弹窗显示
-			// popup1.style.display = 'flex';
+			popup1.style.display = 'flex';
 			// 关闭签到弹窗
-			// receive.addEventListener('click', function() {
-			// 	popup1.style.display = 'none';
-			// });
+			receive.addEventListener('click', function() {
+				popup1.style.display = 'none';
+			});
 
 			// 点击模态框外部时，也关闭它  
-			// window.onclick = function(event) {
-			// 	console.log('window.onclick10011111111111111');
-			// 	if (event.target == popup) {
-			// 		popup.style.display = "none";
-			// 	} else if (event.target == popup1) {
-			// 		popup1.style.display = "none";
-			// 	} else if (event.target == morePopup) {
-			// 		// moreModal.style.animationDirection = 'reverse'
-			// 		// moreModal.style.animationName = 'toRightAnimate'
-			// 		// moreModal.classList.remove('active')
-			// 		morePopup.style.display = "none";
-			// 	}
-			// }
+			window.onclick = function(event) {
+				console.log('window.onclick10011111111111111');
+				if (event.target == popup) {
+					popup.style.display = "none";
+				} else if (event.target == popup1) {
+					popup1.style.display = "none";
+				} else if (event.target == morePopup) {
+					// moreModal.style.animationDirection = 'reverse'
+					// moreModal.style.animationName = 'toRightAnimate'
+					// moreModal.classList.remove('active')
+					morePopup.style.display = "none";
+				}
+			}
 
 
 			// Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
