@@ -369,8 +369,8 @@
 					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
 					<img class="qrcode" src="" alt="">
 					<span class="fs-12 mb-20">可用钱包</span>
-					<div class="flex">
-						<div class="flex1">
+					<div class="flex" id="walletWrap">
+						<!-- <div class="flex1">
 							<img src="./images/wallet1.png" alt="">
 							<span>Wallet inTelegram</span>
 						</div>
@@ -385,7 +385,7 @@
 						<div class="flex1">
 							<img src="./images/wallet3.png" alt="">
 							<span>View allWallets</span>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -449,7 +449,7 @@
 			//        ]
 			// })
 
-			
+
 			// const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 			// 	manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 			// 	buttonRootId: 'ton-connect'
@@ -491,7 +491,8 @@
 			let menu = document.getElementById('menu')
 			let transfer = document.getElementById('transfer')
 			let bindWallet = document.getElementById('bindWallet')
-			
+			let walletWrap = document.getElementById('walletWrap')
+
 
 			document.getElementById('linkWallet').addEventListener('click', function() {
 				popup.style.display = 'flex';
@@ -502,11 +503,11 @@
 			menu.addEventListener('click', function() {
 				morePopup.style.display = 'flex';
 			});
-			bindWallet.addEventListener('click',async function() {
+			bindWallet.addEventListener('click', async function() {
 				console.log(22222222);
 				const connector = new TonConnectSDK.TonConnect();
 				const walletsList = await connector.getWallets();
-				console.log(1111111111,walletsList);
+				console.log(1111111111, walletsList);
 			});
 			transfer.addEventListener('click', async function() {
 				console.log('?????????');
@@ -519,6 +520,22 @@
 
 				const result = await tonConnectUI.sendTransaction(transaction)
 				console.log(111111, result);
+				result.forEach(item => {
+					let div = document.createElement('div')
+					div.className = 'flex1';
+					let img = document.createElement('img')
+					let span = document.createElement('span')
+					img.src = item.bridgeUrl
+					span.textContent = item.appName
+					div.appendChild(img).appendChild(span); // 将列表项添加到div容器
+						walletWrap..appendChild(div)
+						popup.style.display = 'flex';
+					// <div class="flex1">
+					// 	<img src="./images/wallet1.png" alt="">
+					// 	<span>Wallet inTelegram</span>
+					// </div>
+				})
+			
 			});
 			// 签到弹窗显示
 			popup1.style.display = 'flex';
