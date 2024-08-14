@@ -274,7 +274,7 @@
 				<span class="bold fs-20">Babydogeswap</span>
 				<div class="flex">
 					<!-- <div class="flex notBind" id="ton-connect"></div> -->
-					<div class="flex notBind">未绑定</div>
+					<div class="flex notBind" id="bindWallet">未绑定</div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
 					<img class="menu" id="menu" src="./images/menu.png" alt="">
 				</div>
@@ -449,9 +449,7 @@
 			//        ]
 			// })
 
-			const connector = new TonConnectSDK.TonConnect();
-			const walletsList = await connector.getWallets();
-			console.log(1111111111,walletsList);
+			
 			// const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 			// 	manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 			// 	buttonRootId: 'ton-connect'
@@ -493,6 +491,8 @@
 			let receive = document.getElementById('popup1')
 			let menu = document.getElementById('menu')
 			let transfer = document.getElementById('transfer')
+			let bindWallet = document.getElementById('bindWallet')
+			
 
 			document.getElementById('linkWallet').addEventListener('click', function() {
 				popup.style.display = 'flex';
@@ -502,6 +502,12 @@
 			});
 			menu.addEventListener('click', function() {
 				morePopup.style.display = 'flex';
+			});
+			bindWallet.addEventListener('click', function() {
+				console.log(22222222);
+				const connector = new TonConnectSDK.TonConnect();
+				const walletsList = await connector.getWallets();
+				console.log(1111111111,walletsList);
 			});
 			transfer.addEventListener('click', async function() {
 				console.log('?????????');
