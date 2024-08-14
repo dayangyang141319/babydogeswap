@@ -503,7 +503,7 @@
 			menu.addEventListener('click', function() {
 				morePopup.style.display = 'flex';
 			});
-			bindWallet.addEventListener('click', function() {
+			bindWallet.addEventListener('click',async function() {
 				console.log(22222222);
 				const connector = new TonConnectSDK.TonConnect();
 				const walletsList = await connector.getWallets();
