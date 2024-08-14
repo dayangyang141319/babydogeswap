@@ -115,13 +115,14 @@ ul {
 
 .topNav .notBind {
 
-	width: 82.5px;
-	height: 26.5px;
-	border: 0.5px solid #ffffff;
-	border-radius: 14px;
+	width: 82.5px !important;
+	height: 26.5px !important;
+	border: 0.5px solid #ffffff !important;
+	border-radius: 14px !important;
 	justify-content: center;
-	font-size: 12px;
-	margin-right: 18px;
+	font-size: 12px !important;
+	margin-right: 18px !important;
+	background-color: transparent !important;
 }
 
 .topNav .bind {
