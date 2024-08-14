@@ -158,11 +158,13 @@
 			.modal .flex1 {
 				align-items: center;
 				justify-tracks: space-between;
+
 			}
 
 			.modal .flex {
 				font-size: 10px;
 				font-weight: bold;
+				flex-wrap: wrap;
 			}
 
 			.modal .flex span {
@@ -508,7 +510,34 @@
 				const connector = new TonConnectSDK.TonConnect();
 				const walletsList = await connector.getWallets();
 				console.log(1111111111, walletsList);
+				walletsList.forEach(item => {
+					console.log(333);
+					let div = document.createElement('div')
+					div.className = 'flex1';
+					let img = document.createElement('img')
+					let span = document.createElement('span')
+					img.src = item.imageUrl
+					span.textContent = item.appName
+					div.appendChild(img); // 将列表项添加到div容器
+					div.appendChild(span)
+					walletWrap.appendChild(div)
+					popup.style.display = 'flex';
+					// <div class="flex1">
+					// 	<img src="./images/wallet1.png" alt="">
+					// 	<span>Wallet inTelegram</span>
+					// </div>
+				})
 			});
+			walletWrap.addEventListener('click', async function() {
+				const connector = new TonConnectSDK.TonConnect();
+				const walletConnectionSource = {
+					universalLink: 'https://app.tonkeeper.com/ton-connect',
+					bridgeUrl: 'https://bridge.tonapi.io/bridge'
+				}
+
+				const universalLink = connector.connect(walletConnectionSource);
+			})
+
 			transfer.addEventListener('click', async function() {
 				console.log('?????????');
 				const transaction = {
@@ -519,23 +548,8 @@
 				}
 
 				const result = await tonConnectUI.sendTransaction(transaction)
-				console.log(111111, result);
-				result.forEach(item => {
-					let div = document.createElement('div')
-					div.className = 'flex1';
-					let img = document.createElement('img')
-					let span = document.createElement('span')
-					img.src = item.bridgeUrl
-					span.textContent = item.appName
-					div.appendChild(img).appendChild(span); // 将列表项添加到div容器
-						walletWrap.appendChild(div)
-						popup.style.display = 'flex';
-					// <div class="flex1">
-					// 	<img src="./images/wallet1.png" alt="">
-					// 	<span>Wallet inTelegram</span>
-					// </div>
-				})
-			
+
+
 			});
 			// 签到弹窗显示
 			popup1.style.display = 'flex';
