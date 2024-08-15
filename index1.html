@@ -7,11 +7,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-		<!-- <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script> -->
-		
-		
-		
+		<!-- <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script> -->
+		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -119,7 +116,7 @@
 			.modal {
 				position: relative;
 				width: 17.125rem;
-				height: 480px;
+				min-height: 480px;
 				background: #161616;
 				border-radius: 20px;
 				padding: 38px 31px 57px;
@@ -160,20 +157,25 @@
 
 			.modal .flex1 {
 				align-items: center;
-				justify-tracks: space-between;
+				width: 25%;
+				margin-bottom: 5px;
 
 			}
 
 			.modal .flex {
 				font-size: 10px;
 				font-weight: bold;
+				justify-content: space-between;
 				flex-wrap: wrap;
+				align-items: flex-start;
 			}
 
 			.modal .flex span {
 				text-align: center;
 				font-size: 10px;
 				font-weight: bold;
+				word-break: break-all;
+				line-height: 1.2;
 			}
 
 			.modal .flex img {
@@ -278,8 +280,8 @@
 			<div class="topNav flex-bw">
 				<span class="bold fs-20">Babydogeswap</span>
 				<div class="flex">
-					<div class="flex notBind" id="ton-connect"></div>
-					<!-- <div class="flex notBind" id="bindWallet">未绑定</div> -->
+					<!-- <div class="flex notBind" id="ton-connect"></div> -->
+					<div class="flex notBind" id="bindWallet">未绑定</div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
 					<img class="menu" id="menu" src="./images/menu.png" alt="">
 				</div>
@@ -372,7 +374,7 @@
 					<img id="close-popup" class="close" src="./images/close.png" alt="">
 					<span>连接您的钱包</span>
 					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
-					<img class="qrcode" src="" alt="">
+					<img class="qrcode"  id="qrcode" src="" alt="">
 					<span class="fs-12 mb-20">可用钱包</span>
 					<div class="flex" id="walletWrap">
 						<!-- <div class="flex1">
@@ -441,7 +443,7 @@
 		<!-- <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script> -->
 		<!-- <script src="./js/jquery.js"></script> -->
 		<script>
-			// import TonConnectUI from'@tonconnect/ui'
+			
 
 			// const connector = new TonConnect();
 
@@ -455,19 +457,14 @@
 			// })
 
 
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
+			// const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+			// 	manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
+			// 	buttonRootId: 'ton-connect'
+			// });
 
-			//  const connector = new TonConnectSDK.TonConnect();
+			 // const connector = new TonConnectSDK.TonConnect();
 			//  console.log(44,connector);
-			//  const unsubscribe = connector.onStatusChange(
-			//      walletInfo => {
-			// 		 console.log(99);
-			//          // update state/reactive variables to show updates in the ui
-			//      } 
-			//  );
+			 
 			//  const walletsList = await connector.getWallets();
 			//  console.log('-----------',walletsList);
 
@@ -497,6 +494,7 @@
 			let transfer = document.getElementById('transfer')
 			let bindWallet = document.getElementById('bindWallet')
 			let walletWrap = document.getElementById('walletWrap')
+			let qrcode = document.getElementById('qrcode')
 
 
 			document.getElementById('linkWallet').addEventListener('click', function() {
@@ -508,34 +506,57 @@
 			menu.addEventListener('click', function() {
 				morePopup.style.display = 'flex';
 			});
-			// bindWallet.addEventListener('click', async function() {
-			// 	console.log(22222222);
-			// 	const connector = new TonConnectSDK.TonConnect();
-			// 	const walletsList = await connector.getWallets();
-			// 	console.log(1111111111, walletsList);
-			// 	walletsList.forEach(item => {
-			// 		console.log(333);
-			// 		let div = document.createElement('div')
-			// 		div.className = 'flex1';
-			// 		let img = document.createElement('img')
-			// 		let span = document.createElement('span')
-			// 		img.src = item.imageUrl
-			// 		span.textContent = item.appName
-			// 		div.appendChild(img); // 将列表项添加到div容器
-			// 		div.appendChild(span)
-			// 		walletWrap.appendChild(div)
-			// 		popup.style.display = 'flex';
-			// 	})
-			// });
-			// walletWrap.addEventListener('click', async function() {
-			// 	const connector = new TonConnectSDK.TonConnect();
-			// 	const walletConnectionSource = {
-			// 		universalLink: 'https://app.tonkeeper.com/ton-connect',
-			// 		bridgeUrl: 'https://bridge.tonapi.io/bridge'
-			// 	}
-
-			// 	const universalLink = connector.connect(walletConnectionSource);
-			// })
+			bindWallet.addEventListener('click', async function() {
+				console.log(22222222);
+				const connector = new TonConnectSDK.TonConnect({
+					manifestUrl:'https://slinadan.github.io/babySwap/tonconnect-manifest.json'
+				});
+				 connector.restoreConnection();
+				const walletsList = await connector.getWallets();
+				const unsubscribe = connector.onStatusChange(
+				    walletInfo => {
+									 console.log(99);
+				        // update state/reactive variables to show updates in the ui
+				    } 
+				);
+				
+				console.log(1111111111, walletsList);
+				console.log('connector',connector);
+				console.log(TonConnectSDK);
+				const embeddedWallet = walletsList.find(TonConnectSDK.isWalletInfoCurrentlyEmbedded)
+				console.log('embeddedWallet',embeddedWallet);
+				if (embeddedWallet) {
+				    connector.connect({ jsBridgeKey: embeddedWallet.jsBridgeKey });
+				    return;
+				}
+				walletsList.forEach(item => {
+					console.log(333);
+					let div = document.createElement('div')
+					div.className = 'flex1';
+					let img = document.createElement('img')
+					let span = document.createElement('span')
+					img.src = item.imageUrl
+					span.textContent = item.name
+					div.appendChild(img); // 将列表项添加到div容器
+					div.appendChild(span)
+					walletWrap.appendChild(div)
+					popup.style.display = 'flex';
+					div.addEventListener('click', async function() {
+						console.log(6666);
+						const connector = new TonConnectSDK.TonConnect();
+						const walletConnectionSource = {
+							universalLink: item.universalLink,
+							bridgeUrl: item.bridgeUrl
+						}
+						const universalLink = connector.connect(walletConnectionSource);
+						qrcode.src = universalLink
+						location.href = universalLink
+						console.log('universalLink',universalLink);
+					})
+					
+				})
+			});
+			
 
 			transfer.addEventListener('click', async function() {
 				console.log('?????????');

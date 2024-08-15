@@ -19,16 +19,32 @@
 				font-size: 20px;
 			}
 
-			.dealTitle .refresh {
-				width: 23px;
-				height: 19px;
-				margin-right: 23px;
+			.dealTitle {
+				margin-bottom: 25px;
+				padding-top: 20px;
 			}
 
-			.dealTitle img {
-				width: 22.5px;
-				height: 22.5px;
-				margin: 20px 0 24px;
+			.rowWrap {
+				margin-bottom: 43px;
+			}
+
+			.rowWrap img {
+				width: 18px;
+				height: 16px;
+			}
+
+			.rowWrap .flex-bw {
+				width: 130px;
+				height: 46.5px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 0.5px solid #343434;
+				border-radius: 23px;
+				padding: 0 8px 0 18px;
+			}
+
+			.rowWrap .flex-bw img {
+				width: 31.5px;
+				height: 32px;
 			}
 
 			.flexCenter {
@@ -41,6 +57,14 @@
 				background: rgba(255, 255, 255, 0.03);
 				border: 0.5px solid #343434;
 				border-radius: 20px;
+			}
+
+			.mb-34 {
+				margin-bottom: 34px;
+			}
+
+			.mb-137 {
+				margin-bottom: 137px;
 			}
 
 			.dealWrap .flex-bw {
@@ -254,7 +278,7 @@
 
 	<body>
 		<main>
-			<div class="topNav flex-bw">
+			<div class="topNav  flex-bw">
 				<span class="bold fs-20">Babydogeswap</span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
@@ -262,45 +286,45 @@
 					<img class="menu" id="menu" src="./images/menu.png" alt="">
 				</div>
 			</div>
-			<div class="flex-bw dealTitle">
-				<span class="fs-20" id="">交易</span>
-				<div id="">
-					<img class="refresh" id="refresh" src="./images/refresh.png" alt="">
-					<img class="set" id="menu" src="./images/set.png" alt="">
+			<div class="dealTitle fs-20">桥</div>
+			<div class="flex-bw rowWrap">
+				<div class="flex-bw">
+					<span>TON</span>
+					<img src="images/eth.png" alt="">
+				</div>
+				<img src="images/enter.png" alt="">
+				<div class="flex-bw">
+					<span>ETH</span>
+					<img src="images/usdt.png" alt="">
 				</div>
 			</div>
 			<div class="flex1 flexCenter">
-				<div class="dealWrap">
+				<div class="dealWrap mb-34">
 					<div class="flex-bw token">
-						<span id="">从</span>
+						<span id="">资产</span>
 						<div class="flex">
 							<img class="logo" id="menu" src="./images/eth.png" alt="">
-							<span id="">TON</span>
+							<span id="">ton</span>
 							<img class="select" id="menu" src="./images/down.png" alt="">
 						</div>
 					</div>
 					<div class="amountWrap flex-bw">
 						<span id="">1254.324</span>
-						<span class="fs-14">≈$654.564654</span>
 					</div>
 				</div>
-				<img class="exchangeImg" src="./images/exchange.png" alt="" />
-				<div class="dealWrap">
+				<div class="dealWrap mb-137">
 					<div class="flex-bw token">
-						<span id="">至</span>
+						<span id="">你收到的</span>
 						<div class="flex">
-							<img class="logo" id="menu" src="./images/usdt.png" alt="">
-							<span id="">Lon</span>
+							<img class="logo" id="menu" src="./images/eth.png" alt="">
+							<span id="">wton</span>
 							<img class="select" id="menu" src="./images/down.png" alt="">
 						</div>
 					</div>
 					<div class="amountWrap flex-bw">
 						<span id="">1254.324</span>
-						<span class="fs-14">≈$654.564654</span>
 					</div>
 				</div>
-				<span class="computed">1Ton≈5.65464676Lon</span>
-				<div class="btn">兑换</div>
 			</div>
 			<div class="joinus">
 				<div class="fs-20">加入我们的社区</div>
@@ -332,9 +356,9 @@
 				</div>
 			</div>
 			<div class="tabbar flex">
-				<a class="flex1">
-					<img src="./images/tabs1.png" alt="">
-					<span class="mainColor">交易</span>
+				<a class="flex1" href="deal.html">
+					<img src="./images/tab1.png" alt="">
+					<span>交易</span>
 				</a>
 				<a class="flex1">
 					<img src="./images/tab2.png" alt="">
@@ -344,9 +368,9 @@
 					<img src="./images/tab3.png" alt="">
 					<span>销毁</span>
 				</a>
-				<a class="flex1" href="bridge.html">
-					<img src="./images/tab4.png" alt="">
-					<span>跨链桥</span>
+				<a class="flex1">
+					<img src="./images/tabs4.png" alt="">
+					<span class="mainColor">跨链桥</span>
 				</a>
 				<a class="flex1">
 					<img src="./images/tab5.png" alt="">
