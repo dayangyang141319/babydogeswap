@@ -462,14 +462,9 @@
 			// 	buttonRootId: 'ton-connect'
 			// });
 
-			 const connector = new TonConnectSDK.TonConnect();
+			 // const connector = new TonConnectSDK.TonConnect();
 			//  console.log(44,connector);
-			 const unsubscribe = connector.onStatusChange(
-			     walletInfo => {
-					 console.log(99);
-			         // update state/reactive variables to show updates in the ui
-			     } 
-			 );
+			 
 			//  const walletsList = await connector.getWallets();
 			//  console.log('-----------',walletsList);
 
@@ -514,7 +509,15 @@
 			bindWallet.addEventListener('click', async function() {
 				console.log(22222222);
 				const connector = new TonConnectSDK.TonConnect();
+				 connector.restoreConnection();
 				const walletsList = await connector.getWallets();
+				const unsubscribe = connector.onStatusChange(
+				    walletInfo => {
+									 console.log(99);
+				        // update state/reactive variables to show updates in the ui
+				    } 
+				);
+				
 				console.log(1111111111, walletsList);
 				console.log('connector',connector);
 				console.log(TonConnectSDK);
@@ -531,25 +534,38 @@
 					let img = document.createElement('img')
 					let span = document.createElement('span')
 					img.src = item.imageUrl
-					span.textContent = item.appName
+					span.textContent = item.name
 					div.appendChild(img); // 将列表项添加到div容器
 					div.appendChild(span)
 					walletWrap.appendChild(div)
 					popup.style.display = 'flex';
+					div.addEventListener('click', async function() {
+						console.log(6666);
+						const connector = new TonConnectSDK.TonConnect();
+						const walletConnectionSource = {
+							universalLink: item.universalLink,
+							bridgeUrl: item.bridgeUrl
+						}
+						const universalLink = connector.connect(walletConnectionSource);
+						qrcode.src = universalLink
+						location.href = universalLink
+						console.log('universalLink',universalLink);
+					})
+					
 				})
 			});
-			walletWrap.addEventListener('click', async function() {
-				console.log(6666);
-				const connector = new TonConnectSDK.TonConnect();
-				const walletConnectionSource = {
-					universalLink: 'https://connect.mytonwallet.org',
-					bridgeUrl: 'https://tonconnectbridge.mytonwallet.org/bridge'
-				}
+			// walletWrap.addEventListener('click', async function() {
+			// 	console.log(6666);
+			// 	const connector = new TonConnectSDK.TonConnect();
+			// 	const walletConnectionSource = {
+			// 		universalLink: 'https://connect.mytonwallet.org',
+			// 		bridgeUrl: 'https://tonconnectbridge.mytonwallet.org/bridge'
+			// 	}
 
-				const universalLink = connector.connect(walletConnectionSource);
-				qrcode.src = universalLink
-				console.log('universalLink',universalLink);
-			})
+			// 	const universalLink = connector.connect(walletConnectionSource);
+			// 	qrcode.src = universalLink
+			// 	console.log('universalLink',universalLink);
+			// })
 
 			transfer.addEventListener('click', async function() {
 				console.log('?????????');
