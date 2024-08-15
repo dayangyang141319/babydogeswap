@@ -19,88 +19,75 @@
 				font-size: 20px;
 			}
 
-			.dealTitle {
-				margin-bottom: 25px;
-				padding-top: 20px;
+
+			.back {
+				padding: 20px 0 25px 0;
 			}
 
-			.rowWrap {
-				margin-bottom: 43px;
+			.back img {
+				width: 20px;
+				height: 20px;
 			}
 
-			.rowWrap img {
-				width: 18px;
-				height: 16px;
-			}
-
-			.rowWrap .flex-bw {
-				width: 130px;
-				height: 46.5px;
+			.dataWrap {
+				width: 100%;
+				height: 173px;
 				background: rgba(255, 255, 255, 0.03);
 				border: 0.5px solid #343434;
-				border-radius: 23px;
-				padding: 0 8px 0 18px;
+				border-radius: 20px;
+				padding: 24px 20px;
+				margin-bottom: 20px;
+				font-size: 24px;
+				align-items: center;
+				background-image: url('images/bg.png');
+				background-size: 375px 130px;
+				background-position: -23px 28px;
 			}
 
-			.rowWrap .flex-bw img {
-				width: 31.5px;
-				height: 32px;
+			.dataWrap .grey {
+				font-size: 12px;
+				color: #888;
+				margin-bottom: 17px;
+			}
+
+			.dataWrap .btn {
+				width: 270.5px;
+				height: 41.5px;
+				margin-top: 20px;
+			}
+
+			.mb-8 {
+				margin-bottom: 8px;
+			}
+
+			.button {
+				margin: 35px 0 51px;
 			}
 
 			.flexCenter {
-				align-items: center;
-			}
-
-			.dealWrap {
-				width: 100%;
-				height: 150.5px;
+				width: 331px;
+				height: 184px;
 				background: rgba(255, 255, 255, 0.03);
 				border: 0.5px solid #343434;
 				border-radius: 20px;
+				flex-wrap: wrap;
+				padding: 24px 18px;
 			}
 
-			.mb-34 {
-				margin-bottom: 34px;
+			.flexCenter .flex1 {
+				width: 50%;
 			}
 
-			.mb-137 {
-				margin-bottom: 137px;
-			}
-
-			.dealWrap .flex-bw {
-				padding: 0 20px;
-			}
-
-			.dealWrap .logo {
-				width: 31.5px;
-				height: 32px;
-				margin-right: 10px;
-			}
-
-			.dealWrap .token {
-				height: 58px;
-			}
-
-			.amountWrap {
-				width: 100%;
-				height: 91.5px;
-				background: rgba(255, 255, 255, 0.03);
-				border: 0.5px solid #343434;
-				border-radius: 20px;
-				padding: 0 22px;
-				font-size: 24px;
-			}
-
-			.amountWrap .fs-14 {
-				font-size: 14px;
+			.flexCenter .grey {
+				font-size: 12px;
 				color: #888;
+				margin-bottom: 10px;
 			}
 
-			.select {
-				width: 8px;
-				height: 6.5px;
-				margin-left: 7.5px;
+			.mb-15 {
+				margin-bottom: 15px;
 			}
+
 			.modal {
 				position: relative;
 				width: 17.125rem;
@@ -266,136 +253,31 @@
 					<img class="menu" id="menu" src="./images/menu.png" alt="">
 				</div>
 			</div>
-			<div class="dealTitle fs-20">桥</div>
-			<div class="flex-bw rowWrap">
-				<div class="flex-bw">
-					<span>TON</span>
-					<img src="images/eth.png" alt="">
-				</div>
-				<img src="images/enter.png" alt="">
-				<div class="flex-bw">
-					<span>ETH</span>
-					<img src="images/usdt.png" alt="">
-				</div>
+			<div class="back flex-bw">
+				<img src="images/back.png" alt="">
 			</div>
-			<div class="flex1 flexCenter">
-				<div class="dealWrap mb-34">
-					<div class="flex-bw token">
-						<span id="">资产</span>
-						<div class="flex">
-							<img class="logo" id="menu" src="./images/eth.png" alt="">
-							<span id="">ton</span>
-							<img class="select" id="menu" src="./images/down.png" alt="">
-						</div>
-					</div>
-					<div class="amountWrap flex-bw">
-						<span id="">1254.324</span>
-					</div>
-				</div>
-				<div class="dealWrap mb-137">
-					<div class="flex-bw token">
-						<span id="">你收到的</span>
-						<div class="flex">
-							<img class="logo" id="menu" src="./images/eth.png" alt="">
-							<span id="">wton</span>
-							<img class="select" id="menu" src="./images/down.png" alt="">
-						</div>
-					</div>
-					<div class="amountWrap flex-bw">
-						<span id="">1254.324</span>
-					</div>
-				</div>
+			<div class="flex1 dataWrap">
+				<span class="grey">我当前算力</span>
+				<span>12548752.2145</span>
+				<div class="btn">算力转赠</div>
 			</div>
-			<div class="joinus">
-				<div class="fs-20">加入我们的社区</div>
-				<div class="flex-bw">
-					<div class="flex1">
-						<span>探索</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
-					</div>
-					<div class="flex1">
-						<span>用户</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
-					</div>
-					<div class="flex1">
-						<span>开发</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
-					</div>
+			<div class="flex flexCenter">
+				<div class="flex1 mb-15">
+					<span class="grey">平台已产代币B</span>
+					<span>12548752.2145</span>
 				</div>
-			</div>
-			<div class="tabbar flex">
-				<a class="flex1" href="deal.html">
-					<img src="./images/tab1.png" alt="">
-					<span>交易</span>
-				</a>
-				<a class="flex1">
-					<img src="./images/tab2.png" alt="">
-					<span>池子</span>
-				</a>
-				<a class="flex1" href="destroy.html">
-					<img src="./images/tab3.png" alt="">
-					<span>销毁</span>
-				</a>
-				<a class="flex1">
-					<img src="./images/tabs4.png" alt="">
-					<span class="mainColor">跨链桥</span>
-				</a>
-				<a class="flex1">
-					<img src="./images/tab5.png" alt="">
-					<span>社区代币</span>
-				</a>
-			</div>
-			<!-- 连接钱包弹窗 -->
-			<div class="popup" id="popup">
-				<div class="modal flex1" id="modal">
-					<img id="close-popup" class="close" src="./images/close.png" alt="">
-					<span>连接您的钱包</span>
-					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
-					<img class="qrcode" src="" alt="">
-					<span class="fs-12 mb-20">可用钱包</span>
-					<div class="flex">
-						<div class="flex1">
-							<img src="./images/wallet1.png" alt="">
-							<span>Wallet inTelegram</span>
-						</div>
-						<div class="flex1">
-							<img src="./images/wallet2.png" alt="">
-							<span>Tonkeeper Popular</span>
-						</div>
-						<div class="flex1">
-							<img src="./images/wallet2.png" alt="">
-							<span>Bitget Wal...</span>
-						</div>
-						<div class="flex1">
-							<img src="./images/wallet3.png" alt="">
-							<span>View allWallets</span>
-						</div>
-					</div>
+				<div class="flex1 mb-15">
+					<span class="grey">代币B流通量</span>
+					<span>12548752.2145</span>
 				</div>
-			</div>
-			<!-- 签到弹窗 -->
-			<div class="popup " id="popup1">
-				<div class="modal1 flex1" id="modal1">
-					<span>恭喜您获得</span>
-					<div class="flex">
-						<span class="amount">10000</span>
-						<span>代币A</span>
-					</div>
-					<img src="" alt="">
-					<div class="btn flex" id="receive">开心收下</div>
+				<div class="flex1">
+					<span class="grey">总算力(USDT)</span>
+					<span>12548752.2145</span>
 				</div>
+				<a class="flex1" href="power.html">
+					<span class="grey">我的算力(USDT)</span>
+					<span>12548752.2145</span>
+				</a>
 			</div>
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">

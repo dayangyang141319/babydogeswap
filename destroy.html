@@ -8,10 +8,6 @@
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-		<!-- <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script> -->
-		
-		
-		
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -23,98 +19,138 @@
 				font-size: 20px;
 			}
 
-			.transaction {
-				position: relative;
-				width: 100%;
-				height: 177.5px;
-				background: #262626;
-				border-radius: 20px;
-				margin: 17px 0;
-				padding: 25px 0 0 25px;
+			.dealTitle {
+				margin-bottom: 25px;
+				padding-top: 20px;
+			}
+
+			.dealTitle .mainColor {
 				font-size: 12px;
 			}
 
-			.transImg {
-				position: absolute;
-				right: 0;
-				bottom: 0;
-				width: 204.5px;
-				height: 133px;
-			}
-
-			.fs-24 {
-				font-size: 24px;
-				margin-bottom: 15px;
-			}
-
-			.transaction .btn {
-				width: 79.5px;
-				height: 30px;
-				background: #ec502c;
-				border-radius: 15px;
-				justify-content: center;
-				margin-top: 45px;
-			}
-
-			.menuWrap .flex1 {
-				width: 102px;
-				height: 104.5px;
+			.destroyWrap {
+				width: 100%;
+				height: 94.5px;
 				background: rgba(255, 255, 255, 0.03);
 				border: 0.5px solid #343434;
 				border-radius: 20px;
-				align-items: center;
-				justify-content: center;
-				gap: 20px;
+				padding: 24px 20px;
+				margin-bottom: 20px;
+				font-size: 18px
 			}
 
-			.menuWrap img {
-				width: 31.5px;
-				height: 31.5px;
-			}
-
-			.transferWrap {
-				position: relative;
-				width: 100%;
-				height: 49px;
-				background: #ec502c;
-				border-radius: 15px;
-				margin-top: 21px;
-				padding: 0 22px 0 89px;
-				font-size: 15px;
-			}
-
-			.transferWrap img {
-				position: absolute;
-				top: 2.5px;
-				left: 15px;
-				width: 64px;
-				height: 66.5px;
-			}
-
-			.transferWrap .btn {
-				width: 60px;
-				height: 21px;
-				background: #1d1d1d;
-				border-radius: 10.5px;
-				justify-content: center;
-				font-size: 11px;
-			}
-
-			.linkWallet {
-				width: 100%;
-				height: 47.5px;
-				border: 0.5px dashed #ffffff;
-				border-radius: 15px;
-				margin-top: 77px;
-				justify-content: center;
-			}
-
-			.linkWallet img {
-				width: 17.5px;
-				height: 16.5px;
-				margin-right: 8.5px;
+			.destroyWrap .grey {
 				font-size: 12px;
+				color: #888;
+				margin-bottom: 15px;
 			}
+
+			input {
+				width: 100%;
+				height: 41px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 0.5px solid #343434;
+				border-radius: 20px;
+				padding: 0 20px;
+				color: #fff;
+				outline: none;
+				margin-bottom: 16px;
+			}
+
+			.amountsWrap {
+				font-size: 12px;
+				padding: 0 5px;
+			}
+
+			.mb-8 {
+				margin-bottom: 8px;
+			}
+
+			.button {
+				margin: 35px 0 51px;
+			}
+
+			.flexCenter {
+				width: 100%;
+				height: 184px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 0.5px solid #343434;
+				border-radius: 20px;
+				flex-wrap: wrap;
+				padding: 24px 18px;
+			}
+
+			.flexCenter .flex1 {
+				width: 50%;
+			}
+
+			.flexCenter .grey {
+				font-size: 12px;
+				color: #888;
+				margin-bottom: 10px;
+			}
+
+			.mb-15 {
+				margin-bottom: 15px;
+			}
+
+			.dealWrap {
+				width: 100%;
+				height: 150.5px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 0.5px solid #343434;
+				border-radius: 20px;
+			}
+
+			.mb-34 {
+				margin-bottom: 34px;
+			}
+
+			.mb-137 {
+				margin-bottom: 137px;
+			}
+
+			.dealWrap .flex-bw {
+				padding: 0 20px;
+			}
+
+			.dealWrap .logo {
+				width: 31.5px;
+				height: 32px;
+				margin-right: 10px;
+			}
+
+			.dealWrap .token {
+				height: 58px;
+			}
+
+			.amountWrap {
+				width: 100%;
+				height: 91.5px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 0.5px solid #343434;
+				border-radius: 20px;
+				padding: 0 22px;
+				font-size: 24px;
+			}
+
+			.amountWrap .fs-14 {
+				font-size: 14px;
+				color: #888;
+			}
+
+			.select {
+				width: 8px;
+				height: 6.5px;
+				margin-left: 7.5px;
+			}
+
+			.exchangeImg {
+				width: 42px;
+				height: 40px;
+				margin: 23px 0 29px;
+			}
+
 
 			.modal {
 				position: relative;
@@ -161,13 +197,11 @@
 			.modal .flex1 {
 				align-items: center;
 				justify-tracks: space-between;
-
 			}
 
 			.modal .flex {
 				font-size: 10px;
 				font-weight: bold;
-				flex-wrap: wrap;
 			}
 
 			.modal .flex span {
@@ -275,46 +309,58 @@
 
 	<body>
 		<main>
-			<div class="topNav flex-bw">
+			<div class="topNav  flex-bw">
 				<span class="bold fs-20">Babydogeswap</span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
-					<!-- <div class="flex notBind" id="bindWallet">未绑定</div> -->
 					<!-- <div class="flex bind">0D9...4646</div> -->
 					<img class="menu" id="menu" src="./images/menu.png" alt="">
 				</div>
 			</div>
-			<div class="transaction flex1">
-				<img class="transImg" src="./images/coin.png" alt="">
+			<div class="dealTitle flex-bw">
+				<span class="fs-20">销毁</span>
+				<span class="mainColor">进行中</span>
+			</div>
+			<div class="flex-bw destroyWrap">
 				<div class="flex1">
-					<span class="fs-24">交易</span>
-					<span>您可以在TON链上买卖交易代币</span>
+					<span class="grey">累计销毁（USDT）</span>
+					<span>12548752.2145</span>
 				</div>
-				<a href="deal.html" class="btn flex">点击进入</a>
+				<div class="flex1">
+					<span class="grey">您的当前销毁（USDT）</span>
+					<span>12548752.2145</span>
+				</div>
 			</div>
-			<div class="flex-bw menuWrap">
-				<a class="flex1">
-					<img src="./images/icon1.png" alt="">
-					<span>池子</span>
-				</a>
-				<a class="flex1" href="destroy.html">
-					<img src="./images/icon2.png" alt="">
-					<span>销毁</span>
-				</a>
-				<a class="flex1" href="bridge.html">
-					<img src="./images/icon3.png" alt="">
-					<span>桥</span>
+			<input type="" name="" id="" value="" />
+			<div class="flex1 amountsWrap">
+				<div class="flex-bw mb-8">
+					<span>USDT/代币A</span>
+					<span>1000/1500</span>
+				</div>
+				<div class="flex-bw">
+					<span>倍数：5倍</span>
+					<span>算力值：0 USDT</span>
+				</div>
+			</div>
+			<div class="btn button">销毁</div>
+			<div class="flex flexCenter">
+				<div class="flex1 mb-15">
+					<span class="grey">平台已产代币B</span>
+					<span>12548752.2145</span>
+				</div>
+				<div class="flex1 mb-15">
+					<span class="grey">代币B流通量</span>
+					<span>12548752.2145</span>
+				</div>
+				<div class="flex1">
+					<span class="grey">总算力(USDT)</span>
+					<span>12548752.2145</span>
+				</div>
+				<a class="flex1" href="power.html">
+					<span class="grey">我的算力(USDT)</span>
+					<span>12548752.2145</span>
 				</a>
 			</div>
-			<div class="transferWrap flex-bw">
-				<img src="./images/invite.png" alt="">
-				<span>社区代币</span>
-				<div class="btn flex" id="transfer">去兑换</div>
-			</div>
-			<!-- <div class="linkWallet flex" id="linkWallet">
-				<img src="./images/link.png" alt="">
-				<span>链接钱包</span>
-			</div> -->
 			<div class="joinus">
 				<div class="fs-20">加入我们的社区</div>
 				<div class="flex-bw">
@@ -354,10 +400,10 @@
 					<span>池子</span>
 				</a>
 				<a class="flex1">
-					<img src="./images/tab3.png" alt="">
-					<span>销毁</span>
+					<img src="./images/tabs3.png" alt="">
+					<span class="mainColor">销毁</span>
 				</a>
-				<a class="flex1" href="bridge.html">
+				<a class="flex1"  href="bridge.html">
 					<img src="./images/tab4.png" alt="">
 					<span>跨链桥</span>
 				</a>
@@ -374,8 +420,8 @@
 					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
 					<img class="qrcode" src="" alt="">
 					<span class="fs-12 mb-20">可用钱包</span>
-					<div class="flex" id="walletWrap">
-						<!-- <div class="flex1">
+					<div class="flex">
+						<div class="flex1">
 							<img src="./images/wallet1.png" alt="">
 							<span>Wallet inTelegram</span>
 						</div>
@@ -390,7 +436,7 @@
 						<div class="flex1">
 							<img src="./images/wallet3.png" alt="">
 							<span>View allWallets</span>
-						</div> -->
+						</div>
 					</div>
 				</div>
 			</div>
@@ -414,152 +460,57 @@
 						<span>钱包地址：0x564df...23</span>
 						<img src="./images/copy.png" alt="">
 					</div>
-					<div class="flex-bw">
+					<a class="flex-bw" href="index.html">
 						<span>首页</span>
 						<img src="./images/right.png" alt="">
-					</div>
-					<div class="flex-bw">
+					</a>
+					<a class="flex-bw">
 						<span>我的资产</span>
 						<img src="./images/right.png" alt="">
-					</div>
-					<div class="flex-bw">
+					</a>
+					<a class="flex-bw">
 						<span>排行榜</span>
 						<img src="./images/right.png" alt="">
-					</div>
-					<div class="flex-bw">
+					</a>
+					<a class="flex-bw">
 						<span>邀请</span>
 						<img src="./images/right.png" alt="">
-					</div>
+					</a>
 				</div>
 			</div>
 		</main>
-		<!-- 	<div id="viewport"></div>
+		<div id="viewport"></div>
 		<div id="viewport-params-size"></div>
-		<div id="viewport-params-expand"></div> -->
-		<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
-
-		<!-- <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script> -->
-		<!-- <script src="./js/jquery.js"></script> -->
+		<div id="viewport-params-expand"></div>
+		<script src="https://telegram.org/js/telegram-web-app.js"></script>
+		<script src="./js/jquery.js"></script>
 		<script>
-			// import TonConnectUI from'@tonconnect/ui'
-
-			// const connector = new TonConnect();
-
-			// await connector.sendTransaction({
-			//      messages: [
-			//            {
-			//                address: "0:412410771DA82CBA306A55FA9E0D43C9D245E38133CB58F1457DFB8D5CD8892F", // 目的地址
-			//                amount: "20000000" //以nanotons计的Toncoin
-			//            }
-			//        ]
-			// })
-
-
 			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 				buttonRootId: 'ton-connect'
 			});
-
-			//  const connector = new TonConnectSDK.TonConnect();
-			//  console.log(44,connector);
-			//  const unsubscribe = connector.onStatusChange(
-			//      walletInfo => {
-			// 		 console.log(99);
-			//          // update state/reactive variables to show updates in the ui
-			//      } 
-			//  );
-			//  const walletsList = await connector.getWallets();
-			//  console.log('-----------',walletsList);
-
-
-
-			// const walletsList = await tonConnectUI.getWallets();
-
-			// async function connectToWallet() {
-			// 	const connectedWallet = await tonConnectUI.connectWallet();
-			// 	// Do something with connectedWallet if needed
-
-			// }
-
-			// // Call the function
-			// connectToWallet().catch(error => {
-			// 	console.error("Error connecting to wallet:", error);
-			// });
-			// tonConnectUI.uiOptions = {
-			//       twaReturnUrl: 'https://t.me/babySwap'
-			//   };
 			let popup = document.getElementById('popup')
 			let popup1 = document.getElementById('popup1')
 			let morePopup = document.getElementById('morePopup')
 			let moreModal = document.getElementById('moreModal')
 			let receive = document.getElementById('popup1')
 			let menu = document.getElementById('menu')
-			let transfer = document.getElementById('transfer')
-			let bindWallet = document.getElementById('bindWallet')
-			let walletWrap = document.getElementById('walletWrap')
 
-
-			document.getElementById('linkWallet').addEventListener('click', function() {
-				popup.style.display = 'flex';
-			});
 			document.getElementById('close-popup').addEventListener('click', function() {
 				popup.style.display = 'none';
 			});
 			menu.addEventListener('click', function() {
+				// moreModal.style.animationDirection = ''
 				morePopup.style.display = 'flex';
 			});
-			// bindWallet.addEventListener('click', async function() {
-			// 	console.log(22222222);
-			// 	const connector = new TonConnectSDK.TonConnect();
-			// 	const walletsList = await connector.getWallets();
-			// 	console.log(1111111111, walletsList);
-			// 	walletsList.forEach(item => {
-			// 		console.log(333);
-			// 		let div = document.createElement('div')
-			// 		div.className = 'flex1';
-			// 		let img = document.createElement('img')
-			// 		let span = document.createElement('span')
-			// 		img.src = item.imageUrl
-			// 		span.textContent = item.appName
-			// 		div.appendChild(img); // 将列表项添加到div容器
-			// 		div.appendChild(span)
-			// 		walletWrap.appendChild(div)
-			// 		popup.style.display = 'flex';
-			// 	})
-			// });
-			// walletWrap.addEventListener('click', async function() {
-			// 	const connector = new TonConnectSDK.TonConnect();
-			// 	const walletConnectionSource = {
-			// 		universalLink: 'https://app.tonkeeper.com/ton-connect',
-			// 		bridgeUrl: 'https://bridge.tonapi.io/bridge'
-			// 	}
-
-			// 	const universalLink = connector.connect(walletConnectionSource);
-			// })
-
-			transfer.addEventListener('click', async function() {
-				console.log('?????????');
-				const transaction = {
-					messages: [{
-						address: "0:412410771DA82CBA306A55FA9E0D43C9D245E38133CB58F1457DFB8D5CD8892F", // destination address
-						amount: "1" //Toncoin in nanotons
-					}]
-				}
-
-				const result = await tonConnectUI.sendTransaction(transaction)
-
-
-			});
 			// 签到弹窗显示
-			popup1.style.display = 'flex';
+			// popup1.style.display = 'flex';
 			// 关闭签到弹窗
 			receive.addEventListener('click', function() {
 				popup1.style.display = 'none';
 			});
-
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
-				console.log('window.onclick10011111111111111');
 				if (event.target == popup) {
 					popup.style.display = "none";
 				} else if (event.target == popup1) {
@@ -571,6 +522,72 @@
 					morePopup.style.display = "none";
 				}
 			}
+			// Init TWA
+			Telegram.WebApp.ready();
+
+			// Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
+			Telegram.WebApp.onEvent('themeChanged', function() {
+				document.documentElement.className = Telegram.WebApp.colorScheme;
+			});
+
+			// Show main button
+			Telegram.WebApp.MainButton.setParams({
+				text: 'Main Button'
+			});
+			Telegram.WebApp.MainButton.onClick(function() {
+				Telegram.WebApp.showAlert('Main Button was clicked')
+			});
+			Telegram.WebApp.MainButton.show();
+
+			// Function to call showPopup API
+			function showPopup() {
+				Telegram.WebApp.showPopup({
+					title: 'Title',
+					message: 'Some message',
+					buttons: [{
+							id: 'link',
+							type: 'default',
+							text: 'Open ton.org'
+						},
+						{
+							type: 'cancel'
+						},
+					]
+				}, function(btn) {
+					if (btn === 'link') {
+						Telegram.WebApp.openLink('https://ton.org/');
+					}
+				});
+			};
+
+			// Function to toggle main TWA button
+			function toggleMainButton() {
+				if (Telegram.WebApp.MainButton.isVisible) {
+					Telegram.WebApp.MainButton.hide();
+				} else {
+					Telegram.WebApp.MainButton.show();
+				}
+			};
+
+
+
+			function setViewportData() {
+				var sizeEl = document.getElementById('viewport-params-size');
+				sizeEl.innerText = 'width: ' + window.innerWidth + ' x ' +
+					'height: ' + Telegram.WebApp.viewportStableHeight;
+
+				var expandEl = document.querySelector('#viewport-params-expand');
+				expandEl.innerText = 'Is Expanded: ' + (Telegram.WebApp.isExpanded ? 'true' : 'false');
+			}
+
+			Telegram.WebApp.setHeaderColor('secondary_bg_color');
+
+			setViewportData();
+			Telegram.WebApp.onEvent('viewportChanged', setViewportData);
+
+			Telegram.WebApp.onEvent('themeChanged', function() {
+				document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
+			});
 		</script>
 
 		<!-- Eruda is console for mobile browsers -->

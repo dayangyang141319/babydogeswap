@@ -54,10 +54,14 @@ ul {
 	color: #EC502C;
 }
 .btn{
+	width: 100%;
+	height: 41.5px;
+	background: #ec502c;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 15px;
+	border-radius: 20px;
 }
 /* 加入我们 */
 .joinus {
