@@ -508,7 +508,9 @@
 			});
 			bindWallet.addEventListener('click', async function() {
 				console.log(22222222);
-				const connector = new TonConnectSDK.TonConnect();
+				const connector = new TonConnectSDK.TonConnect({
+					manifestUrl：'https://slinadan.github.io/babySwap/tonconnect-manifest.json'
+				});
 				 connector.restoreConnection();
 				const walletsList = await connector.getWallets();
 				const unsubscribe = connector.onStatusChange(
