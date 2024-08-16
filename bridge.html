@@ -165,48 +165,6 @@
 				margin-bottom: 8px;
 
 			}
-
-			.modal1 {
-				width: 274px;
-				height: 312.5px;
-				background: #161616;
-				border-radius: 20px;
-				font-size: 15px;
-				align-items: center;
-				justify-content: center;
-				nimation-name: zoom;
-				animation-duration: .3s;
-				transition: .2s;
-			}
-
-			.modal1 .flex {
-				font-size: 12px;
-				color: #888;
-				margin: 20px 0 12px;
-			}
-
-			.modal1 .flex .amount {
-				font-size: 30px;
-				color: #EC502C;
-				font-weight: bold;
-			}
-
-			.modal1 img {
-				width: 87px;
-				height: 96.5px;
-			}
-
-			.modal1 .btn {
-				width: 211px;
-				height: 39.5px;
-				background: #ec502c;
-				border-radius: 20px;
-				justify-content: center;
-				margin-top: 23px;
-				color: #fff;
-				font-size: 12px;
-			}
-
 			.rightPopup {
 				justify-content: flex-end;
 			}
@@ -263,7 +221,7 @@
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
-					<img class="menu" id="menu" src="./images/menu.png" alt="">
+					<img class="menu"   onclick="showMore()" src="./images/menu.png" alt="">
 				</div>
 			</div>
 			<div class="dealTitle fs-20">桥</div>
@@ -283,9 +241,9 @@
 					<div class="flex-bw token">
 						<span id="">资产</span>
 						<div class="flex">
-							<img class="logo" id="menu" src="./images/eth.png" alt="">
+							<img class="logo" src="./images/eth.png" alt="">
 							<span id="">ton</span>
-							<img class="select" id="menu" src="./images/down.png" alt="">
+							<img class="select"  src="./images/down.png" alt="">
 						</div>
 					</div>
 					<div class="amountWrap flex-bw">
@@ -296,9 +254,9 @@
 					<div class="flex-bw token">
 						<span id="">你收到的</span>
 						<div class="flex">
-							<img class="logo" id="menu" src="./images/eth.png" alt="">
+							<img class="logo"  src="./images/eth.png" alt="">
 							<span id="">wton</span>
-							<img class="select" id="menu" src="./images/down.png" alt="">
+							<img class="select"  src="./images/down.png" alt="">
 						</div>
 					</div>
 					<div class="amountWrap flex-bw">
@@ -360,7 +318,7 @@
 			<!-- 连接钱包弹窗 -->
 			<div class="popup" id="popup">
 				<div class="modal flex1" id="modal">
-					<img id="close-popup" class="close" src="./images/close.png" alt="">
+					<img onclick="closeModal()" class="close" src="./images/close.png" alt="">
 					<span>连接您的钱包</span>
 					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
 					<img class="qrcode" src="" alt="">
@@ -385,18 +343,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- 签到弹窗 -->
-			<div class="popup " id="popup1">
-				<div class="modal1 flex1" id="modal1">
-					<span>恭喜您获得</span>
-					<div class="flex">
-						<span class="amount">10000</span>
-						<span>代币A</span>
-					</div>
-					<img src="" alt="">
-					<div class="btn flex" id="receive">开心收下</div>
-				</div>
-			</div>
+		
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
@@ -435,31 +382,22 @@
 				buttonRootId: 'ton-connect'
 			});
 			let popup = document.getElementById('popup')
-			let popup1 = document.getElementById('popup1')
 			let morePopup = document.getElementById('morePopup')
 			let moreModal = document.getElementById('moreModal')
-			let receive = document.getElementById('popup1')
-			let menu = document.getElementById('menu')
 
-			document.getElementById('close-popup').addEventListener('click', function() {
+			function closeModal() {
 				popup.style.display = 'none';
-			});
-			menu.addEventListener('click', function() {
-				// moreModal.style.animationDirection = ''
+			}
+			
+			function showMore(e) {
+			 console.log(6);
 				morePopup.style.display = 'flex';
-			});
-			// 签到弹窗显示
-			// popup1.style.display = 'flex';
-			// 关闭签到弹窗
-			receive.addEventListener('click', function() {
-				popup1.style.display = 'none';
-			});
+			}
+			
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				if (event.target == popup) {
 					popup.style.display = "none";
-				} else if (event.target == popup1) {
-					popup1.style.display = "none";
 				} else if (event.target == morePopup) {
 					// moreModal.style.animationDirection = 'reverse'
 					// moreModal.style.animationName = 'toRightAnimate'

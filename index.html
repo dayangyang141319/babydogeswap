@@ -9,9 +9,9 @@
 		<link rel="stylesheet" href="./css/common.css" />
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<!-- <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script> -->
-		
-		
-		
+
+
+
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -281,7 +281,7 @@
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex notBind" id="bindWallet">未绑定</div> -->
 					<!-- <div class="flex bind">0D9...4646</div> -->
-					<img class="menu" id="menu" src="./images/menu.png" alt="">
+					<img class="menu"  onclick="showMore()" src="./images/menu.png" alt="">
 				</div>
 			</div>
 			<div class="transaction flex1">
@@ -309,7 +309,7 @@
 			<div class="transferWrap flex-bw">
 				<img src="./images/invite.png" alt="">
 				<span>社区代币</span>
-				<div class="btn flex" id="transfer">去兑换</div>
+				<div class="btn flex"  onclick="toTransfer()">去兑换</div>
 			</div>
 			<!-- <div class="linkWallet flex" id="linkWallet">
 				<img src="./images/link.png" alt="">
@@ -369,7 +369,7 @@
 			<!-- 连接钱包弹窗 -->
 			<div class="popup" id="popup">
 				<div class="modal flex1" id="modal">
-					<img id="close-popup" class="close" src="./images/close.png" alt="">
+					<img  onclick="closeModal()" class="close" src="./images/close.png" alt="">
 					<span>连接您的钱包</span>
 					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
 					<img class="qrcode" src="" alt="">
@@ -403,7 +403,7 @@
 						<span>代币A</span>
 					</div>
 					<img src="" alt="">
-					<div class="btn flex" id="receive">开心收下</div>
+					<div class="btn flex"  onclick="toReceive()">开心收下</div>
 				</div>
 			</div>
 			<!-- 更多菜单 -->
@@ -441,20 +441,6 @@
 		<!-- <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script> -->
 		<!-- <script src="./js/jquery.js"></script> -->
 		<script>
-			// import TonConnectUI from'@tonconnect/ui'
-
-			// const connector = new TonConnect();
-
-			// await connector.sendTransaction({
-			//      messages: [
-			//            {
-			//                address: "0:412410771DA82CBA306A55FA9E0D43C9D245E38133CB58F1457DFB8D5CD8892F", // 目的地址
-			//                amount: "20000000" //以nanotons计的Toncoin
-			//            }
-			//        ]
-			// })
-
-
 			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 				buttonRootId: 'ton-connect'
@@ -492,22 +478,17 @@
 			let popup1 = document.getElementById('popup1')
 			let morePopup = document.getElementById('morePopup')
 			let moreModal = document.getElementById('moreModal')
-			let receive = document.getElementById('popup1')
-			let menu = document.getElementById('menu')
-			let transfer = document.getElementById('transfer')
 			let bindWallet = document.getElementById('bindWallet')
 			let walletWrap = document.getElementById('walletWrap')
-
-
-			document.getElementById('linkWallet').addEventListener('click', function() {
-				popup.style.display = 'flex';
-			});
-			document.getElementById('close-popup').addEventListener('click', function() {
+			
+			function closeModal() {
 				popup.style.display = 'none';
-			});
-			menu.addEventListener('click', function() {
+			}
+
+			function showMore(e) {
+			 console.log(6);
 				morePopup.style.display = 'flex';
-			});
+			}
 			// bindWallet.addEventListener('click', async function() {
 			// 	console.log(22222222);
 			// 	const connector = new TonConnectSDK.TonConnect();
@@ -536,8 +517,7 @@
 
 			// 	const universalLink = connector.connect(walletConnectionSource);
 			// })
-
-			transfer.addEventListener('click', async function() {
+			async function toTransfer() {
 				console.log('?????????');
 				const transaction = {
 					messages: [{
@@ -547,15 +527,13 @@
 				}
 
 				const result = await tonConnectUI.sendTransaction(transaction)
-
-
-			});
+			}
 			// 签到弹窗显示
 			popup1.style.display = 'flex';
 			// 关闭签到弹窗
-			receive.addEventListener('click', function() {
+			function toReceive() {
 				popup1.style.display = 'none';
-			});
+			}
 
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {

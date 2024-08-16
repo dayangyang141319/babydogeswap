@@ -314,7 +314,7 @@
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
-					<img class="menu" id="menu" src="./images/menu.png" alt="">
+					<img class="menu" onclick="showMore()" src="./images/menu.png" alt="">
 				</div>
 			</div>
 			<div class="dealTitle flex-bw">
@@ -403,7 +403,7 @@
 					<img src="./images/tabs3.png" alt="">
 					<span class="mainColor">销毁</span>
 				</a>
-				<a class="flex1"  href="bridge.html">
+				<a class="flex1" href="bridge.html">
 					<img src="./images/tab4.png" alt="">
 					<span>跨链桥</span>
 				</a>
@@ -415,7 +415,7 @@
 			<!-- 连接钱包弹窗 -->
 			<div class="popup" id="popup">
 				<div class="modal flex1" id="modal">
-					<img id="close-popup" class="close" src="./images/close.png" alt="">
+					<img onclick="closeModal()" class="close" src="./images/close.png" alt="">
 					<span>连接您的钱包</span>
 					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
 					<img class="qrcode" src="" alt="">
@@ -440,18 +440,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- 签到弹窗 -->
-			<div class="popup " id="popup1">
-				<div class="modal1 flex1" id="modal1">
-					<span>恭喜您获得</span>
-					<div class="flex">
-						<span class="amount">10000</span>
-						<span>代币A</span>
-					</div>
-					<img src="" alt="">
-					<div class="btn flex" id="receive">开心收下</div>
-				</div>
-			</div>
+
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
@@ -490,31 +479,22 @@
 				buttonRootId: 'ton-connect'
 			});
 			let popup = document.getElementById('popup')
-			let popup1 = document.getElementById('popup1')
 			let morePopup = document.getElementById('morePopup')
 			let moreModal = document.getElementById('moreModal')
-			let receive = document.getElementById('popup1')
-			let menu = document.getElementById('menu')
 
-			document.getElementById('close-popup').addEventListener('click', function() {
+			function closeModal() {
 				popup.style.display = 'none';
-			});
-			menu.addEventListener('click', function() {
-				// moreModal.style.animationDirection = ''
+			}
+
+			function showMore(e) {
+				console.log(6);
 				morePopup.style.display = 'flex';
-			});
-			// 签到弹窗显示
-			// popup1.style.display = 'flex';
-			// 关闭签到弹窗
-			receive.addEventListener('click', function() {
-				popup1.style.display = 'none';
-			});
+			}
+
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				if (event.target == popup) {
 					popup.style.display = "none";
-				} else if (event.target == popup1) {
-					popup1.style.display = "none";
 				} else if (event.target == morePopup) {
 					// moreModal.style.animationDirection = 'reverse'
 					// moreModal.style.animationName = 'toRightAnimate'
