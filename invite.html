@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>babydogeswap</title>
+		<link rel="stylesheet" href="./css/common.css" />
+		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+		<style>
+			body {
+				padding: 0;
+				padding-bottom: 90px;
+				padding-top: 64px;
+				font-size: 13px;
+				height: 100vh;
+				box-sizing: border-box;
+
+			}
+
+			main {
+				height: 100vh;
+				box-sizing: border-box;
+
+			}
+
+			.inviteBg {
+				position: relative;
+				width: 100%;
+				height: 330px;
+				background: #ec502c;
+				padding: 46px 25px;
+				font-size: 13px;
+			}
+
+			.inviteBg .fs-27 {
+				font-size: 27px;
+				margin-bottom: 10px;
+
+			}
+
+			.inviteBg .btn {
+				width: 150px;
+				height: 30px;
+				background: #161616;
+				border-radius: 15px;
+				justify-content: center;
+				margin-top: 26px;
+				font-size: 13px;
+			}
+
+
+
+			.bgimg {
+				position: absolute;
+				top: 64px;
+				right: 0;
+				width: 203px;
+				height: 175.5px;
+			}
+
+			.inviteWrap {
+				position: relative;
+				width: 100%;
+				height: calc(100vh - 230px);
+				background: #1d1d1d;
+				border-radius: 40px 40px 0 0;
+				top: -101px;
+				z-index: 2;
+				padding: 101px 0;
+				align-items: center;
+				gap: 25px;
+			}
+
+			.inviteWrap .btn {
+				width: 244px;
+				height: 49.5px;
+				border-radius: 24.5px;
+			}
+
+			.inviteWrap .btn1 {
+				border: 0.5px solid #ec502c;
+				background-color: #1d1d1d;
+				color: #EC502C;
+			}
+
+			.fs-12 {
+				font-size: 12px;
+			}
+
+			.fs-20 {
+				font-size: 20px;
+			}
+
+			.mb-10 {
+				margin-bottom: 10px;
+			}
+
+			.mb-15 {
+				margin-bottom: 15px;
+			}
+
+			.mb-18 {
+				margin-bottom: 18px;
+			}
+
+			.mb-56 {
+				margin-bottom: 56px;
+			}
+
+			.invitePopup {
+				align-items: flex-end;
+			}
+
+			.inviteModal {
+				width: 374.5px;
+				height: 242px;
+				background: #161616;
+				border-radius: 20px 20px 0 0;
+				align-items: center;
+				padding: 20px 14px;
+				gap: 20px;
+				animation-name: slideDown;
+				animation-duration: 0.4s;
+			}
+
+			
+			/* 弹窗上滑动画 */
+			@keyframes slideDown {
+				from {
+					transform: translateY(242px);
+				}
+			
+				to {
+					transform: translateY(0);
+				}
+			}
+			
+			/* 弹窗下滑动画 */
+			@keyframes slideUp {
+				from {
+					transform: translateY(0);
+				}
+			
+				to {
+					transform: translateY(242px);
+				}
+			}
+
+			.inviteModal span {
+				margin-bottom: 31px;
+			}
+
+			.inviteModal .btn {
+				height: 49.5px;
+				border-radius: 24.5px;
+			}
+
+			.inviteModal .btn1 {
+				border: 0.5px solid #ec502c;
+				color: #EC502C;
+				background-color: #161616;
+			}
+		</style>
+	</head>
+
+	<body>
+		<main>
+			<div class="topNav  flex-bw">
+				<span class="bold fs-20">Babydogeswap</span>
+				<div class="flex">
+					<div class="flex notBind" id="ton-connect"></div>
+					<!-- <div class="flex bind">0D9...4646</div> -->
+					<img class="menu" onclick="showMore()" src="./images/menu.png" alt="">
+				</div>
+			</div>
+			<div class="inviteBg">
+				<div class="fs-27">邀请好友</div>
+				<div>获得更多代币A</div>
+				<div class="flex btn">点击下方按钮分享好友</div>
+				<img class="bgimg" src="./images/inviteimg.png" alt="">
+			</div>
+			<div class="inviteWrap flex1">
+				<div class="btn" onclick="showPopup()">邀请好友</div>
+				<div class="btn btn1">查看我的团队</div>
+			</div>
+			<!-- 邀请弹窗 -->
+			<div class="popup invitePopup" id="invitePopup">
+				<div class="flex1 inviteModal" id="inviteModal">
+					<span>邀请好友</span>
+					<div class="btn btn1">复制邀请链接</div>
+					<div class="btn">分享邀请链接</div>
+				</div>
+			</div>
+			<!-- 更多菜单 -->
+			<div class="popup rightPopup" id="morePopup">
+				<div class="moreModal flex1" id="moreModal">
+					<span class="bold">Babydogeswap</span>
+					<div class="walletBtn flex">
+						<span>钱包地址：0x564df...23</span>
+						<img src="./images/copy.png" alt="">
+					</div>
+					<a class="flex-bw" href="index.html">
+						<span>首页</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="wallet.html">
+						<span>我的资产</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="ranking.html">
+						<span>排行榜</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="invite.html">
+						<span>邀请</span>
+						<img src="./images/right.png" alt="">
+					</a>
+				</div>
+			</div>
+		</main>
+
+		<script>
+			let invitePopup = document.getElementById('invitePopup')
+			let inviteModal = document.getElementById('inviteModal')
+			let morePopup = document.getElementById('morePopup')
+			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
+				buttonRootId: 'ton-connect'
+			});
+
+			function showPopup() {
+				invitePopup.style.display = 'flex'
+				inviteModal.style.animation = "slideDown 0.4s forwards"; // 应用下滑动画  
+			}
+
+			function showMore(e) {
+				morePopup.style.display = 'flex';
+				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
+			}
+			// 点击模态框外部时，也关闭它
+			window.onclick = function(event) {
+				console.log('window.onclick10011111111111111');
+				if (event.target == morePopup) {
+					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画  
+					setTimeout(() => {
+						morePopup.style.display = "none";
+					},200)
+				} else if (event.target == invitePopup) {
+					// invitePopup.style.display = "none";
+					inviteModal.style.animation = "slideUp 0.4s forwards"; // 应用上滑动画  
+					setTimeout(function() {
+						invitePopup.style.display = "none";
+					}, 40); // 动画完成后隐藏模态框 
+				}
+			}
+		</script>
+
+		<!-- Eruda is console for mobile browsers -->
+		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+		<script>
+			eruda.init();
+		</script>
+	</body>
+</html>

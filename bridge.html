@@ -298,19 +298,19 @@
 					<img src="./images/tab1.png" alt="">
 					<span>交易</span>
 				</a>
-				<a class="flex1">
+				<a class="flex1" href="pool.html">
 					<img src="./images/tab2.png" alt="">
 					<span>池子</span>
 				</a>
-				<a class="flex1" href="destroy.html">
+				<a class="flex1"  href="destroy.html">
 					<img src="./images/tab3.png" alt="">
 					<span>销毁</span>
 				</a>
-				<a class="flex1">
+				<a class="flex1" href="bridge.html">
 					<img src="./images/tabs4.png" alt="">
 					<span class="mainColor">跨链桥</span>
 				</a>
-				<a class="flex1">
+				<a class="flex1"  href="communityToken.html">
 					<img src="./images/tab5.png" alt="">
 					<span>社区代币</span>
 				</a>
@@ -356,15 +356,15 @@
 						<span>首页</span>
 						<img src="./images/right.png" alt="">
 					</a>
-					<a class="flex-bw">
+					<a class="flex-bw" href="wallet.html">
 						<span>我的资产</span>
 						<img src="./images/right.png" alt="">
 					</a>
-					<a class="flex-bw">
+					<a class="flex-bw" href="ranking.html">
 						<span>排行榜</span>
 						<img src="./images/right.png" alt="">
 					</a>
-					<a class="flex-bw">
+					<a class="flex-bw" href="invite.html">
 						<span>邀请</span>
 						<img src="./images/right.png" alt="">
 					</a>
@@ -390,8 +390,9 @@
 			}
 			
 			function showMore(e) {
-			 console.log(6);
+				console.log(6);
 				morePopup.style.display = 'flex';
+				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 			}
 			
 			// 点击模态框外部时，也关闭它  
@@ -399,10 +400,11 @@
 				if (event.target == popup) {
 					popup.style.display = "none";
 				} else if (event.target == morePopup) {
-					// moreModal.style.animationDirection = 'reverse'
-					// moreModal.style.animationName = 'toRightAnimate'
+					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
 					// moreModal.classList.remove('active')
-					morePopup.style.display = "none";
+					setTimeout(() => {
+						morePopup.style.display = "none";
+					},200)
 				}
 			}
 			// Init TWA

@@ -333,9 +333,9 @@
 					<img class="menu" onclick="showMore()" src="./images/menu.png" alt="">
 				</div>
 			</div>
-			<div class="back flex-bw">
+			<a class="back flex-bw" href="wallet.html">
 				<img src="images/back.png" alt="">
-			</div>
+			</a>
 			<div class="flex1 dataWrap">
 				<span class="grey">可提现USDT</span>
 				<span>12548752.2145</span>
@@ -413,15 +413,15 @@
 						<span>首页</span>
 						<img src="./images/right.png" alt="">
 					</a>
-					<a class="flex-bw">
+					<a class="flex-bw" href="wallet.html">
 						<span>我的资产</span>
 						<img src="./images/right.png" alt="">
 					</a>
-					<a class="flex-bw">
+					<a class="flex-bw" href="ranking.html">
 						<span>排行榜</span>
 						<img src="./images/right.png" alt="">
 					</a>
-					<a class="flex-bw">
+					<a class="flex-bw" href="invite.html">
 						<span>邀请</span>
 						<img src="./images/right.png" alt="">
 					</a>
@@ -442,8 +442,9 @@
 			let moreModal = document.getElementById('moreModal')
 
 			function showMore(e) {
-			 console.log(6);
+				console.log(6);
 				morePopup.style.display = 'flex';
+				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 			}
 
 			function changeTab(index) {
@@ -465,7 +466,11 @@
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				 if (event.target == morePopup) {
-					morePopup.style.display = "none";
+					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
+					// moreModal.classList.remove('active')
+					setTimeout(() => {
+						morePopup.style.display = "none";
+					}, 200)
 				}
 			}
 			// Init TWA

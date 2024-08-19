@@ -14,17 +14,24 @@ body {
 * {
 	box-sizing: border-box;
 }
-a{
+
+a {
 	color: #fff;
 	text-decoration: none;
 }
-a:link,a:visited,a:hover,a:active,a:focus{
+
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
 	text-decoration: none;
 	/* -webkit-user-select: none; */
 	-webkit-tap-highlight-color: transparent;
 	/* -moz-user-focus: none;
 	-moz-user-select: none; */
 }
+
 .flex {
 	display: flex;
 	align-items: center;
@@ -50,10 +57,12 @@ ul {
 	padding: 0;
 	margin: 0;
 }
-.mainColor{
+
+.mainColor {
 	color: #EC502C;
 }
-.btn{
+
+.btn {
 	width: 100%;
 	height: 41.5px;
 	background: #ec502c;
@@ -63,10 +72,11 @@ ul {
 	font-size: 15px;
 	border-radius: 20px;
 }
+
 /* 加入我们 */
 .joinus {
 	margin-top: 44px;
-	
+
 }
 
 .joinus .fs-20 {
@@ -117,9 +127,11 @@ ul {
 	width: 20px;
 	height: 20px;
 }
-.tabbar a{
+
+.tabbar a {
 	color: #888;
 }
+
 /* 头部 */
 .topNav {
 	position: fixed;
@@ -127,7 +139,7 @@ ul {
 	left: 0;
 	width: 100%;
 	height: 44px;
-	z-index: 2;
+	z-index: 3;
 	padding: 0 22px;
 	background-color: #161616;
 }
@@ -143,7 +155,8 @@ ul {
 	margin-right: 18px !important;
 	background-color: transparent !important;
 }
-.topNav .notBind button{
+
+.topNav .notBind button {
 
 	width: 82.5px !important;
 	height: 26.5px !important;
@@ -152,16 +165,19 @@ ul {
 	justify-content: center;
 	font-size: 12px !important;
 	background-color: transparent !important;
-	padding:0 !important;
+	padding: 0 !important;
 }
-.topNav .notBind button div{
+
+.topNav .notBind button div {
 	font-size: 12px !important;
 	line-height: 1.2;
 	color: #EC502C !important;
 }
-.topNav .notBind svg{
+
+.topNav .notBind svg {
 	display: none !important;
 }
+
 .topNav .bind {
 	width: 82.5px;
 	height: 26.5px;
@@ -197,13 +213,60 @@ ul {
 
 .overlay {
 	display: none;
-	
+
 }
 
 .hide {
 	animation-name: fadeOut;
 	animation-duration: .6s;
 	transition: all .5s;
+}
+
+.rightPopup {
+	justify-content: flex-end;
+}
+
+.moreModal {
+	width: 194px;
+	height: 100vh;
+	background: #161616;
+	border-radius: 20px 20px 20px 0px;
+	align-items: center;
+	animation-name: toLeftAnimate;
+	animation-duration: .3s;
+	padding: 20px 11px;
+
+}
+
+.moreModal .bold {
+	font-size: 20px;
+}
+
+.moreModal .walletBtn {
+	width: 171.5px;
+	height: 34px;
+	background: #ec502c;
+	border-radius: 17px;
+	margin: 18px 0 21px;
+	justify-content: center;
+	gap: 9px;
+	font-size: 12px;
+}
+
+.moreModal .walletBtn img {
+	width: 9px;
+	height: 9px;
+}
+
+.moreModal .flex-bw {
+	width: 100%;
+	font-size: 13px;
+	margin-bottom: 20px;
+}
+
+.moreModal .flex-bw img {
+	width: 13px;
+	height: 13px;
 }
 
 @keyframes fadeIn {
@@ -229,19 +292,23 @@ ul {
 @keyframes toLeftAnimate {
 	from {
 		transform: translateX(194px);
+	}
 
 	to {
 		transform: translateX(0);
 	}
 }
+
 @keyframes toRightAnimate {
 	from {
 		transform: translateX(0);
+	}
 
 	to {
 		transform: translateX(194px);
 	}
 }
+
 @keyframes zoom {
 	from {
 		transform: scale(0)
@@ -251,6 +318,7 @@ ul {
 		transform: scale(1)
 	}
 }
+
 @keyframes closeZoom {
 	from {
 		transform: scale(1)

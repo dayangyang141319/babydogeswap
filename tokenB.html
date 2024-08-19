@@ -19,82 +19,153 @@
 				font-size: 20px;
 			}
 
-			.dealTitle .refresh {
-				width: 23px;
-				height: 19px;
-				margin-right: 23px;
+
+			.back {
+				padding: 20px 0 25px 0;
 			}
 
-			.dealTitle img {
-				width: 22.5px;
-				height: 22.5px;
-				margin: 20px 0 24px;
+			.back img {
+				width: 20px;
+				height: 20px;
 			}
 
-			.flexCenter {
-				align-items: center;
-			}
-
-			.dealWrap {
-				width: 331px;
-				height: 150.5px;
+			.dataWrap {
+				width: 100%;
+				height: 173px;
 				background: rgba(255, 255, 255, 0.03);
 				border: 0.5px solid #343434;
 				border-radius: 20px;
-			}
-
-			.dealWrap .flex-bw {
-				padding: 0 20px;
-			}
-
-			.dealWrap .logo {
-				width: 31.5px;
-				height: 32px;
-				margin-right: 10px;
-			}
-
-			.dealWrap .token {
-				height: 58px;
-			}
-
-			.amountWrap {
-				width: 331px;
-				height: 91.5px;
-				background: rgba(255, 255, 255, 0.03);
-				border: 0.5px solid #343434;
-				border-radius: 20px;
-				padding: 0 22px;
+				padding: 24px 20px;
+				margin-bottom: 20px;
 				font-size: 24px;
+				align-items: center;
+				background-image: url('images/bg.png');
+				background-size: 375px 130px;
+				background-position: -23px 28px;
 			}
 
-			.amountWrap .fs-14 {
+			.dataWrap .grey {
+				font-size: 12px;
+				color: #888;
+				margin-bottom: 17px;
+			}
+
+			.dataWrap .btn {
+				width: 270.5px;
+				height: 41.5px;
+				margin-top: 20px;
+			}
+
+			.tabs {
+				position: relative;
 				font-size: 14px;
 				color: #888;
 			}
 
-			.select {
-				width: 8px;
-				height: 6.5px;
-				margin-left: 7.5px;
+			.tabs .flex1 {
+				align-items: center;
 			}
 
-			.exchangeImg {
-				width: 42px;
-				height: 40px;
-				margin: 23px 0 29px;
-			}
-
-			.flexCenter .computed {
-				color: #888;
-				align-self: flex-start;
-				margin: 16px 0 64px;
-			}
-
-			.flexCenter .btn {
-				width: 331px;
-				height: 41.5px;
+			.tabs .indicator {
+				position: absolute;
+				bottom: -7px;
+				left: 12px;
+				height: 3px;
 				background: #ec502c;
+				border-radius: 1.5px;
+				transition: transform 0.3s ease;
+				width: 30px;
+			}
+
+			.tabs .active {
+				color: #fff;
+			}
+
+			.tabs .active .line {
+				background: #ec502c;
+			}
+
+			.recordWrap {
+				margin-top: 23px;
+				width: 100%;
+				min-height: 305px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 0.5px solid #343434;
 				border-radius: 20px;
+				padding: 0 8px;
+				font-size: 12px;
+			}
+
+			.recordWrap .flex {
+				width: 100%;
+				height: 54px;
+				border-bottom: 1px solid #343434;
+			}
+
+			.recordWrap>.flex>.flex1 {
+				align-items: center;
+				flex: 1;
+			}
+
+			.recordWrap .flex .flex {
+				flex: 1.5;
+				padding-left: 10px;
+				justify-content: flex-start;
+			}
+
+			.recordWrap .flex .flex .flex1 {
+				align-items: center;
+			}
+
+			.recordWrap .flex>span {
+				flex: 1;
+			}
+
+			.recordWrap .green {
+				color: #24E564;
+				text-align: center;
+			}
+
+			.recordWrap .red {
+				color: #E52424;
+				text-align: center;
+			}
+
+			.recordWrap .btn {
+				width: 38px;
+				height: 19.5px;
+				font-size: 11px;
+				margin-left: 5px;
+			}
+
+			.tab-panel {
+				display: none;
+				padding: 20px;
+			}
+
+			.tab-panel.active {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.tab-link.active {
+				color: #fff;
+			}
+
+			.empty {
+				justify-content: center;
+			}
+
+			.mb-8 {
+				margin-bottom: 8px;
+			}
+
+			.button {
+				margin: 35px 0 51px;
+			}
+
+			.mb-15 {
+				margin-bottom: 15px;
 			}
 
 			.modal {
@@ -254,7 +325,7 @@
 
 	<body>
 		<main>
-			<div class="topNav flex-bw">
+			<div class="topNav  flex-bw">
 				<span class="bold fs-20">Babydogeswap</span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
@@ -262,121 +333,69 @@
 					<img class="menu" onclick="showMore()" src="./images/menu.png" alt="">
 				</div>
 			</div>
-			<div class="flex-bw dealTitle">
-				<span class="fs-20" id="">交易</span>
-				<div id="">
-					<img class="refresh" id="refresh" src="./images/refresh.png" alt="">
-					<img class="set" src="./images/set.png" alt="">
-				</div>
+			<a class="back flex-bw" href="wallet.html">
+				<img src="images/back.png" alt="">
+			</a>
+			<div class="flex1 dataWrap">
+				<span class="grey">可提现代币B</span>
+				<span>12548752.2145</span>
+				<a class="btn" href="transfer.html">提取</a>
 			</div>
-			<div class="flex1 flexCenter">
-				<div class="dealWrap">
-					<div class="flex-bw token">
-						<span id="">从</span>
-						<div class="flex">
-							<img class="logo" src="./images/eth.png" alt="">
-							<span id="">TON</span>
-							<img class="select" src="./images/down.png" alt="">
-						</div>
-					</div>
-					<div class="amountWrap flex-bw">
-						<span id="">1254.324</span>
-						<span class="fs-14">≈$654.564654</span>
-					</div>
+			<div class="flex-bw tabs">
+				<div class="flex1 tab-link" id="tabs-1" onclick="changeTab(0)">
+					<span id="">收益记录</span>
 				</div>
-				<img class="exchangeImg" src="./images/exchange.png" alt="" />
-				<div class="dealWrap">
-					<div class="flex-bw token">
-						<span id="">至</span>
-						<div class="flex">
-							<img class="logo" src="./images/usdt.png" alt="">
-							<span id="">Lon</span>
-							<img class="select" src="./images/down.png" alt="">
-						</div>
-					</div>
-					<div class="amountWrap flex-bw">
-						<span id="">1254.324</span>
-						<span class="fs-14">≈$654.564654</span>
-					</div>
+				<div class="flex1 tab-link" id="tabs-2" onclick="changeTab(1)">
+					<span id="">提取记录</span>
 				</div>
-				<span class="computed">1Ton≈5.65464676Lon</span>
-				<div class="btn">兑换</div>
+				<div class="indicator"></div>
 			</div>
-			<div class="joinus">
-				<div class="fs-20">加入我们的社区</div>
-				<div class="flex-bw">
-					<div class="flex1">
-						<span>探索</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+			<div class="tab-content">
+				<div class=" recordWrap tab-panel" id="tab-1">
+					<div class="empty flex">
+						暂无记录
 					</div>
-					<div class="flex1">
-						<span>用户</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
-					</div>
-					<div class="flex1">
-						<span>开发</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="tabbar flex">
-				<a class="flex1" href="deal.html">
-					<img src="./images/tabs1.png" alt="">
-					<span class="mainColor">交易</span>
-				</a>
-				<a class="flex1" href="pool.html">
-					<img src="./images/tab2.png" alt="">
-					<span>池子</span>
-				</a>
-				<a class="flex1" href="destroy.html">
-					<img src="./images/tab3.png" alt="">
-					<span>销毁</span>
-				</a>
-				<a class="flex1" href="bridge.html">
-					<img src="./images/tab4.png" alt="">
-					<span>跨链桥</span>
-				</a>
-				<a class="flex1" href="communityToken.html">
-					<img src="./images/tab5.png" alt="">
-					<span>社区代币</span>
-				</a>
-			</div>
-			<!-- 连接钱包弹窗 -->
-			<div class="popup" id="popup">
-				<div class="modal flex1" id="modal">
-					<img onclick="closeModal()" class="close" src="./images/close.png" alt="">
-					<span>连接您的钱包</span>
-					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
-					<img class="qrcode" src="" alt="">
-					<span class="fs-12 mb-20">可用钱包</span>
 					<div class="flex">
+						<span>动态奖励</span>
+						<span class="green">+100</span>
 						<div class="flex1">
-							<img src="./images/wallet1.png" alt="">
-							<span>Wallet inTelegram</span>
+							<span>2024-07-15</span>
+							<span>17:13:21</span>
 						</div>
+					</div>
+					<div class="flex">
+						<span>动态奖励</span>
+						<span class="green">+100</span>
 						<div class="flex1">
-							<img src="./images/wallet2.png" alt="">
-							<span>Tonkeeper Popular</span>
+							<span>2024-07-15</span>
+							<span>17:13:21</span>
 						</div>
-						<div class="flex1">
-							<img src="./images/wallet2.png" alt="">
-							<span>Bitget Wal...</span>
+					</div>
+				</div>
+				<div class=" recordWrap tab-panel" id="tab-2">
+					<div class="empty flex">
+						暂无记录
+					</div>
+					<div class="flex">
+						<span>(用户昵称)转增</span>
+						<span class="red">-100</span>
+						<div class="flex">
+							<div class="flex1">
+								<span>2024-07-15</span>
+								<span>17:13:21</span>
+							</div>
+							<div class="btn">领取</div>
 						</div>
-						<div class="flex1">
-							<img src="./images/wallet3.png" alt="">
-							<span>View allWallets</span>
+					</div>
+					<div class="flex">
+						<span>销毁获得</span>
+						<span class="red">-100</span>
+						<div class="flex">
+							<div class="flex1">
+								<span>2024-07-15</span>
+								<span>17:13:21</span>
+							</div>
+							<!-- <div class="btn">领取</div> -->
 						</div>
 					</div>
 				</div>
@@ -419,24 +438,34 @@
 				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 				buttonRootId: 'ton-connect'
 			});
-			let popup = document.getElementById('popup')
 			let morePopup = document.getElementById('morePopup')
 			let moreModal = document.getElementById('moreModal')
-
-			function closeModal() {
-				popup.style.display = 'none';
-			}
 
 			function showMore(e) {
 				console.log(6);
 				morePopup.style.display = 'flex';
 				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 			}
+
+			function changeTab(index) {
+				console.log(index);
+				// 移除所有tab-panel的active类  
+				document.querySelectorAll('.tab-panel').forEach(function(panel) {
+					panel.classList.remove('active');
+				});
+				document.querySelectorAll('.tab-link').forEach(function(panel) {
+					panel.classList.remove('active');
+				});
+				// 添加active类到选中的tab-panel  
+				document.getElementById('tabs-' + (index + 1)).classList.add('active');
+				document.getElementById('tab-' + (index + 1)).classList.add('active');
+				const newLeft = index * (window.innerWidth - 95) + 'px'; // 计算新的left值  
+				document.querySelector('.indicator').style.transform = `translateX(${newLeft})`;
+			}
+			changeTab(0);
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
-				if (event.target == popup) {
-					popup.style.display = "none";
-				} else if (event.target == morePopup) {
+				 if (event.target == morePopup) {
 					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
 					// moreModal.classList.remove('active')
 					setTimeout(() => {

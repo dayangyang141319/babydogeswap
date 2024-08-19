@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>babydogeswap</title>
+		<link rel="stylesheet" href="./css/common.css" />
+		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+		<style>
+			body {
+				padding-bottom: 90px;
+				padding-top: 64px;
+				font-size: 13px;
+			}
+
+			.fs-20 {
+				font-size: 20px;
+
+			}
+
+			.mb-41 {
+				margin-bottom: 41px;
+			}
+
+			.walletWrap {
+				width: 100%;
+				height: 65px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 0.5px solid #343434;
+				border-radius: 20px;
+				padding: 0 20px;
+				font-size: 13px;
+			}
+
+			.walletWrap .logo {
+				width: 31.5px;
+				height: 31.5px;
+				margin-right: 14px;
+			}
+
+			.walletWrap .amount {
+				font-size: 18px;
+				margin-right: 14px;
+			}
+
+			.walletWrap .right {
+				width: 8.5px;
+				height: 8.5px;
+			}
+
+			.mb-15 {
+				margin-bottom: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<main>
+			<div class="topNav  flex-bw">
+				<span class="bold fs-20">Babydogeswap</span>
+				<div class="flex">
+					<div class="flex notBind" id="ton-connect"></div>
+					<!-- <div class="flex bind">0D9...4646</div> -->
+					<img class="menu" onclick="showMore()" src="./images/menu.png" alt="">
+				</div>
+			</div>
+			<div class="fs-20 mb-41">我的钱包</div>
+			<a class="flex-bw walletWrap mb-15" href="usdt.html">
+				<div class="flex">
+					<img class="logo" src="images/usdt.png" alt="" />
+					<span>USDT</span>
+				</div>
+				<div class="flex">
+					<span class="amount">845.6143</span>
+					<img class="right" src="images/right.png" alt="" />
+				</div>
+			</a>
+			<a class="flex-bw walletWrap mb-15" href="tokenA.html">
+				<div class="flex">
+					<img class="logo" src="images/usdt.png" alt="" />
+					<span>USDT</span>
+				</div>
+				<div class="flex">
+					<span class="amount">845.6143</span>
+					<img class="right" src="images/right.png" alt="" />
+				</div>
+			</a>
+			<a class="flex-bw walletWrap mb-15" href="tokenB.html">
+				<div class="flex">
+					<img class="logo" src="images/usdt.png" alt="" />
+					<span>USDT</span>
+				</div>
+				<div class="flex">
+					<span class="amount">845.6143</span>
+					<img class="right" src="images/right.png" alt="" />
+				</div>
+			</a>
+			<!-- 更多菜单 -->
+			<div class="popup rightPopup" id="morePopup">
+				<div class="moreModal flex1" id="moreModal">
+					<span class="bold">Babydogeswap</span>
+					<div class="walletBtn flex">
+						<span>钱包地址：0x564df...23</span>
+						<img src="./images/copy.png" alt="">
+					</div>
+					<a class="flex-bw" href="index.html">
+						<span>首页</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="wallet.html">
+						<span>我的资产</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="ranking.html">
+						<span>排行榜</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="invite.html">
+						<span>邀请</span>
+						<img src="./images/right.png" alt="">
+					</a>
+				</div>
+			</div>
+		</main>
+
+		<script>
+			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
+				buttonRootId: 'ton-connect'
+			});
+			let morePopup = document.getElementById('morePopup')
+			let moreModal = document.getElementById('moreModal')
+
+			function showMore(e) {
+				console.log(6);
+				morePopup.style.display = 'flex';
+				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
+			}
+
+			window.onclick = function(event) {
+				if (event.target == morePopup) {
+					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
+					// moreModal.classList.remove('active')
+					setTimeout(() => {
+						morePopup.style.display = "none";
+					}, 200)
+				}
+			}
+		</script>
+
+		<!-- Eruda is console for mobile browsers -->
+		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+		<script>
+			eruda.init();
+		</script>
+	</body>
+</html>

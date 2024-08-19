@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>babydogeswap</title>
+		<link rel="stylesheet" href="./css/common.css" />
+		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+		<style>
+			body {
+				position: relative;
+				padding-bottom: 90px;
+				padding-top: 64px;
+				font-size: 13px;
+			}
+
+			.fs-20 {
+				font-size: 20px;
+
+			}
+
+			.mb-95 {
+				margin-bottom: 95px;
+			}
+
+			.bgimg {
+				position: absolute;
+				top: 49px;
+				right: 15px;
+				width: 153px;
+				height: 144px;
+			}
+
+			.walletWrap {
+				position: relative;
+				z-index: 2;
+				width: 100%;
+				height: 65px;
+				background: #1D1D1D;
+				border: 0.5px solid #343434;
+				border-radius: 20px;
+				padding: 0 18px;
+				font-size: 13px;
+			}
+
+			.walletWrap .logo {
+				width: 31.5px;
+				height: 31.5px;
+				margin-right: 14px;
+			}
+
+			.walletWrap .flex .flex1 {
+				gap: 5px;
+			}
+
+			.walletWrap .mainColor {
+				margin-right: 8px;
+				font-size: 15px;
+			}
+
+			.walletWrap>.flex1 {
+				align-items: center;
+				font-size: 11px;
+			}
+
+			.walletWrap .amount {
+				font-size: 18px;
+			}
+
+			.walletWrap .rank {
+				width: 23px;
+				height: 26px;
+			}
+
+			.fs-12 {
+				font-size: 12px;
+			}
+
+			.mb-10 {
+				margin-bottom: 10px;
+			}
+
+			.mb-15 {
+				margin-bottom: 15px;
+			}
+
+			.mb-18 {
+				margin-bottom: 18px;
+			}
+
+			.mb-56 {
+				margin-bottom: 56px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<main>
+			<div class="topNav  flex-bw">
+				<span class="bold fs-20">Babydogeswap</span>
+				<div class="flex">
+					<div class="flex notBind" id="ton-connect"></div>
+					<!-- <div class="flex bind">0D9...4646</div> -->
+					<img class="menu" onclick="showMore()" src="./images/menu.png" alt="">
+				</div>
+			</div>
+			<div class="fs-20 mb-95">名人榜</div>
+			<img class="bgimg" src="./images/bgimg.png" alt="">
+			<div class="flex-bw walletWrap mb-56">
+				<div class="flex">
+					<img class="logo" src="images/usdt.png" alt="" />
+					<div class="flex1">
+						<span id="">elite295</span>
+						<div class="flex">
+							<span class="mainColor">845.6143</span>
+							<span class="fs-12">代币A</span>
+						</div>
+					</div>
+				</div>
+				<div class="flex1">
+					<span>名次</span>
+					<span class="amount">125</span>
+				</div>
+			</div>
+			<div class="mb-18">排名</div>
+			<div class="flex-bw walletWrap mb-10">
+				<div class="flex">
+					<img class="logo" src="images/usdt.png" alt="" />
+					<div class="flex1">
+						<span id="">elite295</span>
+						<div class="flex">
+							<span class="mainColor">845.6143</span>
+							<span class="fs-12">代币A</span>
+						</div>
+					</div>
+				</div>
+				<img class="rank" src="images/one.png" alt="" />
+			</div>
+			<div class="flex-bw walletWrap mb-10">
+				<div class="flex">
+					<img class="logo" src="images/usdt.png" alt="" />
+					<div class="flex1">
+						<span id="">elite295</span>
+						<div class="flex">
+							<span class="mainColor">845.6143</span>
+							<span class="fs-12">代币A</span>
+						</div>
+					</div>
+				</div>
+				<img class="rank" src="images/two.png" alt="" />
+			</div>
+			<div class="flex-bw walletWrap mb-10">
+				<div class="flex">
+					<img class="logo" src="images/usdt.png" alt="" />
+					<div class="flex1">
+						<span id="">elite295</span>
+						<div class="flex">
+							<span class="mainColor">845.6143</span>
+							<span class="fs-12">代币A</span>
+						</div>
+					</div>
+				</div>
+				<img class="rank" src="images/three.png" alt="" />
+			</div>
+			<div class="flex-bw walletWrap mb-10">
+				<div class="flex">
+					<img class="logo" src="images/usdt.png" alt="" />
+					<div class="flex1">
+						<span id="">elite295</span>
+						<div class="flex">
+							<span class="mainColor">845.6143</span>
+							<span class="fs-12">代币A</span>
+						</div>
+					</div>
+				</div>
+				<span class="amount">4</span>
+			</div>
+			<!-- 更多菜单 -->
+			<div class="popup rightPopup" id="morePopup">
+				<div class="moreModal flex1" id="moreModal">
+					<span class="bold">Babydogeswap</span>
+					<div class="walletBtn flex">
+						<span>钱包地址：0x564df...23</span>
+						<img src="./images/copy.png" alt="">
+					</div>
+					<a class="flex-bw" href="index.html">
+						<span>首页</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="wallet.html">
+						<span>我的资产</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="ranking.html">
+						<span>排行榜</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="invite.html">
+						<span>邀请</span>
+						<img src="./images/right.png" alt="">
+					</a>
+				</div>
+			</div>
+			<div class="joinus">
+				<div class="fs-20">加入我们的社区</div>
+				<div class="flex-bw">
+					<div class="flex1">
+						<span>探索</span>
+						<ul>
+							<li>标题名称</li>
+							<li>标题名称</li>
+							<li>标题名称</li>
+						</ul>
+					</div>
+					<div class="flex1">
+						<span>用户</span>
+						<ul>
+							<li>标题名称</li>
+							<li>标题名称</li>
+							<li>标题名称</li>
+						</ul>
+					</div>
+					<div class="flex1">
+						<span>开发</span>
+						<ul>
+							<li>标题名称</li>
+							<li>标题名称</li>
+							<li>标题名称</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<script>
+			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
+				buttonRootId: 'ton-connect'
+			});
+			let morePopup = document.getElementById('morePopup')
+			let moreModal = document.getElementById('moreModal')
+
+			function showMore(e) {
+				console.log(6);
+				morePopup.style.display = 'flex';
+				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
+			}
+			window.onclick = function(event) {
+				if (event.target == morePopup) {
+					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
+					// moreModal.classList.remove('active')
+					setTimeout(() => {
+						morePopup.style.display = "none";
+					}, 200)
+				}
+			}
+		</script>
+
+		<!-- Eruda is console for mobile browsers -->
+		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+		<script>
+			eruda.init();
+		</script>
+	</body>
+</html>

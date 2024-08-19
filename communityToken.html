@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>babydogeswap</title>
+		<link rel="stylesheet" href="./css/common.css" />
+		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+		<style>
+			body {
+				padding-bottom: 90px;
+				padding-top: 64px;
+				font-size: 13px;
+			}
+
+			.fs-20 {
+				font-size: 20px;
+			}
+
+			.mb-14 {
+				margin-bottom: 14px;
+			}
+
+			.inputWrap {
+				width: 100%;
+				height: 41px;
+				background: rgba(255, 255, 255, 0.03);
+				border: 0.5px solid #343434;
+				border-radius: 20px;
+				padding: 0 20px;
+				gap: 12px;
+			}
+
+			.inputWrap .line {
+				width: 0.5px;
+				height: 21px;
+				opacity: 0.1;
+				border: 0.5px solid #8e8e8e;
+				border-radius: 1px;
+			}
+
+			.inputWrap img {
+				width: 8px;
+				height: 7px;
+			}
+
+			input {
+				background: #1d1d1d;
+				border: none;
+				outline: none;
+				color: #fff;
+				/* padding: 0 20px; */
+			}
+
+			.mb-42 {
+				margin-bottom: 42px;
+			}
+
+			.mb-17 {
+				margin-bottom: 17px;
+			}
+
+			.empty {
+				justify-content: center;
+			}
+
+			.mb-8 {
+				margin-bottom: 8px;
+			}
+
+			.button {
+				margin: 35px 0 51px;
+			}
+
+			.mb-15 {
+				margin-bottom: 15px;
+			}
+
+
+			.mt-20 {
+				margin-top: 20px;
+			}
+
+			.mb-20 {
+				margin-bottom: 20px;
+			}
+
+			.mb-25 {
+				margin-bottom: 25px;
+			}
+
+			.btn {
+				margin-top: 182px;
+				margin-bottom: 129px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<main>
+			<div class="topNav  flex-bw">
+				<span class="bold fs-20">Babydogeswap</span>
+				<div class="flex">
+					<div class="flex notBind" id="ton-connect"></div>
+					<!-- <div class="flex bind">0D9...4646</div> -->
+					<img class="menu" onclick="showMore()" src="./images/menu.png" alt="">
+				</div>
+			</div>
+			<div class="fs-20 mb-25">兑换</div>
+			<div class="mb-14">资金</div>
+			<div class="flex inputWrap mb-42">
+				<span>USDT</span>
+				<div class="line"></div>
+				<input class="" type="number">
+			</div>
+			<div class="mb-14">接收人钱包地址</div>
+			<div class="flex inputWrap mb-14">
+				<span>代币A</span>
+				<img src="./images/down.png" alt="">
+				<div class="line"></div>
+				<input type="text">
+			</div>
+			<div class="mb-20">
+				<span>1USDT=1.05代币A</span>
+			</div>
+			<div class="btn">兑换</div>
+			<div class="joinus">
+				<div class="fs-20">加入我们的社区</div>
+				<div class="flex-bw">
+					<div class="flex1">
+						<span>探索</span>
+						<ul>
+							<li>标题名称</li>
+							<li>标题名称</li>
+							<li>标题名称</li>
+						</ul>
+					</div>
+					<div class="flex1">
+						<span>用户</span>
+						<ul>
+							<li>标题名称</li>
+							<li>标题名称</li>
+							<li>标题名称</li>
+						</ul>
+					</div>
+					<div class="flex1">
+						<span>开发</span>
+						<ul>
+							<li>标题名称</li>
+							<li>标题名称</li>
+							<li>标题名称</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="tabbar flex">
+				<a class="flex1" href="deal.html">
+					<img src="./images/tab1.png" alt="">
+					<span>交易</span>
+				</a>
+				<a class="flex1" href="pool.html">
+					<img src="./images/tab2.png" alt="">
+					<span>池子</span>
+				</a>
+				<a class="flex1" href="destroy.html">
+					<img src="./images/tab3.png" alt="">
+					<span>销毁</span>
+				</a>
+				<a class="flex1" href="bridge.html">
+					<img src="./images/tab4.png" alt="">
+					<span>跨链桥</span>
+				</a>
+				<a class="flex1" href="communityToken.html">
+					<img src="./images/tabs5.png" alt="">
+					<span class="mainColor">社区代币</span>
+				</a>
+			</div>
+			<!-- 更多菜单 -->
+			<div class="popup rightPopup" id="morePopup">
+				<div class="moreModal flex1" id="moreModal">
+					<span class="bold">Babydogeswap</span>
+					<div class="walletBtn flex">
+						<span>钱包地址：0x564df...23</span>
+						<img src="./images/copy.png" alt="">
+					</div>
+					<a class="flex-bw" href="index.html">
+						<span>首页</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="wallet.html">
+						<span>我的资产</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="ranking.html">
+						<span>排行榜</span>
+						<img src="./images/right.png" alt="">
+					</a>
+					<a class="flex-bw" href="invite.html">
+						<span>邀请</span>
+						<img src="./images/right.png" alt="">
+					</a>
+				</div>
+			</div>
+		</main>
+
+		<script>
+			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
+				buttonRootId: 'ton-connect'
+			});
+			let morePopup = document.getElementById('morePopup')
+			let moreModal = document.getElementById('moreModal')
+
+			function showMore(e) {
+				console.log(6);
+				morePopup.style.display = 'flex';
+				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
+			}
+			// 点击模态框外部时，也关闭它
+			window.onclick = function(event) {
+				if (event.target == morePopup) {
+					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
+					// moreModal.classList.remove('active')
+					setTimeout(() => {
+						morePopup.style.display = "none";
+					}, 200)
+				}
+			}
+		</script>
+
+		<!-- Eruda is console for mobile browsers -->
+		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+		<script>
+			eruda.init();
+		</script>
+	</body>
+</html>
