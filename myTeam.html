@@ -13,15 +13,15 @@
 				padding: 0;
 				padding-top: 64px;
 				font-size: 13px;
-				height: 100vh;
+				min-height: 100vh;
 				box-sizing: border-box;
 
 			}
 
 			main {
-				height: 100vh;
+				min-height: 100vh;
 				box-sizing: border-box;
-
+				/* background: #252525; */
 			}
 
 			.inviteBg {
@@ -32,7 +32,7 @@
 
 			.inviteWrap {
 				width: 100%;
-				height: calc(100vh - 76px);
+				min-height: calc(100vh - 76px);
 				background: #252525;
 				border-radius: 40px 40px 0 0;
 				padding: 17px 0;
@@ -44,6 +44,7 @@
 				font-size: 12px;
 				padding: 0 27px;
 				margin-bottom: 22px;
+				background: #252525;
 			}
 
 			.teamList span:first-child {
@@ -65,7 +66,6 @@
 			.fs-20 {
 				font-size: 20px;
 			}
-			
 		</style>
 	</head>
 
@@ -134,14 +134,13 @@
 		</main>
 
 		<script>
-			
 			let morePopup = document.getElementById('morePopup')
 			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 				buttonRootId: 'ton-connect'
 			});
 
-		
+
 
 			function showMore(e) {
 				morePopup.style.display = 'flex';

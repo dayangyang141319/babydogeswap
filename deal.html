@@ -249,6 +249,129 @@
 				width: 13px;
 				height: 13px;
 			}
+
+			.assetPopup,
+			.setPopup {
+				align-items: flex-end;
+			}
+
+			.assetModal {
+				width: 100%;
+				height: 452px;
+				background: #161616;
+				border-radius: 20px;
+				padding: 19px 30px;
+				font-size: 14px;
+				border-top: 1px solid #343434;
+			}
+
+			.assetModal .title {
+				font-size: 15px;
+				text-align: center;
+				margin-bottom: 38px;
+			}
+
+			.assetModal .flex-bw {
+				margin-bottom: 20px;
+			}
+
+			.assetModal .flex-bw .dot {
+				width: 4px;
+				height: 4px;
+				/* background-color: #276AF6; */
+				margin-right: 5px;
+			}
+
+			.listWrap {
+				overflow-y: scroll;
+			}
+
+			.setModal {
+				width: 100%;
+				min-height: 352px;
+				background: #161616;
+				border-top: 1px solid #343434;
+				border-radius: 20px;
+				font-size: 15px;
+				padding: 19px 20px 37px;
+			}
+
+			.setModal .title {
+				margin-bottom: 34px;
+				text-align: center;
+			}
+
+			.setModal .fs-18 {
+				font-size: 18px;
+				margin-bottom: 15px;
+			}
+
+			.setModal .tip {
+				font-size: 14px;
+				color: #888;
+				margin-bottom: 33px;
+			}
+
+			.setModal .flex-bw {
+				width: 100%;
+				margin-bottom: 67px;
+			}
+
+			.setModal .flex-bw .flex {
+				width: 107.5px;
+				height: 44px;
+				background: #161616;
+				border: 0.5px solid #343434;
+				border-radius: 22px;
+				justify-content: center;
+			}
+
+			.setModal .flex-bw .selected {
+				color: #EC502C;
+				border: 0.5px solid #EC502C;
+			}
+
+			.setModal .btn {
+				height: 49.5px;
+				border-radius: 24.5px;
+			}
+
+			/* 弹窗上滑动画 */
+			@keyframes slideDown {
+				from {
+					transform: translateY(242px);
+				}
+
+				to {
+					transform: translateY(0);
+				}
+			}
+
+			/* 弹窗下滑动画 */
+			@keyframes slideUp {
+				from {
+					transform: translateY(0);
+				}
+
+				to {
+					transform: translateY(242px);
+				}
+			}
+
+			@keyframes rotate {
+				from {
+					transform: rotate(0deg);
+				}
+
+				to {
+					transform: rotate(360deg);
+				}
+			}
+
+			/* 按钮旋转动画类 */
+			.rotate-animation {
+				animation: rotate 1s linear;
+			}
 		</style>
 	</head>
 
@@ -265,15 +388,15 @@
 			<div class="flex-bw dealTitle">
 				<span class="fs-20" id="">交易</span>
 				<div id="">
-					<img class="refresh" id="refresh" src="./images/refresh.png" alt="">
-					<img class="set" src="./images/set.png" alt="">
+					<img class="refresh" onclick="toRefresh()" id="refresh" src="./images/refresh.png" alt="">
+					<img class="set" onclick="showSet()" src="./images/set.png" alt="">
 				</div>
 			</div>
 			<div class="flex1 flexCenter">
 				<div class="dealWrap">
 					<div class="flex-bw token">
 						<span id="">从</span>
-						<div class="flex">
+						<div class="flex" onclick="showPopup()">
 							<img class="logo" src="./images/eth.png" alt="">
 							<span id="">TON</span>
 							<img class="select" src="./images/down.png" alt="">
@@ -288,7 +411,7 @@
 				<div class="dealWrap">
 					<div class="flex-bw token">
 						<span id="">至</span>
-						<div class="flex">
+						<div class="flex" onclick="showPopup()">
 							<img class="logo" src="./images/usdt.png" alt="">
 							<span id="">Lon</span>
 							<img class="select" src="./images/down.png" alt="">
@@ -301,6 +424,63 @@
 				</div>
 				<span class="computed">1Ton≈5.65464676Lon</span>
 				<div class="btn">兑换</div>
+			</div>
+			<!-- 设置弹窗 -->
+			<div class="popup setPopup" id="setPopup">
+				<div class="flex1 setModal" id="setModal">
+					<span class="title">高级设置</span>
+					<div class="fs-18">滑移</div>
+					<div class="tip">如果价格不利变化超过该百分比，您的交易将会撤销。</div>
+					<div class="flex-bw">
+						<div class="flex">1%</div>
+						<div class="flex">5%</div>
+						<div class="flex">10%</div>
+					</div>
+					<div class="btn">保存</div>
+				</div>
+			</div>
+			<!-- 选择资产弹窗 -->
+			<div class="popup assetPopup" id="assetPopup">
+				<div class="flex1 assetModal" id="assetModal">
+					<span class="title">选择资产</span>
+					<div class="listWrap">
+						<div class="flex-bw">
+							<div class="flex">
+								<div class="dot"></div>
+								<span>ETH</span>
+							</div>
+							<span>$0</span>
+						</div>
+						<div class="flex-bw">
+							<div class="flex">
+								<div class="dot"></div>
+								<span>ETH</span>
+							</div>
+							<span>$0</span>
+						</div>
+						<div class="flex-bw">
+							<div class="flex">
+								<div class="dot"></div>
+								<span>ETH</span>
+							</div>
+							<span>$0</span>
+						</div>
+						<div class="flex-bw">
+							<div class="flex">
+								<div class="dot"></div>
+								<span>ETH</span>
+							</div>
+							<span>$0</span>
+						</div>
+						<div class="flex-bw">
+							<div class="flex">
+								<div class="dot"></div>
+								<span>ETH</span>
+							</div>
+							<span>$0</span>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="joinus">
 				<div class="fs-20">加入我们的社区</div>
@@ -422,6 +602,40 @@
 			let popup = document.getElementById('popup')
 			let morePopup = document.getElementById('morePopup')
 			let moreModal = document.getElementById('moreModal')
+			let assetPopup = document.getElementById('assetPopup')
+			let assetModal = document.getElementById('assetModal')
+			let setPopup = document.getElementById('setPopup')
+			let setModal = document.getElementById('setModal')
+			let selects = document.querySelectorAll('#setModal .flex')
+			let refresh = document.getElementById('refresh')
+
+			document.querySelectorAll('.dot').forEach(item => {
+				var randomColor = 'rgb(' +
+					(Math.floor(Math.random() * 256)) + ',' +
+					(Math.floor(Math.random() * 256)) + ',' +
+					(Math.floor(Math.random() * 256)) + ')';
+				item.style.backgroundColor = randomColor;
+			})
+			selects.forEach(function(item) {
+				item.onclick = function() {
+					selects.forEach(function(item_) {
+						item_.classList.remove('selected');
+					})
+					item.classList.add('selected')
+				}
+			})
+			refresh.addEventListener('click', function() {
+				this.classList.add('rotate-animation');
+
+				// 动画完成后移除类，以便下次点击时重新触发
+				this.addEventListener('animationend', function() {
+					this.classList.remove('rotate-animation');
+				});
+			});
+
+			function toRefresh() {
+
+			}
 
 			function closeModal() {
 				popup.style.display = 'none';
@@ -432,6 +646,17 @@
 				morePopup.style.display = 'flex';
 				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 			}
+
+			function showPopup() {
+				assetPopup.style.display = 'flex'
+				assetModal.style.animation = "slideDown 0.4s forwards"; // 应用下滑动画  
+			};
+
+			function showSet() {
+				setPopup.style.display = 'flex'
+				setModal.style.animation = "slideDown 0.4s forwards"; // 应用下滑动画  
+			}
+
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				if (event.target == popup) {
@@ -442,6 +667,16 @@
 					setTimeout(() => {
 						morePopup.style.display = "none";
 					}, 200)
+				} else if (event.target == assetPopup) {
+					assetModal.style.animation = "slideUp 0.4s forwards"; // 应用上滑动画  
+					setTimeout(function() {
+						assetPopup.style.display = "none";
+					}, 40); // 动画完成后隐藏模态框 
+				} else if (event.target == setPopup) {
+					setModal.style.animation = "slideUp 0.4s forwards"; // 应用上滑动画  
+					setTimeout(function() {
+						setPopup.style.display = "none";
+					}, 40); // 动画完成后隐藏模态框 
 				}
 			}
 			// Init TWA
@@ -461,26 +696,7 @@
 			});
 			Telegram.WebApp.MainButton.show();
 
-			// Function to call showPopup API
-			function showPopup() {
-				Telegram.WebApp.showPopup({
-					title: 'Title',
-					message: 'Some message',
-					buttons: [{
-							id: 'link',
-							type: 'default',
-							text: 'Open ton.org'
-						},
-						{
-							type: 'cancel'
-						},
-					]
-				}, function(btn) {
-					if (btn === 'link') {
-						Telegram.WebApp.openLink('https://ton.org/');
-					}
-				});
-			};
+
 
 			// Function to toggle main TWA button
 			function toggleMainButton() {
