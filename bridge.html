@@ -101,6 +101,7 @@
 				height: 6.5px;
 				margin-left: 7.5px;
 			}
+
 			.modal {
 				position: relative;
 				width: 17.125rem;
@@ -165,6 +166,7 @@
 				margin-bottom: 8px;
 
 			}
+
 			.rightPopup {
 				justify-content: flex-end;
 			}
@@ -217,11 +219,11 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20">Babydogeswap</span>
+				<span class="bold fs-20" id="twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
-					<img class="menu"   onclick="showMore()" src="./images/menu.png" alt="">
+					<img class="menu" onclick="showMore()" src="./images/menu.png" alt="">
 				</div>
 			</div>
 			<div class="dealTitle fs-20">桥</div>
@@ -243,7 +245,7 @@
 						<div class="flex">
 							<img class="logo" src="./images/eth.png" alt="">
 							<span id="">ton</span>
-							<img class="select"  src="./images/down.png" alt="">
+							<img class="select" src="./images/down.png" alt="">
 						</div>
 					</div>
 					<div class="amountWrap flex-bw">
@@ -254,9 +256,9 @@
 					<div class="flex-bw token">
 						<span id="">你收到的</span>
 						<div class="flex">
-							<img class="logo"  src="./images/eth.png" alt="">
+							<img class="logo" src="./images/eth.png" alt="">
 							<span id="">wton</span>
-							<img class="select"  src="./images/down.png" alt="">
+							<img class="select" src="./images/down.png" alt="">
 						</div>
 					</div>
 					<div class="amountWrap flex-bw">
@@ -266,30 +268,20 @@
 			</div>
 			<div class="joinus">
 				<div class="fs-20">加入我们的社区</div>
-				<div class="flex-bw">
+				<div class="ourCommunity flex" id="ourCommunity">
+				</div>
+				<div class="flex-bw" id="footerAbout">
 					<div class="flex1">
 						<span>探索</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+						<ul id="dt1"></ul>
 					</div>
 					<div class="flex1">
 						<span>用户</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+						<ul id="dt2"></ul>
 					</div>
 					<div class="flex1">
 						<span>开发</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+						<ul id="dt3"></ul>
 					</div>
 				</div>
 			</div>
@@ -302,7 +294,7 @@
 					<img src="./images/tab2.png" alt="">
 					<span>池子</span>
 				</a>
-				<a class="flex1"  href="destroy.html">
+				<a class="flex1" href="destroy.html">
 					<img src="./images/tab3.png" alt="">
 					<span>销毁</span>
 				</a>
@@ -310,7 +302,7 @@
 					<img src="./images/tabs4.png" alt="">
 					<span class="mainColor">跨链桥</span>
 				</a>
-				<a class="flex1"  href="communityToken.html">
+				<a class="flex1" href="communityToken.html">
 					<img src="./images/tab5.png" alt="">
 					<span>社区代币</span>
 				</a>
@@ -343,7 +335,7 @@
 					</div>
 				</div>
 			</div>
-		
+
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
@@ -376,6 +368,7 @@
 		<div id="viewport-params-expand"></div>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script src="./js/jquery.js"></script>
+		<script src="./js/http.js"></script>
 		<script>
 			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
@@ -388,13 +381,18 @@
 			function closeModal() {
 				popup.style.display = 'none';
 			}
-			
+
 			function showMore(e) {
 				console.log(6);
 				morePopup.style.display = 'flex';
 				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 			}
-			
+
+			function getIndex() {
+				let data = localStorage.getItem('twaInfo')
+				setFooter(JSON.parse(data))
+			}
+			getIndex()
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				if (event.target == popup) {
@@ -404,7 +402,7 @@
 					// moreModal.classList.remove('active')
 					setTimeout(() => {
 						morePopup.style.display = "none";
-					},200)
+					}, 200)
 				}
 			}
 			// Init TWA

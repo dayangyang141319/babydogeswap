@@ -126,24 +126,24 @@
 				border-top: 1px solid #343434;
 			}
 
-			
+
 			/* 弹窗上滑动画 */
 			@keyframes slideDown {
 				from {
 					transform: translateY(242px);
 				}
-			
+
 				to {
 					transform: translateY(0);
 				}
 			}
-			
+
 			/* 弹窗下滑动画 */
 			@keyframes slideUp {
 				from {
 					transform: translateY(0);
 				}
-			
+
 				to {
 					transform: translateY(242px);
 				}
@@ -169,7 +169,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20">Babydogeswap</span>
+				<span class="bold fs-20" id="twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -221,7 +221,8 @@
 				</div>
 			</div>
 		</main>
-
+		<script src="./js/jquery.js"></script>
+		<script src="./js/http.js"></script>
 		<script>
 			let invitePopup = document.getElementById('invitePopup')
 			let inviteModal = document.getElementById('inviteModal')
@@ -236,6 +237,12 @@
 				inviteModal.style.animation = "slideDown 0.4s forwards"; // 应用下滑动画  
 			}
 
+			function getIndex() {
+				let data = localStorage.getItem('twaInfo')
+				document.getElementById('twaName').innerHTML = JSON.parse(data).name
+			}
+			getIndex()
+
 			function showMore(e) {
 				morePopup.style.display = 'flex';
 				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
@@ -247,7 +254,7 @@
 					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画  
 					setTimeout(() => {
 						morePopup.style.display = "none";
-					},200)
+					}, 200)
 				} else if (event.target == invitePopup) {
 					// invitePopup.style.display = "none";
 					inviteModal.style.animation = "slideUp 0.4s forwards"; // 应用上滑动画  

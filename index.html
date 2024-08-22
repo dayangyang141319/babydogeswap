@@ -249,7 +249,7 @@
 	<body>
 		<main>
 			<div class="topNav flex-bw">
-				<span class="bold fs-20">Babydogeswap</span>
+				<span class="bold fs-20" id="twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex notBind" id="bindWallet">未绑定</div> -->
@@ -290,30 +290,20 @@
 			</div> -->
 			<div class="joinus">
 				<div class="fs-20">加入我们的社区</div>
-				<div class="flex-bw">
+				<div class="ourCommunity flex" id="ourCommunity">
+				</div>
+				<div class="flex-bw" id="footerAbout">
 					<div class="flex1">
 						<span>探索</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+						<ul id="dt1"></ul>
 					</div>
 					<div class="flex1">
 						<span>用户</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+						<ul id="dt2"></ul>
 					</div>
 					<div class="flex1">
 						<span>开发</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+						<ul id="dt3"></ul>
 					</div>
 				</div>
 			</div>
@@ -372,10 +362,10 @@
 				<div class="modal1 flex1" id="modal1">
 					<span>恭喜您获得</span>
 					<div class="flex">
-						<span class="amount">10000</span>
+						<span class="amount" id="signPrice"></span>
 						<span>代币A</span>
 					</div>
-					<img src="" alt="">
+					<img src="./images/sign.png" alt="">
 					<div class="btn flex" onclick="toReceive()">开心收下</div>
 				</div>
 			</div>
@@ -409,31 +399,101 @@
 		<!-- 	<div id="viewport"></div>
 		<div id="viewport-params-size"></div>
 		<div id="viewport-params-expand"></div> -->
-		<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
+		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
+			let address = ''
 			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 				buttonRootId: 'ton-connect'
 			});
 			const currentAccount = tonConnectUI.connector;
-			console.log(111, tonConnectUI);
-			console.log(currentAccount);
-			setTimeout(function() {
-				if (currentAccount.wallet) {
+			console.log(111, currentAccount);
+
+			function getAddress() {
+				// 	setTimeout(function() {
+				// 		if (currentAccount.wallet) {
+				// 			setTimeout(function() {
+				// 				if (currentAccount.wallet.account) {
+				// 					setTimeout(function() {
+				// 						console.log('sss',currentAccount.wallet.account.address);
+				// 						address = currentAccount.wallet.account.address
+				// 					}, 200);
+				// 				}
+				// 			}, 200);
+				// 		}
+				// 	}, 200);
+				setTimeout(function() {
+					console.log(currentAccount.wallet.account.address);
+					address = currentAccount.wallet.account.address
+				}, 1000);
+			}
+
+			async function init() {
+				let res = await getAddress()
+				console.log('aaaa', address);
+				let token = localStorage.getItem('token')
+				if (!token) {
 					setTimeout(function() {
-						if (currentAccount.wallet.account) {
-							setTimeout(function() {
-								console.log(currentAccount.wallet.account.address);
-							}, 100);
-						}
-					}, 100);
+						login()
+					}, 1000);
+				} else {
+					loadData()
 				}
-			}, 100);
+			}
+
+			function login() {
+				apiHttp($, "/api/contract/auth/login", {
+					address: address
+				}).then(res => {
+					console.log(res);
+					if (res.code == 1) {
+						localStorage.setItem('token', res.data.userInfo.token)
+						localStorage.setItem('userInfo', res.data.userInfo)
+					}
+				})
+			}
+
+			function loadData() {
+				getSign()
+				getIndex()
+			}
+
+			function getSign() {
+				apiHttp($, "/api/contract/sign/index").then(res => {
+					if (res.code == 1) {
+						if (res.data.sign == 0) {
+							// 签到弹窗显示
+							popup1.style.display = 'flex';
+							document.getElementById('signPrice').innerHTML = res.data.price
+						}
+					}
+				})
+			}
+
+			function getIndex() {
+				apiHttp($, "/api/contract/index/index").then(res => {
+					if (res.code == 1) {
+						localStorage.setItem('twaInfo', JSON.stringify(res.data))
+						setFooter(res.data)
+					}
+				})
+			}
+			// 关闭签到弹窗
+			function toReceive() {
+				apiHttp($, "/api/contract/sign/getSign").then(res => {
+					if (res.code == 1) {
+						popup1.style.display = 'none';
+						Telegram.WebApp.showAlert('签到成功')
+					}
+				})
+				// popup1.style.display = 'none';
+			}
+			init()
 			// const connector = new TonConnectSDK.TonConnect();
 			// console.log(444, connector);
 
@@ -457,32 +517,8 @@
 				console.log('Transaction init', event.detail);
 			});
 
-			function getData() {
-				console.log(888888888);
-				let params = new URLSearchParams();
-				params.append('page', 1);
 
-				$.ajax({
-					url: baseUrl + "/api/contract/sign/getSign",
-					dataType: "jsonp",
-					type: "POST",
-					jsonp: 'callback',
-					// headers: {
-					// 	'token': "6b712ffb-9841-4b46-bfc5-eaaea9a4bfd4"
-					// },
-					data: { // 要发送给后端的数据  
-						'token': "6b712ffb-9841-4b46-bfc5-eaaea9a4bfd4"
-					},
-					success: (res) => {
-						console.log(123, res);
-					},
-					error: (error) => {
-						console.log('error', error);
-					},
-				})
 
-			}
-			getData()
 			async function toTransfer() {
 				console.log('?????????');
 				const transaction = {
@@ -494,12 +530,8 @@
 
 				const result = await tonConnectUI.sendTransaction(transaction)
 			}
-			// 签到弹窗显示
-			popup1.style.display = 'flex';
-			// 关闭签到弹窗
-			function toReceive() {
-				popup1.style.display = 'none';
-			}
+
+
 
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
@@ -522,7 +554,6 @@
 		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 		<script>
 			eruda.init();
-			console.log(300, eruda);
 		</script>
 	</body>
 </html>

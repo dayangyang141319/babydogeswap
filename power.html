@@ -261,7 +261,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20">Babydogeswap</span>
+				<span class="bold fs-20" id="twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -330,6 +330,7 @@
 		<div id="viewport-params-expand"></div>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script src="./js/jquery.js"></script>
+		<script src="./js/http.js"></script>
 		<script>
 			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
@@ -344,13 +345,18 @@
 				morePopup.style.display = 'flex';
 				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 			}
-			
-			
+
+			function getIndex() {
+				let data = localStorage.getItem('twaInfo')
+				document.getElementById('twaName').innerHTML = JSON.parse(data).name
+			}
+			getIndex()
+
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				if (event.target == popup) {
 					popup.style.display = "none";
-				}else if (event.target == morePopup) {
+				} else if (event.target == morePopup) {
 					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
 					// moreModal.classList.remove('active')
 					setTimeout(() => {
