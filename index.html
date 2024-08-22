@@ -409,9 +409,9 @@
 		<!-- 	<div id="viewport"></div>
 		<div id="viewport-params-size"></div>
 		<div id="viewport-params-expand"></div> -->
-		<script src="https://telegram.org/js/telegram-web-app.js"></script>
+		<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
 
-		<!-- <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script> -->
+		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
@@ -422,9 +422,14 @@
 			const currentAccount = tonConnectUI.connector;
 			console.log(111, tonConnectUI);
 			console.log(currentAccount);
-			console.log(22,Telegram);
-			
-
+			const connector = new TonConnectSDK.TonConnect();
+			console.log(444, connector);
+			connector.onStatusChange(wallet => {
+				console.log(666,wallet);
+				if (!wallet) {
+					return;
+				}
+			});
 			let popup = document.getElementById('popup')
 			let popup1 = document.getElementById('popup1')
 			let morePopup = document.getElementById('morePopup')
@@ -454,13 +459,13 @@
 					url: baseUrl + "/api/contract/sign/getRanking",
 					dataType: "json",
 					type: "POST",
-					headers: {
-						'Authorization': localStorage.getItem('token')
-					},
-					// data: { // 要发送给后端的数据  
-					// 	username: "xx",
-					// 	pass: "12345"
+					// headers: {
+					// 	'Authorization': localStorage.getItem('token')
 					// },
+					data: { // 要发送给后端的数据  
+						username: "xx",
+						pass: "12345"
+					},
 
 					success: () => {
 						console.log(888);
@@ -503,11 +508,11 @@
 				}
 			}
 		</script>
-
 		<!-- Eruda is console for mobile browsers -->
 		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 		<script>
 			eruda.init();
+			console.log(300, eruda);
 		</script>
 	</body>
 </html>
