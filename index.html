@@ -412,6 +412,7 @@
 		<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
 
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
@@ -422,14 +423,20 @@
 			const currentAccount = tonConnectUI.connector;
 			console.log(111, tonConnectUI);
 			console.log(currentAccount);
-			const connector = new TonConnectSDK.TonConnect();
-			console.log(444, connector);
-			connector.onStatusChange(wallet => {
-				console.log(666,wallet);
-				if (!wallet) {
-					return;
+			setTimeout(function() {
+				if (currentAccount.wallet) {
+					setTimeout(function() {
+						if (currentAccount.wallet.account) {
+							setTimeout(function() {
+								console.log(currentAccount.wallet.account.address);
+							}, 100);
+						}
+					}, 100);
 				}
-			});
+			}, 100);
+			// const connector = new TonConnectSDK.TonConnect();
+			// console.log(444, connector);
+
 			let popup = document.getElementById('popup')
 			let popup1 = document.getElementById('popup1')
 			let morePopup = document.getElementById('morePopup')
@@ -456,21 +463,24 @@
 				params.append('page', 1);
 
 				$.ajax({
-					url: baseUrl + "/api/contract/sign/getRanking",
-					dataType: "json",
+					url: baseUrl + "/api/contract/sign/getSign",
+					dataType: "jsonp",
 					type: "POST",
+					jsonp: 'callback',
 					// headers: {
-					// 	'Authorization': localStorage.getItem('token')
+					// 	'token': "6b712ffb-9841-4b46-bfc5-eaaea9a4bfd4"
 					// },
 					data: { // 要发送给后端的数据  
-						username: "xx",
-						pass: "12345"
+						'token': "6b712ffb-9841-4b46-bfc5-eaaea9a4bfd4"
 					},
-
-					success: () => {
-						console.log(888);
+					success: (res) => {
+						console.log(123, res);
+					},
+					error: (error) => {
+						console.log('error', error);
 					},
 				})
+
 			}
 			getData()
 			async function toTransfer() {
