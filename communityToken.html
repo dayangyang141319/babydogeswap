@@ -97,11 +97,15 @@
 				margin-top: 82px;
 				margin-bottom: 29px;
 			}
-			.ruleWrap{
+
+			.ruleWrap {
 				width: 100%;
-				padding:15px;
-				border-radius:10px;
-				border:1px solid #343434;
+				padding: 15px;
+				border-radius: 10px;
+				border: 1px solid #343434;
+			}
+			#title{
+				font-size: 17px;
 			}
 		</style>
 	</head>
@@ -109,7 +113,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20">Babydogeswap</span>
+				<span class="bold fs-20" id="twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -135,35 +139,25 @@
 			</div>
 			<div class="btn">兑换</div>
 			<div class="ruleWrap">
-				<div class="title"></div>
-				<div class="cont"></div>
+				<div id="title"></div>
+				<div id="cont"></div>
 			</div>
 			<div class="joinus">
 				<div class="fs-20">加入我们的社区</div>
-				<div class="flex-bw">
+				<div class="ourCommunity flex" id="ourCommunity">
+				</div>
+				<div class="flex-bw" id="footerAbout">
 					<div class="flex1">
 						<span>探索</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+						<ul id="dt1"></ul>
 					</div>
 					<div class="flex1">
 						<span>用户</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+						<ul id="dt2"></ul>
 					</div>
 					<div class="flex1">
 						<span>开发</span>
-						<ul>
-							<li>标题名称</li>
-							<li>标题名称</li>
-							<li>标题名称</li>
-						</ul>
+						<ul id="dt3"></ul>
 					</div>
 				</div>
 			</div>
@@ -216,30 +210,26 @@
 				</div>
 			</div>
 		</main>
-
+		<script src="./js/jquery.js"></script>
+		<script src="./js/http.js"></script>
 		<script>
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
-			let morePopup = document.getElementById('morePopup')
-			let moreModal = document.getElementById('moreModal')
-
-			function showMore(e) {
-				console.log(6);
-				morePopup.style.display = 'flex';
-				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
+			function getIndex() {
+				let data = localStorage.getItem('twaInfo')
+				setFooter(JSON.parse(data))
 			}
-			// 点击模态框外部时，也关闭它
-			window.onclick = function(event) {
-				if (event.target == morePopup) {
-					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
-					// moreModal.classList.remove('active')
-					setTimeout(() => {
-						morePopup.style.display = "none";
-					}, 200)
-				}
+			function loadData() {
+				getIndex()
+				getRule()
 			}
+			function getRule() {
+				apiHttp($, "/api/contract/auth/getRule").then(res => {
+					if (res.code == 1) {
+						document.getElementById('title').innerHTML = res.data.title
+						document.getElementById('cont').innerHTML = res.data.info
+					}
+				})
+			}
+			loadData()
 		</script>
 
 		<!-- Eruda is console for mobile browsers -->

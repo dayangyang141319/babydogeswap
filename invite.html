@@ -226,12 +226,7 @@
 		<script>
 			let invitePopup = document.getElementById('invitePopup')
 			let inviteModal = document.getElementById('inviteModal')
-			let morePopup = document.getElementById('morePopup')
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
-
+			
 			function showPopup() {
 				invitePopup.style.display = 'flex'
 				inviteModal.style.animation = "slideDown 0.4s forwards"; // 应用下滑动画  
@@ -243,10 +238,7 @@
 			}
 			getIndex()
 
-			function showMore(e) {
-				morePopup.style.display = 'flex';
-				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
-			}
+		
 			// 点击模态框外部时，也关闭它
 			window.onclick = function(event) {
 				console.log('window.onclick10011111111111111');

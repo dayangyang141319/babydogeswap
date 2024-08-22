@@ -352,34 +352,12 @@
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
-			let morePopup = document.getElementById('morePopup')
-			let moreModal = document.getElementById('moreModal')
-
-			function showMore(e) {
-				console.log(6);
-				morePopup.style.display = 'flex';
-				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
-			}
-
 			function getIndex() {
 				let data = localStorage.getItem('twaInfo')
 				document.getElementById('twaName').innerHTML = JSON.parse(data).name
 			}
 			getIndex()
-			// 点击模态框外部时，也关闭它  
-			window.onclick = function(event) {
-				if (event.target == morePopup) {
-					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
-					// moreModal.classList.remove('active')
-					setTimeout(() => {
-						morePopup.style.display = "none";
-					}, 200)
-				}
-			}
+			
 			// Init TWA
 			Telegram.WebApp.ready();
 

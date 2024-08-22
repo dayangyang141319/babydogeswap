@@ -110,24 +110,24 @@
 			<img class="bgimg" src="./images/bgimg.png" alt="">
 			<div class="flex-bw walletWrap mb-56">
 				<div class="flex">
-					<img class="logo" src="images/usdt.png" alt="" />
+					<img class="logo avatar"  src="images/usdt.png" alt="" />
 					<div class="flex1">
-						<span id="">elite295</span>
+						<span id="myName"></span>
 						<div class="flex">
-							<span class="mainColor">845.6143</span>
+							<span class="mainColor" id="mySign"></span>
 							<span class="fs-12">代币A</span>
 						</div>
 					</div>
 				</div>
 				<div class="flex1">
 					<span>名次</span>
-					<span class="amount">125</span>
+					<span class="amount" id="myRank">125</span>
 				</div>
 			</div>
 			<div class="mb-18">排名</div>
 			<div class="flex-bw walletWrap mb-10">
 				<div class="flex">
-					<img class="logo" src="images/usdt.png" alt="" />
+					<img class="logo avatar" src="images/usdt.png" alt="" />
 					<div class="flex1">
 						<span id="">elite295</span>
 						<div class="flex">
@@ -140,7 +140,7 @@
 			</div>
 			<div class="flex-bw walletWrap mb-10">
 				<div class="flex">
-					<img class="logo" src="images/usdt.png" alt="" />
+					<img class="logo avatar" src="images/usdt.png" alt="" />
 					<div class="flex1">
 						<span id="">elite295</span>
 						<div class="flex">
@@ -153,7 +153,7 @@
 			</div>
 			<div class="flex-bw walletWrap mb-10">
 				<div class="flex">
-					<img class="logo" src="images/usdt.png" alt="" />
+					<img class="logo avatar" src="images/usdt.png" alt="" />
 					<div class="flex1">
 						<span id="">elite295</span>
 						<div class="flex">
@@ -166,7 +166,7 @@
 			</div>
 			<div class="flex-bw walletWrap mb-10">
 				<div class="flex">
-					<img class="logo" src="images/usdt.png" alt="" />
+					<img class="logo avatar" src="images/usdt.png" alt="" />
 					<div class="flex1">
 						<span id="">elite295</span>
 						<div class="flex">
@@ -226,33 +226,29 @@
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
-			let morePopup = document.getElementById('morePopup')
-			let moreModal = document.getElementById('moreModal')
-
-			function showMore(e) {
-				console.log(6);
-				morePopup.style.display = 'flex';
-				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
-			}
-
 			function getIndex() {
 				let data = localStorage.getItem('twaInfo')
 				setFooter(JSON.parse(data))
 			}
-			getIndex()
-			window.onclick = function(event) {
-				if (event.target == morePopup) {
-					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
-					// moreModal.classList.remove('active')
-					setTimeout(() => {
-						morePopup.style.display = "none";
-					}, 200)
-				}
+
+			function getRanking() {
+				apiHttp($, "/api/contract/sign/getRanking").then(res => {
+					if (res.code == 1) {
+						document.querySelectorAll('.avatar').forEach(item=>{
+							item.src = res.data.avatar
+						})
+						document.getElementById('myName').innerHTML = res.data.nickname
+						document.getElementById('mySign').innerHTML = res.data.user.sign
+						document.getElementById('myRank').innerHTML = res.data.ranking
+					}
+				})
 			}
+
+			function loadData() {
+				getIndex()
+				getRanking()
+			}
+			loadData()
 		</script>
 
 		<!-- Eruda is console for mobile browsers -->

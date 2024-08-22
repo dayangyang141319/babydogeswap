@@ -135,11 +135,6 @@
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
-			let morePopup = document.getElementById('morePopup')
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
 
 			function getIndex() {
 				let data = localStorage.getItem('twaInfo')
@@ -147,21 +142,6 @@
 			}
 			getIndex()
 
-
-			function showMore(e) {
-				morePopup.style.display = 'flex';
-				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
-			}
-			// 点击模态框外部时，也关闭它
-			window.onclick = function(event) {
-				console.log('window.onclick10011111111111111');
-				if (event.target == morePopup) {
-					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画  
-					setTimeout(() => {
-						morePopup.style.display = "none";
-					}, 200)
-				}
-			}
 		</script>
 
 		<!-- Eruda is console for mobile browsers -->

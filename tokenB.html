@@ -451,20 +451,9 @@
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
-			let morePopup = document.getElementById('morePopup')
-			let moreModal = document.getElementById('moreModal')
+			
 			let withdrawPopup = document.getElementById('withdrawPopup')
 			let withdrawModal = document.getElementById('withdrawModal')
-
-			function showMore(e) {
-				console.log(6);
-				morePopup.style.display = 'flex';
-				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
-			}
 
 			function showPopup() {
 				withdrawPopup.style.display = 'flex'

@@ -407,10 +407,7 @@
 		<script src="./js/http.js"></script>
 		<script>
 			let address = ''
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
+			
 			const currentAccount = tonConnectUI.connector;
 			console.log(111, currentAccount);
 
@@ -491,28 +488,12 @@
 						Telegram.WebApp.showAlert('签到成功')
 					}
 				})
-				// popup1.style.display = 'none';
 			}
 			init()
 			// const connector = new TonConnectSDK.TonConnect();
 			// console.log(444, connector);
 
-			let popup = document.getElementById('popup')
-			let popup1 = document.getElementById('popup1')
-			let morePopup = document.getElementById('morePopup')
-			let moreModal = document.getElementById('moreModal')
-			let bindWallet = document.getElementById('bindWallet')
-			let walletWrap = document.getElementById('walletWrap')
-
-			function closeModal() {
-				popup.style.display = 'none';
-			}
-
-			function showMore(e) {
-				console.log(6);
-				morePopup.style.display = 'flex';
-				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
-			}
+			
 			window.addEventListener('connection-restoring-started', (event) => {
 				console.log('Transaction init', event.detail);
 			});
@@ -533,22 +514,7 @@
 
 
 
-			// 点击模态框外部时，也关闭它  
-			window.onclick = function(event) {
-				console.log('window.onclick10011111111111111');
-				if (event.target == popup) {
-					popup.style.display = "none";
-				} else if (event.target == popup1) {
-					popup1.style.display = "none";
-				} else if (event.target == morePopup) {
-					// moreModal.style.animationDirection = 'reverse'
-					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画  
-					// moreModal.classList.remove('active')
-					setTimeout(() => {
-						morePopup.style.display = "none";
-					}, 200)
-				}
-			}
+			
 		</script>
 		<!-- Eruda is console for mobile browsers -->
 		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>

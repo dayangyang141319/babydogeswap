@@ -324,41 +324,53 @@
 			<div class="flex-bw destroyWrap">
 				<div class="flex1">
 					<span class="grey">累计销毁（USDT）</span>
-					<span>12548752.2145</span>
+					<span id="count">12548752.2145</span>
 				</div>
 				<div class="flex1">
 					<span class="grey">您的当前销毁（USDT）</span>
-					<span>12548752.2145</span>
+					<span id="userPrice">12548752.2145</span>
 				</div>
 			</div>
-			<input type="" name="" id="" value="" />
+			<input type="" id="myInput" name="" value="" oninput="updateOtherValue()" />
 			<div class="flex1 amountsWrap">
 				<div class="flex-bw mb-8">
 					<span>USDT/代币A</span>
-					<span>1000/1500</span>
+					<div class="flex">
+						<span id="inputNum"></span>
+						<span>/</span>
+						<span id="tokenA"></span>
+					</div>
 				</div>
 				<div class="flex-bw">
-					<span>倍数：5倍</span>
-					<span>算力值：0 USDT</span>
+					<div class="flex">
+						<span>倍数：</span>
+						<span id="bei">5</span>
+						<span>倍</span>
+					</div>
+					<div class="flex">
+						<span>算力值：</span>
+						<span id="power">0</span>
+						<span>USDT</span>
+					</div>
 				</div>
 			</div>
 			<div class="btn button">销毁</div>
 			<div class="flex flexCenter">
 				<div class="flex1 mb-15">
 					<span class="grey">平台已产代币B</span>
-					<span>12548752.2145</span>
+					<span id="dayCount">12548752.2145</span>
 				</div>
 				<div class="flex1 mb-15">
 					<span class="grey">代币B流通量</span>
-					<span>12548752.2145</span>
+					<span id="tokenB">12548752.2145</span>
 				</div>
 				<div class="flex1">
 					<span class="grey">总算力(USDT)</span>
-					<span>12548752.2145</span>
+					<span id="countCredit4">12548752.2145</span>
 				</div>
 				<a class="flex1" href="power.html">
 					<span class="grey">我的算力(USDT)</span>
-					<span>12548752.2145</span>
+					<span id="userCredit4">12548752.2145</span>
 				</a>
 			</div>
 			<div class="joinus">
@@ -465,41 +477,46 @@
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
-			let popup = document.getElementById('popup')
-			let morePopup = document.getElementById('morePopup')
-			let moreModal = document.getElementById('moreModal')
-
-			function closeModal() {
-				popup.style.display = 'none';
-			}
-
-			function showMore(e) {
-				console.log(6);
-				morePopup.style.display = 'flex';
-				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
-			}
-
 			function getIndex() {
 				let data = localStorage.getItem('twaInfo')
 				setFooter(JSON.parse(data))
 			}
-			getIndex()
-			// 点击模态框外部时，也关闭它  
-			window.onclick = function(event) {
-				if (event.target == popup) {
-					popup.style.display = "none";
-				} else if (event.target == morePopup) {
-					moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画
-					// moreModal.classList.remove('active')
-					setTimeout(() => {
-						morePopup.style.display = "none";
-					}, 200)
-				}
+			let percent = 0
+			let linePrice = 1
+			let bei = 1
+
+			function getBurn() {
+				apiHttp($, "/api/contract/burn/index").then(res => {
+					if (res.code == 1) {
+						let inputValue = document.getElementById('myInput').value || 0;
+						document.getElementById('count').innerHTML = res.data.count
+						document.getElementById('userPrice').innerHTML = res.data.userPrice
+						document.getElementById('bei').innerHTML = res.data.bei
+						document.getElementById('dayCount').innerHTML = res.data.dayCount
+						document.getElementById('countCredit4').innerHTML = res.data.countCredit4
+						document.getElementById('userCredit4').innerHTML = res.data.userCredit4
+						document.getElementById('inputNum').textContent = 0;
+						document.getElementById('tokenA').innerHTML = 0
+						document.getElementById('power').innerHTML = 0
+						percent = res.data.percent
+						linePrice = res.data.linePrice
+						bei = res.data.bei
+					}
+				})
 			}
+
+			function updateOtherValue() {
+				let inputValue = document.getElementById('myInput').value || 0;
+				document.getElementById('inputNum').textContent = inputValue * percent / 100;
+				document.getElementById('tokenA').innerHTML = (inputValue * (1 - percent / 100) / linePrice).toFixed(2)
+				document.getElementById('power').innerHTML = inputValue * bei
+			}
+
+			function loadData() {
+				getIndex()
+				getBurn()
+			}
+			loadData()
 			// Init TWA
 			Telegram.WebApp.ready();
 
