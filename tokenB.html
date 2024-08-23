@@ -380,7 +380,10 @@
 				<div class="moreModal flex1" id="moreModal">
 					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
-						<span>钱包地址：0x564df...23</span>
+						<div class="flex">
+							<span>钱包地址：</span>
+							<span id="walletAddress">0x564df...23</span>
+						</div>
 						<img src="./images/copy.png" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
@@ -418,11 +421,13 @@
 				withdrawModal.style.animation = "slideDown 0.4s forwards"; // 应用下滑动画  
 			};
 
-			function getIndex() {
+			function getIndexInfo() {
 				let data = localStorage.getItem('twaInfo')
 				document.querySelectorAll('.twaName').forEach(item=>{
 					item.innerHTML = JSON.parse(data).name
 				})
+				let addr = localStorage.getItem('address')
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 			}
 			function getAsset() {
 				apiHttp($, "/api/contract/user/index").then(res => {
@@ -511,7 +516,7 @@
 				})
 			}
 			function loadData() {
-				getIndex()
+				getIndexInfo()
 				getAsset()
 			}
 			loadData()

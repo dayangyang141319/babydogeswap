@@ -303,7 +303,10 @@
 				<div class="moreModal flex1" id="moreModal">
 					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
-						<span>钱包地址：0x564df...23</span>
+						<div class="flex">
+							<span>钱包地址：</span>
+							<span id="walletAddress">0x564df...23</span>
+						</div>
 						<img src="./images/copy.png" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
@@ -333,13 +336,15 @@
 		<script src="./js/http.js"></script>
 		<script>
 
-			function getIndex() {
+			function getIndexInfo() {
 				let data = localStorage.getItem('twaInfo')
 				document.querySelectorAll('.twaName').forEach(item=>{
 					item.innerHTML = JSON.parse(data).name
 				})
+				let addr = localStorage.getItem('address')
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 			}
-			getIndex()
+			getIndexInfo()
 
 			// Init TWA
 			Telegram.WebApp.ready();

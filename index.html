@@ -374,7 +374,10 @@
 				<div class="moreModal flex1" id="moreModal">
 					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
-						<span>钱包地址：0x564df...23</span>
+						<div class="flex">
+							<span>钱包地址：</span>
+							<span id="walletAddress">0x564df...23</span>
+						</div>
 						<img src="./images/copy.png" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
@@ -407,9 +410,10 @@
 		<script src="./js/http.js"></script>
 		<script>
 			let address = ''
-			
+
 			const currentAccount = tonConnectUI.connector;
 			console.log(111, currentAccount);
+			console.log('toUserFriendlyAddress',  TonConnectSDK.toUserFriendlyAddress);
 
 			function getAddress() {
 				// 	setTimeout(function() {
@@ -427,7 +431,11 @@
 				setTimeout(function() {
 					console.log(currentAccount.wallet.account.address);
 					address = currentAccount.wallet.account.address
-				}, 1000);
+					let addr = TonConnectSDK.toUserFriendlyAddress(address,true)
+					console.log(TonConnectSDK.toUserFriendlyAddress(address,true));
+					localStorage.setItem('address',addr)
+					document.getElementById('walletAddress').innerHTML  = sliceAddress(addr,4,4)
+				}, 1000); 
 			}
 
 			async function init() {
@@ -457,7 +465,7 @@
 
 			function loadData() {
 				getSign()
-				getIndex()
+				getIndexInfo()
 			}
 
 			function getSign() {
@@ -472,7 +480,7 @@
 				})
 			}
 
-			function getIndex() {
+			function getIndexInfo() {
 				apiHttp($, "/api/contract/index/index").then(res => {
 					if (res.code == 1) {
 						localStorage.setItem('twaInfo', JSON.stringify(res.data))
@@ -493,7 +501,7 @@
 			// const connector = new TonConnectSDK.TonConnect();
 			// console.log(444, connector);
 
-			
+
 			window.addEventListener('connection-restoring-started', (event) => {
 				console.log('Transaction init', event.detail);
 			});
@@ -511,10 +519,6 @@
 
 				const result = await tonConnectUI.sendTransaction(transaction)
 			}
-
-
-
-			
 		</script>
 		<!-- Eruda is console for mobile browsers -->
 		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>

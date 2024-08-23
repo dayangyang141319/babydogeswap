@@ -557,7 +557,10 @@
 				<div class="moreModal flex1" id="moreModal">
 					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
-						<span>钱包地址：0x564df...23</span>
+						<div class="flex">
+							<span>钱包地址：</span>
+							<span id="walletAddress">0x564df...23</span>
+						</div>
 						<img src="./images/copy.png" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
@@ -618,10 +621,7 @@
 				});
 			});
 
-			function getIndex() {
-				let data = localStorage.getItem('twaInfo')
-				setFooter(JSON.parse(data))
-			}
+			
 			getIndex()
 
 			function toRefresh() {
