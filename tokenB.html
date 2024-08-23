@@ -326,7 +326,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20 twaName" ></span>
+				<span class="bold fs-20 twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -352,10 +352,10 @@
 			</div>
 			<div class="tab-content">
 				<div class=" recordWrap tab-panel" id="tab-1">
-					
+
 				</div>
 				<div class=" recordWrap tab-panel" id="tab-2">
-					
+
 				</div>
 			</div>
 			<!-- 提取弹窗 -->
@@ -367,12 +367,12 @@
 						<span class="mainColor credit">0</span>
 					</div>
 					<div class="tip">请输入提取数量</div>
-					<input type="number">
+					<input type="number" id="input" placeholder="请输入提取数量">
 					<div class="fee flex">
 						<span>手续费：</span>
 						<span class="percent" id="percent">0%</span>
 					</div>
-					<div class="btn">提取</div>
+					<div class="btn" onclick="toWithdraw()">提取</div>
 				</div>
 			</div>
 			<!-- 更多菜单 -->
@@ -382,9 +382,9 @@
 					<div class="walletBtn flex">
 						<div class="flex">
 							<span>钱包地址：</span>
-							<span id="walletAddress">0x564df...23</span>
+							<span id="walletAddress"></span>
 						</div>
-						<img src="./images/copy.png" alt="">
+						<img src="./images/copy.png" onclick="copy()" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
 						<span>首页</span>
@@ -405,16 +405,28 @@
 				</div>
 			</div>
 		</main>
-		<div id="viewport"></div>
-		<div id="viewport-params-size"></div>
-		<div id="viewport-params-expand"></div>
+		
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
-			
 			let withdrawPopup = document.getElementById('withdrawPopup')
 			let withdrawModal = document.getElementById('withdrawModal')
+
+			function toWithdraw() {
+				let price = document.getElementById('input').value
+				if (Number(price) <= 0) {
+					return alert('请输入提取数量')
+				}
+				apiHttp($, "/api/contract/withdraw/index", {
+					price: price,
+					credittype: 'credit3'
+				}).then(res => {
+					if (res.code == 1) {
+						alert(res.msg)
+					}
+				})
+			}
 
 			function showPopup() {
 				withdrawPopup.style.display = 'flex'
@@ -423,38 +435,42 @@
 
 			function getIndexInfo() {
 				let data = localStorage.getItem('twaInfo')
-				document.querySelectorAll('.twaName').forEach(item=>{
+				document.querySelectorAll('.twaName').forEach(item => {
 					item.innerHTML = JSON.parse(data).name
 				})
 				let addr = localStorage.getItem('address')
 				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 			}
+
 			function getAsset() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
-						document.querySelectorAll('.credit').forEach(item=>{
+						document.querySelectorAll('.credit').forEach(item => {
 							item.innerHTML = res.data.credit3
 						})
 						document.getElementById('percent').innerHTML = res.data.withdrawPercent + '%'
 					}
 				})
 			}
+
 			function getRebateList() {
-				apiHttp($, "/api/contract/user/getRebateList",{credittype:'credit3'}).then(res => {
+				apiHttp($, "/api/contract/user/getRebateList", {
+					credittype: 'credit3'
+				}).then(res => {
 					if (res.code == 1) {
 						let typesInfo = res.data.typesInfo
 						let list = res.data.list
 						let recordItem = ''
 						let tab1 = document.getElementById('tab-1')
-						if(!list.length){
+						if (!list.length) {
 							recordItem = `<div class="empty flex">
 								暂无记录
 							</div>`
 							tab1.innerHTML = recordItem
-							
-						}else{
-							list.forEach(item=>{
-						recordItem += `<div class="flex">
+
+						} else {
+							list.forEach(item => {
+								recordItem += `<div class="flex">
 								<span>${typesInfo[item.types]}</span>
 								<span class="green">+${item.price}</span>
 								<div class="flex1">
@@ -468,25 +484,28 @@
 					}
 				})
 			}
+
 			function getWithdrawList() {
-				apiHttp($, "/api/contract/withdraw/getList",{credittype:'credit3'}).then(res => {
+				apiHttp($, "/api/contract/withdraw/getList", {
+					credittype: 'credit3'
+				}).then(res => {
 					if (res.code == 1) {
 						let statusInfo = res.data.statusInfo
 						let list = res.data.list
 						let recordItem = ''
 						let tab2 = document.getElementById('tab-2')
-						
-						
-						if(!list.length){
+
+
+						if (!list.length) {
 							recordItem = `<div class="empty flex">
 								暂无记录
 							</div>`
 							tab2.innerHTML = recordItem
-							
-						}else{
-							list.forEach(item=>{
-						if(item.status == 2){
-							recordItem += `<div class="flex">
+
+						} else {
+							list.forEach(item => {
+								if (item.status == 2) {
+									recordItem += `<div class="flex">
 								<span>提取</span>
 								<span class="red">-${item.price}</span>
 								<div class="flex">
@@ -497,8 +516,8 @@
 									<div class="btn" onclick="${toReceive()}">领取</div>
 								</div>
 							</div>`
-						}else{
-							recordItem += `<div class="flex">
+								} else {
+									recordItem += `<div class="flex">
 								<span>提取</span>
 								<span class="red">-${item.price}</span>
 								<div class="flex">
@@ -508,13 +527,14 @@
 									</div>
 								</div>
 							</div>`
-						}
+								}
 							})
 							tab2.innerHTML = recordItem
 						}
 					}
 				})
 			}
+
 			function loadData() {
 				getIndexInfo()
 				getAsset()
@@ -535,9 +555,9 @@
 				document.getElementById('tab-' + (index + 1)).classList.add('active');
 				const newLeft = index * (window.innerWidth - 95) + 'px'; // 计算新的left值  
 				document.querySelector('.indicator').style.transform = `translateX(${newLeft})`;
-				if(index == 0){
+				if (index == 0) {
 					getRebateList()
-				}else{
+				} else {
 					getWithdrawList()
 				}
 			}

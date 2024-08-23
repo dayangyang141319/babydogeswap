@@ -18,9 +18,13 @@ function apiHttp($, url, params = {}) {
 			data: Object.assign(tokenToken, params),
 			success: (res) => {
 				resolve(res)
+				if (res.code != 1) {
+					toast(res.msg)
+				}
 			},
 			error: (error) => {
 				console.log('error', error);
+
 				reject(error)
 			},
 		})
@@ -139,4 +143,16 @@ function getIndex() {
 	setFooter(JSON.parse(data))
 	let addr = localStorage.getItem('address')
 	document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+}
+
+function toast(msg) {
+	// alert(msg)
+	Telegram.WebApp.showAlert(msg)
+}
+
+function copy() {
+	// navigator.clipboard.writeText 将文本内容写入剪贴板
+	let addr = localStorage.getItem('address')
+	navigator.clipboard.writeText(addr)
+	toast('复制成功')
 }
