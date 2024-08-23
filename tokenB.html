@@ -405,13 +405,14 @@
 				</div>
 			</div>
 		</main>
-		
+
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
 			let withdrawPopup = document.getElementById('withdrawPopup')
 			let withdrawModal = document.getElementById('withdrawModal')
+			let current = 0
 
 			function toWithdraw() {
 				let price = document.getElementById('input').value
@@ -424,6 +425,18 @@
 				}).then(res => {
 					if (res.code == 1) {
 						alert(res.msg)
+						document.getElementById('input').value = ''
+						withdrawModal.style.animation = "slideUp 0.4s forwards"; // 应用上滑动画
+						// moreModal.classList.remove('active')
+						setTimeout(() => {
+							withdrawPopup.style.display = "none";
+						}, 200)
+						getAsset()
+						if (current == 0) {
+							getRebateList()
+						} else {
+							getWithdrawList()
+						}
 					}
 				})
 			}
@@ -543,6 +556,7 @@
 
 			function changeTab(index) {
 				console.log(index);
+				current = index
 				// 移除所有tab-panel的active类  
 				document.querySelectorAll('.tab-panel').forEach(function(panel) {
 					panel.classList.remove('active');

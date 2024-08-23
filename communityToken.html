@@ -104,7 +104,8 @@
 				border-radius: 10px;
 				border: 1px solid #343434;
 			}
-			#title{
+
+			#title {
 				font-size: 17px;
 			}
 		</style>
@@ -125,19 +126,21 @@
 			<div class="flex inputWrap mb-42">
 				<span>USDT</span>
 				<div class="line"></div>
-				<input class="" type="number">
+				<input class="" type="number" placeholder="请输入数量" id="price" oninput="updateValue()">
 			</div>
 			<div class="mb-14">资金</div>
 			<div class="flex inputWrap mb-14">
 				<span>代币A</span>
 				<img src="./images/down.png" alt="">
 				<div class="line"></div>
-				<input type="text">
+				<input type="text" id="tokenA" disabled>
 			</div>
-			<div class="mb-20">
-				<span>1USDT=1.05代币A</span>
+			<div class="mb-20 flex">
+				<span>1USDT=</span>
+				<span id="usdtPrice">0</span>
+				<span>代币A</span>
 			</div>
-			<div class="btn">兑换</div>
+			<div class="btn" onclick="toExchange()">兑换</div>
 			<div class="ruleWrap">
 				<div id="title"></div>
 				<div id="cont"></div>
@@ -217,11 +220,44 @@
 		<script src="./js/http.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
-			
+			let input = document.getElementById('price')
+			let usdtPrice = 1
+
 			function loadData() {
 				getIndex()
 				getRule()
+				getInfo()
 			}
+
+			function getInfo() {
+				apiHttp($, "/api/contract/exchange/index").then(res => {
+					if (res.code == 1) {
+						usdtPrice = res.data.usdtPrice
+						document.getElementById('usdtPrice').innerHTML = usdtPrice
+					}
+				})
+			}
+
+			function updateValue() {
+				document.getElementById('tokenA').value = (input.value * usdtPrice).toFixed(2)
+			}
+
+			function toExchange() {
+				
+				if (Number(input.value) <= 0) {
+					return toast('请输入数量')
+				}
+				apiHttp($, "/api/contract/exchange/exchange", {
+					price:input.value
+				}).then(res => {
+					if (res.code == 1) {
+						toast(res.msg)
+						input.value = ''
+						document.getElementById('tokenA').value = ''
+					}
+				})
+			}
+
 			function getRule() {
 				apiHttp($, "/api/contract/auth/getRule").then(res => {
 					if (res.code == 1) {

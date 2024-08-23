@@ -310,7 +310,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20 twaName" ></span>
+				<span class="bold fs-20 twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -354,7 +354,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="btn button">销毁</div>
+			<div class="btn button" onclick="createBurn()">销毁</div>
 			<div class="flex flexCenter">
 				<div class="flex1 mb-15">
 					<span class="grey">平台已产代币B</span>
@@ -476,15 +476,30 @@
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
-			
 			let percent = 0
 			let linePrice = 1
 			let bei = 1
+			let myInput = document.getElementById('myInput')
+
+			function createBurn() {
+				if (Number(myInput.value) <= 0) {
+					return alert('请输入提取数量')
+				}
+				apiHttp($, "/api/contract/burn/createBurn", {
+					price: myInput.value,
+				}).then(res => {
+					if (res.code == 1) {
+						alert(res.msg)
+						myInput.value = ''
+						getBurn() 
+					}
+				})
+			}
 
 			function getBurn() {
 				apiHttp($, "/api/contract/burn/index").then(res => {
 					if (res.code == 1) {
-						let inputValue = document.getElementById('myInput').value || 0;
+						let inputValue = myInput.value || 0;
 						document.getElementById('count').innerHTML = res.data.count
 						document.getElementById('userPrice').innerHTML = res.data.userPrice
 						document.getElementById('bei').innerHTML = res.data.bei
@@ -502,7 +517,7 @@
 			}
 
 			function updateOtherValue() {
-				let inputValue = document.getElementById('myInput').value || 0;
+				let inputValue = myInput.value || 0;
 				document.getElementById('inputNum').textContent = inputValue * percent / 100;
 				document.getElementById('tokenA').innerHTML = (inputValue * (1 - percent / 100) / linePrice).toFixed(2)
 				document.getElementById('power').innerHTML = inputValue * bei

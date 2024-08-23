@@ -146,8 +146,8 @@ function getIndex() {
 }
 
 function toast(msg) {
-	// alert(msg)
-	Telegram.WebApp.showAlert(msg)
+	alert(msg)
+	// Telegra.WebApp.showAlert(msg)
 }
 
 function copy() {

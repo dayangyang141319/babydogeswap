@@ -261,7 +261,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20 twaName" ></span>
+				<span class="bold fs-20 twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -273,30 +273,12 @@
 			</div>
 			<div class="flex1 dataWrap">
 				<span class="grey">我当前算力</span>
-				<span>12548752.2145</span>
+				<span id="userCredit4">0</span>
 				<a class="btn" href="transfer.html">算力转赠</a>
 			</div>
 			<div class="">算力记录</div>
-			<div class="flex1 recordWrap">
-				<div class="empty flex">
-					暂无记录
-				</div>
-				<div class="flex">
-					<span>(用户昵称)转增</span>
-					<span class="green">+100</span>
-					<div class="flex1">
-						<span>2024-07-15</span>
-						<span>17:13:21</span>
-					</div>
-				</div>
-				<div class="flex">
-					<span>销毁获得</span>
-					<span class="green">+100</span>
-					<div class="flex1">
-						<span>2024-07-15</span>
-						<span>17:13:21</span>
-					</div>
-				</div>
+			<div class="flex1 recordWrap" id="recordWrap">
+				
 			</div>
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
@@ -328,21 +310,66 @@
 				</div>
 			</div>
 		</main>
-		
-		<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
+		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
+			function getCredit() {
+				apiHttp($, "/api/contract/user/index").then(res => {
+					if (res.code == 1) {
+						document.getElementById('userCredit4').innerHTML = res.data.credit4
+					}
+				})
+			}
+
+			function getRebateList() {
+				apiHttp($, "/api/contract/user/getRebateList", {
+					credittype: 'credit4'
+				}).then(res => {
+					if (res.code == 1) {
+						let typesInfo = res.data.typesInfo
+						let list = res.data.list
+						let recordItem = ''
+						let recordWrap = document.getElementById('recordWrap')
+					
+						if (!list.length) {
+							recordItem = `<div class="empty flex">
+								暂无记录
+							</div>`
+							recordWrap.innerHTML = recordItem
+						} else {
+							list.forEach(item => {
+								recordItem += `<div class="flex">
+								<span>${typesInfo[item.types]}</span>
+								<span class="green">+${item.price}</span>
+								<div class="flex1">
+									<span>${formatTimestamp(item.createtime,'date')}</span>
+									<span>${formatTimestamp(item.createtime,'time')}</span>
+								</div>
+							</div>`
+							})
+							recordWrap.innerHTML = recordItem
+						}
+					}
+				})
+			}
 
 			function getIndexInfo() {
 				let data = localStorage.getItem('twaInfo')
-				document.querySelectorAll('.twaName').forEach(item=>{
+				document.querySelectorAll('.twaName').forEach(item => {
 					item.innerHTML = JSON.parse(data).name
 				})
 				let addr = localStorage.getItem('address')
 				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 			}
-			getIndexInfo()
+
+			function loadData() {
+				getIndexInfo()
+				getCredit()
+				getRebateList()
+			}
+			loadData()
 
 			// Init TWA
 			Telegram.WebApp.ready();

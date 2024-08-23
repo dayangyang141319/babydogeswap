@@ -169,7 +169,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20 twaName" ></span>
+				<span class="bold fs-20 twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -190,7 +190,7 @@
 			<div class="popup invitePopup" id="invitePopup">
 				<div class="flex1 inviteModal" id="inviteModal">
 					<span>邀请好友</span>
-					<div class="btn btn1">复制邀请链接</div>
+					<div class="btn btn1" onclick="toCopy()">复制邀请链接</div>
 					<div class="btn">分享邀请链接</div>
 				</div>
 			</div>
@@ -230,7 +230,21 @@
 		<script>
 			let invitePopup = document.getElementById('invitePopup')
 			let inviteModal = document.getElementById('inviteModal')
-			
+			let posterUrl = ''
+
+			function getInfo() {
+				apiHttp($, "/api/contract/user/index").then(res => {
+					if (res.code == 1) {
+						posterUrl = res.data.posterUrl
+					}
+				})
+			}
+
+			function toCopy() {
+				navigator.clipboard.writeText(posterUrl)
+				toast('复制成功')
+			}
+
 			function showPopup() {
 				invitePopup.style.display = 'flex'
 				inviteModal.style.animation = "slideDown 0.4s forwards"; // 应用下滑动画  
@@ -238,15 +252,18 @@
 
 			function getIndexInfo() {
 				let data = localStorage.getItem('twaInfo')
-				document.querySelectorAll('.twaName').forEach(item=>{
+				document.querySelectorAll('.twaName').forEach(item => {
 					item.innerHTML = JSON.parse(data).name
 				})
 				let addr = localStorage.getItem('address')
 				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 			}
-			getIndexInfo()
 
-		
+			function loadData() {
+				getIndexInfo()
+				getInfo()
+			}
+			loadData()
 			// 点击模态框外部时，也关闭它
 			window.onclick = function(event) {
 				console.log('window.onclick10011111111111111');

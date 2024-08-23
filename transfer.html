@@ -99,15 +99,15 @@
 				<span></span>
 			</div>
 			<div class="mb-14">接收人钱包地址</div>
-			<input class="mb-42" type="text">
+			<input class="mb-42" type="text" id="address" placeholder="接收人钱包地址">
 			<div class="mb-14">赠送数量</div>
-			<input class="mb-17" type="number">
+			<input class="mb-17" type="number" id="price" placeholder="赠送数量">
 			<div class="mb-20">
 				<span>拥有算力：</span>
-				<span class="mainColor">1000</span>
+				<span class="mainColor" id="credit4">0</span>
 				<span>USDT</span>
 			</div>
-			<div class="mb-20">
+			<!-- <div class="mb-20">
 				<span>赠送算力数量：</span>
 				<span class="mainColor">1000</span>
 				<span>USDT</span>
@@ -116,15 +116,43 @@
 				<span>合计：</span>
 				<span class="mainColor">1000</span>
 				<span>USDT</span>
-			</div>
-			<div class="btn">赠送</div>
+			</div> -->
+			<div class="btn" onclick="toTransfer()">赠送</div>
 		</main>
-		
-		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
+		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
-			
+			function getCredit() {
+				apiHttp($, "/api/contract/user/index").then(res => {
+					if (res.code == 1) {
+						document.getElementById('credit4').innerHTML = res.data.credit4
+					}
+				})
+			}
+
+			function toTransfer() {
+				let address = document.getElementById('address').value
+				let price = document.getElementById('price').value
+				if (!address) {
+					return toast('请输入地址')
+				}
+				if (Number(price) <= 0) {
+					return toast('请输入数量')
+				}
+				apiHttp($, "/api/contract/exchange/transfer", {
+					address,
+					price
+				}).then(res => {
+					if (res.code == 1) {
+						toast(res.msg)
+						document.getElementById('address').value = ''
+						document.getElementById('price').value = ''
+						getCredit()
+					}
+				})
+			}
+			getCredit()
 			// Init TWA
 			Telegram.WebApp.ready();
 
