@@ -276,7 +276,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20" id="twaName"></span>
+				<span class="bold fs-20 twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -288,7 +288,7 @@
 			</a>
 			<div class="flex1 dataWrap">
 				<span class="grey">当前代币A</span>
-				<span>12548752.2145</span>
+				<span class="credit">0</span>
 			</div>
 			<div class="flex tabItem">
 				<div class="flex1">
@@ -296,32 +296,13 @@
 					<div class="line"></div>
 				</div>
 			</div>
-			<div class="flex1 recordWrap">
-				<div class="empty flex">
-					暂无记录
-				</div>
-				<div class="flex">
-					<span class="pl-10">兑换</span>
-					<span class="green">+100</span>
-					<div class="flex1">
-						<span>2024-07-15</span>
-						<span>17:13:21</span>
-					</div>
-				</div>
-				<div class="flex">
-					<span class="pl-10">销毁</span>
-					<!-- <span class="green">+100</span> -->
-					<span class="red">-100</span>
-					<div class="flex1">
-						<span>2024-07-15</span>
-						<span>17:13:21</span>
-					</div>
-				</div>
+			<div class="flex1 recordWrap" id="recordWrap">
+
 			</div>
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
-					<span class="bold">Babydogeswap</span>
+					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<span>钱包地址：0x564df...23</span>
 						<img src="./images/copy.png" alt="">
@@ -354,10 +335,58 @@
 		<script>
 			function getIndex() {
 				let data = localStorage.getItem('twaInfo')
-				document.getElementById('twaName').innerHTML = JSON.parse(data).name
+				document.querySelectorAll('.twaName').forEach(item=>{
+					item.innerHTML = JSON.parse(data).name
+				})
 			}
-			getIndex()
-			
+
+			function getAsset() {
+				apiHttp($, "/api/contract/user/index").then(res => {
+					if (res.code == 1) {
+						document.querySelector('.credit').innerHTML = res.data.credit2
+						document.getElementById('percent').innerHTML = res.data.withdrawPercent + '%'
+					}
+				})
+			}
+
+			function getRebateList() {
+				apiHttp($, "/api/contract/user/getRebateList", {
+					credittype: 'credit2'
+				}).then(res => {
+					if (res.code == 1) {
+						let typesInfo = res.data.typesInfo
+						let list = res.data.list
+						let recordItem = ''
+						let recordWrap = document.getElementById('recordWrap')
+						if (!list.length) {
+							recordItem = `<div class="empty flex">
+								暂无记录
+							</div>`
+							recordWrap.innerHTML = recordItem
+
+						} else {
+							list.forEach(item => {
+								recordItem += `<div class="flex">
+							<span class="pl-10">${typesInfo[item.types]}</span>
+							<span class="${Number(item.price) < 0?'red':'green'}">${Number(item.price) < 0 ?'-'+item.price:'+'+item.price}</span>
+							<div class="flex1">
+								<span>${formatTimestamp(item.createtime,'date')}</span>
+								<span>${formatTimestamp(item.createtime,'time')}</span>
+							</div>
+						</div>`
+							})
+							recordWrap.innerHTML = recordItem
+						}
+					}
+				})
+			}
+
+			function loadData() {
+				getIndex()
+				getAsset()
+				getRebateList()
+			}
+			loadData()
 			// Init TWA
 			Telegram.WebApp.ready();
 

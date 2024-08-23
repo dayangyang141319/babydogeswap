@@ -27,7 +27,9 @@ function apiHttp($, url, params = {}) {
 }
 
 function setFooter(data) {
-	document.getElementById('twaName').innerHTML = data.name
+	document.querySelectorAll('.twaName').forEach(item=>{
+		item.innerHTML = data.name
+	})
 	let ourCommunity = document.getElementById('ourCommunity')
 	let dt1 = document.getElementById('dt1')
 	let dt2 = document.getElementById('dt2')
@@ -103,3 +105,28 @@ window.onclick = function(event) {
 		}, 200)
 	}
 }
+function sliceAddress(address, num1 = 4, num2 = 5) {
+	if (!address) {
+		return ''
+	}
+	return address.substr(0, num1) + '****' + address.substring(address.length - num2)
+};
+function formatTimestamp(timestamp,type) {  
+    // 创建一个Date对象  
+    const date = new Date(timestamp * 1000); // 注意：JavaScript中的Date期望毫秒为单位，所以可能需要乘以1000  
+  
+    // 提取年月日时分秒  
+    const year = date.getFullYear();  
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份是从0开始的，所以要+1  
+    const day = String(date.getDate()).padStart(2, '0');  
+    const hours = String(date.getHours()).padStart(2, '0');  
+    const minutes = String(date.getMinutes()).padStart(2, '0');  
+    const seconds = String(date.getSeconds()).padStart(2, '0');  
+  
+    // 拼接成目标格式  
+   if(type == 'date'){
+	    return `${year}-${month}-${day}`
+   } else if(type == 'time'){
+	    return `${hours}:${minutes}:${seconds}`; 
+   }
+} 

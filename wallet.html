@@ -59,7 +59,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20" id="twaName"></span>
+				<span class="bold fs-20 twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -73,34 +73,34 @@
 					<span>USDT</span>
 				</div>
 				<div class="flex">
-					<span class="amount">845.6143</span>
+					<span class="amount" id="credit1">0</span>
 					<img class="right" src="images/right.png" alt="" />
 				</div>
 			</a>
 			<a class="flex-bw walletWrap mb-15" href="tokenA.html">
 				<div class="flex">
 					<img class="logo" src="images/usdt.png" alt="" />
-					<span>USDT</span>
+					<span>代币A</span>
 				</div>
 				<div class="flex">
-					<span class="amount">845.6143</span>
+					<span class="amount" id="credit2">0</span>
 					<img class="right" src="images/right.png" alt="" />
 				</div>
 			</a>
 			<a class="flex-bw walletWrap mb-15" href="tokenB.html">
 				<div class="flex">
 					<img class="logo" src="images/usdt.png" alt="" />
-					<span>USDT</span>
+					<span>代币B</span>
 				</div>
 				<div class="flex">
-					<span class="amount">845.6143</span>
+					<span class="amount" id="credit3">0</span>
 					<img class="right" src="images/right.png" alt="" />
 				</div>
 			</a>
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
-					<span class="bold">Babydogeswap</span>
+					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<span>钱包地址：0x564df...23</span>
 						<img src="./images/copy.png" alt="">
@@ -127,13 +127,28 @@
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
-			
 			function getIndex() {
 				let data = localStorage.getItem('twaInfo')
-				document.getElementById('twaName').innerHTML = JSON.parse(data).name
+				document.querySelectorAll('.twaName').forEach(item=>{
+					item.innerHTML = JSON.parse(data).name
+				})
 			}
-			getIndex()
-			
+
+			function getAsset() {
+				apiHttp($, "/api/contract/user/index").then(res => {
+					if (res.code == 1) {
+						document.getElementById('credit1').innerHTML = res.data.credit1
+						document.getElementById('credit2').innerHTML = res.data.credit2
+						document.getElementById('credit3').innerHTML = res.data.credit3
+					}
+				})
+			}
+
+			function loadData() {
+				getIndex()
+				getAsset()
+			}
+			loadData()
 		</script>
 
 		<!-- Eruda is console for mobile browsers -->

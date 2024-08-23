@@ -378,7 +378,7 @@
 	<body>
 		<main>
 			<div class="topNav flex-bw">
-				<span class="bold fs-20" id="twaName"></span>
+				<span class="bold fs-20 twaName" ></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -555,7 +555,7 @@
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
-					<span class="bold">Babydogeswap</span>
+					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<span>钱包地址：0x564df...23</span>
 						<img src="./images/copy.png" alt="">
@@ -586,13 +586,7 @@
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script>
-			const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-				manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
-				buttonRootId: 'ton-connect'
-			});
-			let popup = document.getElementById('popup')
-			let morePopup = document.getElementById('morePopup')
-			let moreModal = document.getElementById('moreModal')
+		
 			let assetPopup = document.getElementById('assetPopup')
 			let assetModal = document.getElementById('assetModal')
 			let setPopup = document.getElementById('setPopup')
@@ -632,16 +626,6 @@
 
 			function toRefresh() {
 
-			}
-
-			function closeModal() {
-				popup.style.display = 'none';
-			}
-
-			function showMore(e) {
-				console.log(6);
-				morePopup.style.display = 'flex';
-				moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 			}
 
 			function showPopup() {

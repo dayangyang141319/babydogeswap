@@ -326,7 +326,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20" id="twaName"></span>
+				<span class="bold fs-20 twaName" ></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -338,7 +338,7 @@
 			</a>
 			<div class="flex1 dataWrap">
 				<span class="grey">可提现代币B</span>
-				<span>12548752.2145</span>
+				<span class="credit">0</span>
 				<div class="btn" onclick="showPopup()">提取</div>
 			</div>
 			<div class="flex-bw tabs">
@@ -352,52 +352,10 @@
 			</div>
 			<div class="tab-content">
 				<div class=" recordWrap tab-panel" id="tab-1">
-					<div class="empty flex">
-						暂无记录
-					</div>
-					<div class="flex">
-						<span>动态奖励</span>
-						<span class="green">+100</span>
-						<div class="flex1">
-							<span>2024-07-15</span>
-							<span>17:13:21</span>
-						</div>
-					</div>
-					<div class="flex">
-						<span>动态奖励</span>
-						<span class="green">+100</span>
-						<div class="flex1">
-							<span>2024-07-15</span>
-							<span>17:13:21</span>
-						</div>
-					</div>
+					
 				</div>
 				<div class=" recordWrap tab-panel" id="tab-2">
-					<div class="empty flex">
-						暂无记录
-					</div>
-					<div class="flex">
-						<span>(用户昵称)转增</span>
-						<span class="red">-100</span>
-						<div class="flex">
-							<div class="flex1">
-								<span>2024-07-15</span>
-								<span>17:13:21</span>
-							</div>
-							<div class="btn">领取</div>
-						</div>
-					</div>
-					<div class="flex">
-						<span>销毁获得</span>
-						<span class="red">-100</span>
-						<div class="flex">
-							<div class="flex1">
-								<span>2024-07-15</span>
-								<span>17:13:21</span>
-							</div>
-							<!-- <div class="btn">领取</div> -->
-						</div>
-					</div>
+					
 				</div>
 			</div>
 			<!-- 提取弹窗 -->
@@ -406,13 +364,13 @@
 					<span class="title">提取</span>
 					<div class="flex balance">
 						<div>当前代币B：</div>
-						<span class="mainColor">4564.23</span>
+						<span class="mainColor credit">0</span>
 					</div>
 					<div class="tip">请输入提取数量</div>
 					<input type="number">
 					<div class="fee flex">
 						<span>手续费：</span>
-						<span class="percent">5%</span>
+						<span class="percent" id="percent">0%</span>
 					</div>
 					<div class="btn">提取</div>
 				</div>
@@ -420,7 +378,7 @@
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
-					<span class="bold">Babydogeswap</span>
+					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<span>钱包地址：0x564df...23</span>
 						<img src="./images/copy.png" alt="">
@@ -462,9 +420,101 @@
 
 			function getIndex() {
 				let data = localStorage.getItem('twaInfo')
-				document.getElementById('twaName').innerHTML = JSON.parse(data).name
+				document.querySelectorAll('.twaName').forEach(item=>{
+					item.innerHTML = JSON.parse(data).name
+				})
 			}
-			getIndex()
+			function getAsset() {
+				apiHttp($, "/api/contract/user/index").then(res => {
+					if (res.code == 1) {
+						document.querySelectorAll('.credit').forEach(item=>{
+							item.innerHTML = res.data.credit3
+						})
+						document.getElementById('percent').innerHTML = res.data.withdrawPercent + '%'
+					}
+				})
+			}
+			function getRebateList() {
+				apiHttp($, "/api/contract/user/getRebateList",{credittype:'credit3'}).then(res => {
+					if (res.code == 1) {
+						let typesInfo = res.data.typesInfo
+						let list = res.data.list
+						let recordItem = ''
+						let tab1 = document.getElementById('tab-1')
+						if(!list.length){
+							recordItem = `<div class="empty flex">
+								暂无记录
+							</div>`
+							tab1.innerHTML = recordItem
+							
+						}else{
+							list.forEach(item=>{
+						recordItem += `<div class="flex">
+								<span>${typesInfo[item.types]}</span>
+								<span class="green">+${item.price}</span>
+								<div class="flex1">
+									<span>${formatTimestamp(item.createtime,'date')}</span>
+									<span>${formatTimestamp(item.createtime,'time')}</span>
+								</div>
+							</div>`
+							})
+							tab1.innerHTML = recordItem
+						}
+					}
+				})
+			}
+			function getWithdrawList() {
+				apiHttp($, "/api/contract/withdraw/getList",{credittype:'credit3'}).then(res => {
+					if (res.code == 1) {
+						let statusInfo = res.data.statusInfo
+						let list = res.data.list
+						let recordItem = ''
+						let tab2 = document.getElementById('tab-2')
+						
+						
+						if(!list.length){
+							recordItem = `<div class="empty flex">
+								暂无记录
+							</div>`
+							tab2.innerHTML = recordItem
+							
+						}else{
+							list.forEach(item=>{
+						if(item.status == 2){
+							recordItem += `<div class="flex">
+								<span>提取</span>
+								<span class="red">-${item.price}</span>
+								<div class="flex">
+									<div class="flex1">
+										<span>${formatTimestamp(item.createtime,'date')}</span>
+										<span>${formatTimestamp(item.createtime,'time')}</span>
+									</div>
+									<div class="btn" onclick="${toReceive()}">领取</div>
+								</div>
+							</div>`
+						}else{
+							recordItem += `<div class="flex">
+								<span>提取</span>
+								<span class="red">-${item.price}</span>
+								<div class="flex">
+									<div class="flex1">
+										<span>${formatTimestamp(item.createtime,'date')}</span>
+										<span>${formatTimestamp(item.createtime,'time')}</span>
+									</div>
+								</div>
+							</div>`
+						}
+							})
+							tab2.innerHTML = recordItem
+						}
+					}
+				})
+			}
+			function loadData() {
+				getIndex()
+				getAsset()
+			}
+			loadData()
 
 			function changeTab(index) {
 				console.log(index);
@@ -480,6 +530,11 @@
 				document.getElementById('tab-' + (index + 1)).classList.add('active');
 				const newLeft = index * (window.innerWidth - 95) + 'px'; // 计算新的left值  
 				document.querySelector('.indicator').style.transform = `translateX(${newLeft})`;
+				if(index == 0){
+					getRebateList()
+				}else{
+					getWithdrawList()
+				}
 			}
 			changeTab(0);
 			// 点击模态框外部时，也关闭它  

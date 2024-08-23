@@ -261,7 +261,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20" id="twaName"></span>
+				<span class="bold fs-20 twaName" ></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -301,7 +301,7 @@
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
-					<span class="bold">Babydogeswap</span>
+					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<span>钱包地址：0x564df...23</span>
 						<img src="./images/copy.png" alt="">
@@ -335,7 +335,9 @@
 
 			function getIndex() {
 				let data = localStorage.getItem('twaInfo')
-				document.getElementById('twaName').innerHTML = JSON.parse(data).name
+				document.querySelectorAll('.twaName').forEach(item=>{
+					item.innerHTML = JSON.parse(data).name
+				})
 			}
 			getIndex()
 

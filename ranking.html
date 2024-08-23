@@ -78,6 +78,10 @@
 				font-size: 12px;
 			}
 
+			.fs-18 {
+				font-size: 18px;
+			}
+
 			.mb-10 {
 				margin-bottom: 10px;
 			}
@@ -99,7 +103,7 @@
 	<body>
 		<main>
 			<div class="topNav  flex-bw">
-				<span class="bold fs-20" id="twaName"></span>
+				<span class="bold fs-20 twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -110,7 +114,7 @@
 			<img class="bgimg" src="./images/bgimg.png" alt="">
 			<div class="flex-bw walletWrap mb-56">
 				<div class="flex">
-					<img class="logo avatar"  src="images/usdt.png" alt="" />
+					<img class="logo avatar" src="images/usdt.png" alt="" />
 					<div class="flex1">
 						<span id="myName"></span>
 						<div class="flex">
@@ -121,66 +125,15 @@
 				</div>
 				<div class="flex1">
 					<span>名次</span>
-					<span class="amount" id="myRank">125</span>
+					<span class="amount" id="myRank"></span>
 				</div>
 			</div>
 			<div class="mb-18">排名</div>
-			<div class="flex-bw walletWrap mb-10">
-				<div class="flex">
-					<img class="logo avatar" src="images/usdt.png" alt="" />
-					<div class="flex1">
-						<span id="">elite295</span>
-						<div class="flex">
-							<span class="mainColor">845.6143</span>
-							<span class="fs-12">代币A</span>
-						</div>
-					</div>
-				</div>
-				<img class="rank" src="images/one.png" alt="" />
-			</div>
-			<div class="flex-bw walletWrap mb-10">
-				<div class="flex">
-					<img class="logo avatar" src="images/usdt.png" alt="" />
-					<div class="flex1">
-						<span id="">elite295</span>
-						<div class="flex">
-							<span class="mainColor">845.6143</span>
-							<span class="fs-12">代币A</span>
-						</div>
-					</div>
-				</div>
-				<img class="rank" src="images/two.png" alt="" />
-			</div>
-			<div class="flex-bw walletWrap mb-10">
-				<div class="flex">
-					<img class="logo avatar" src="images/usdt.png" alt="" />
-					<div class="flex1">
-						<span id="">elite295</span>
-						<div class="flex">
-							<span class="mainColor">845.6143</span>
-							<span class="fs-12">代币A</span>
-						</div>
-					</div>
-				</div>
-				<img class="rank" src="images/three.png" alt="" />
-			</div>
-			<div class="flex-bw walletWrap mb-10">
-				<div class="flex">
-					<img class="logo avatar" src="images/usdt.png" alt="" />
-					<div class="flex1">
-						<span id="">elite295</span>
-						<div class="flex">
-							<span class="mainColor">845.6143</span>
-							<span class="fs-12">代币A</span>
-						</div>
-					</div>
-				</div>
-				<span class="amount">4</span>
-			</div>
+			<div id="rankList"></div>
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
-					<span class="bold">Babydogeswap</span>
+					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<span>钱包地址：0x564df...23</span>
 						<img src="./images/copy.png" alt="">
@@ -234,12 +187,47 @@
 			function getRanking() {
 				apiHttp($, "/api/contract/sign/getRanking").then(res => {
 					if (res.code == 1) {
-						document.querySelectorAll('.avatar').forEach(item=>{
+						document.querySelectorAll('.avatar').forEach(item => {
 							item.src = res.data.avatar
 						})
 						document.getElementById('myName').innerHTML = res.data.nickname
 						document.getElementById('mySign').innerHTML = res.data.user.sign
 						document.getElementById('myRank').innerHTML = res.data.ranking
+						let rankList = document.getElementById('rankList')
+						let rankItem = ''
+						res.data.list.forEach((item, i) => {
+							if (i < 3) {
+								rankItem += `<div class="flex-bw walletWrap mb-10">
+									<div class="flex">
+										<img class="logo avatar" src="${res.data.avatar}" alt="" />
+										<div class="flex1">
+											<span id="">${sliceAddress(item.address)}</span>
+											<div class="flex">
+												<span class="mainColor">${item.sign}</span>
+												<span class="fs-12">代币A</span>
+											</div>
+										</div>
+									</div>
+									<img class="rank" src="${i==0?'images/one.png':i==1?'images/two.png':i==2?'images/three.png':''}" alt="" />
+								</div>`
+							} else {
+								rankItem += `<div class="flex-bw walletWrap mb-10">
+									<div class="flex">
+										<img class="logo avatar" src="${res.data.avatar}" alt="" />
+										<div class="flex1">
+											<span id="">${sliceAddress(item.address)}</span>
+											<div class="flex">
+												<span class="mainColor">${item.sign}</span>
+												<span class="fs-12">代币A</span>
+											</div>
+										</div>
+									</div>
+									<span class="fs-18">${i+1}</span>
+								</div>`
+							}
+
+						})
+						rankList.innerHTML = rankItem
 					}
 				})
 			}
