@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -278,7 +278,7 @@
 			</div>
 			<div class="">算力记录</div>
 			<div class="flex1 recordWrap" id="recordWrap">
-				
+
 			</div>
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
@@ -310,7 +310,7 @@
 				</div>
 			</div>
 		</main>
-
+		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -332,7 +332,7 @@
 						let list = res.data.list
 						let recordItem = ''
 						let recordWrap = document.getElementById('recordWrap')
-					
+
 						if (!list.length) {
 							recordItem = `<div class="empty flex">
 								暂无记录
