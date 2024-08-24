@@ -459,6 +459,7 @@
 					if (res.code == 1) {
 						localStorage.setItem('token', res.data.userInfo.token)
 						localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
+						loadData()
 					}
 				})
 			}
