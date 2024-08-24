@@ -365,7 +365,7 @@
 						<span>代币A</span>
 					</div>
 					<img src="./images/sign.png" alt="">
-					<div class="btn flex" onclick="toReceive()">开心收下</div>
+					<div class="btn flex" onclick="closePopup1()">开心收下</div>
 				</div>
 			</div>
 			<!-- 更多菜单 -->
@@ -472,6 +472,7 @@
 							// 签到弹窗显示
 							popup1.style.display = 'flex';
 							document.getElementById('signPrice').innerHTML = res.data.price
+							toReceive()
 						}
 					}
 				})
@@ -490,10 +491,13 @@
 			function toReceive() {
 				apiHttp($, "/api/contract/sign/getSign").then(res => {
 					if (res.code == 1) {
-						popup1.style.display = 'none';
-						toast('签到成功')
+						// popup1.style.display = 'none';
+						// toast('签到成功')
 					}
 				})
+			}
+			function closePopup1(){
+				popup1.style.display = 'none'
 			}
 			init()
 			// const connector = new TonConnectSDK.TonConnect();
