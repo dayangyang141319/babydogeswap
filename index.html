@@ -399,7 +399,7 @@
 				</div>
 			</div>
 		</main>
-	
+
 
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="./js/jquery.js"></script>
@@ -407,7 +407,7 @@
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
 			let address = ''
-            console.log('url-----------',window);
+			console.log('url-----------', window);
 			const currentAccount = tonConnectUI.connector;
 			console.log(111, currentAccount);
 
@@ -427,11 +427,11 @@
 				setTimeout(function() {
 					console.log(currentAccount.wallet.account.address);
 					address = currentAccount.wallet.account.address
-					let addr = TonConnectSDK.toUserFriendlyAddress(address,true)
-					console.log(TonConnectSDK.toUserFriendlyAddress(address,true));
-					localStorage.setItem('address',addr)
-					document.getElementById('walletAddress').innerHTML  = sliceAddress(addr,4,4)
-				}, 1000); 
+					let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+					console.log(TonConnectSDK.toUserFriendlyAddress(address, true));
+					localStorage.setItem('address', addr)
+					document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				}, 1000);
 			}
 
 			async function init() {
@@ -440,7 +440,13 @@
 				let token = localStorage.getItem('token')
 				if (!token) {
 					setTimeout(function() {
-						login()
+						if (address) {
+							login()
+						} else {
+							setTimeout(function() {
+								login()
+							}, 1000);
+						}
 					}, 1000);
 				} else {
 					loadData()
@@ -484,7 +490,7 @@
 					}
 				})
 			}
-			
+
 			// 关闭签到弹窗
 			function toReceive() {
 				apiHttp($, "/api/contract/sign/getSign").then(res => {
