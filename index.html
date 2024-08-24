@@ -400,18 +400,16 @@
 			</div>
 		</main>
 	
-		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="./js/jquery.js"></script>
 		<script src="./js/http.js"></script>
+		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
 			let address = ''
             console.log('url-----------',window);
 			const currentAccount = tonConnectUI.connector;
 			console.log(111, currentAccount);
-			console.log('toUserFriendlyAddress',  TonConnectSDK.toUserFriendlyAddress);
 
 			function getAddress() {
 				// 	setTimeout(function() {
@@ -501,8 +499,8 @@
 			// console.log(444, connector);
 
 
-			window.addEventListener('connection-restoring-started', (event) => {
-				console.log('Transaction init', event.detail);
+			window.addEventListener('ton-connect-connection-restoring-started', (event) => {
+				console.log('Transaction init==============', event.detail);
 			});
 
 
