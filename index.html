@@ -402,7 +402,7 @@
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script src="./js/http.js"></script>
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-		<script src="https://telegram.org/js/telegram-web-app.js"></script>
+		<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
 		<script>
 			let address = ''
 			console.log('url-----------', window);
@@ -410,18 +410,6 @@
 			console.log(111, currentAccount);
 
 			function getAddress() {
-				// 	setTimeout(function() {
-				// 		if (currentAccount.wallet) {
-				// 			setTimeout(function() {
-				// 				if (currentAccount.wallet.account) {
-				// 					setTimeout(function() {
-				// 						console.log('sss',currentAccount.wallet.account.address);
-				// 						address = currentAccount.wallet.account.address
-				// 					}, 200);
-				// 				}
-				// 			}, 200);
-				// 		}
-				// 	}, 200);
 				setTimeout(function() {
 					console.log(currentAccount.wallet.account.address);
 					address = currentAccount.wallet.account.address
@@ -433,32 +421,40 @@
 			}
 
 			async function init() {
-				let res = await getAddress()
-				console.log('aaaa', address);
+				// let res = await getAddress()
+				// console.log('aaaa', address);
+
+			}
+			window.addEventListener('ton-connect-connection-completed', (event) => {
+				console.log('Transaction init==============', event.detail.wallet_address);
+				address = event.detail.wallet_address
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				console.log(TonConnectSDK.toUserFriendlyAddress(address, true));
+				localStorage.setItem('address', addr)
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 				let token = localStorage.getItem('token')
-				if (!token) {
-					setTimeout(function() {
-						if (address) {
-							login()
-						}
-					}, 1000);
+				let saveAddress = localStorage.getItem('address')
+				if (!token || !saveAddress) {
+					login(address)
 				} else {
 					loadData()
 				}
-			}
+			});
 
-			function login() {
-				apiHttp($, "/api/contract/auth/login", {
-					address: address
-				}).then(res => {
-					console.log(res);
-					if (res.code == 1) {
-						localStorage.setItem('token', res.data.userInfo.token)
-						localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
-						loadData()
-					}
-				})
-			}
+			// function login(address) {
+			// 	apiHttp($, "/api/contract/auth/login", {
+			// 		address: address
+			// 	}).then(res => {
+			// 		console.log(res);
+			// 		if (res.code == 1) {
+			// 			localStorage.setItem('token', res.data.userInfo.token)
+			// 			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
+			// 			setTimeout(()=>{
+			// 				loadData()
+			// 			},100)
+			// 		}
+			// 	})
+			// }
 
 			function loadData() {
 				getSign()
@@ -496,17 +492,16 @@
 					}
 				})
 			}
-			function closePopup1(){
+
+			function closePopup1() {
 				popup1.style.display = 'none'
 			}
-			init()
+			// init()
 			// const connector = new TonConnectSDK.TonConnect();
 			// console.log(444, connector);
 
 
-			window.addEventListener('ton-connect-connection-restoring-started', (event) => {
-				console.log('Transaction init==============', event.detail);
-			});
+
 
 
 

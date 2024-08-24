@@ -7,6 +7,7 @@ const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 	buttonRootId: 'ton-connect'
 });
 
+
 function apiHttp($, url, params = {}) {
 	console.log('////////////', params);
 	// console.log(Object.assign(tokenToken,params));
@@ -39,6 +40,10 @@ function setFooter(data) {
 	let dt1 = document.getElementById('dt1')
 	let dt2 = document.getElementById('dt2')
 	let dt3 = document.getElementById('dt3')
+	dt1.innerHTML = ''
+	dt2.innerHTML = ''
+	dt3.innerHTML = ''
+	ourCommunity.innerHTML = ''
 	data.article1.forEach(item => {
 		const li = document.createElement('li');
 		li.innerHTML = item.title
@@ -155,4 +160,37 @@ function copy() {
 	let addr = localStorage.getItem('address')
 	navigator.clipboard.writeText(addr)
 	toast('复制成功')
+}
+
+// window.addEventListener('ton-connect-disconnection', (event) => {
+// 	console.log('断开连接！！！！！！！', event.detail.wallet_address);
+// 	localStorage.clear()
+
+// });
+
+function reLogin() {
+	apiHttp($, "/api/contract/auth/login", {
+		address: address
+	}).then(res => {
+		console.log(res);
+		if (res.code == 1) {
+			localStorage.setItem('token', res.data.userInfo.token)
+			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
+		}
+	})
+}
+
+function login(address) {
+	apiHttp($, "/api/contract/auth/login", {
+		address: address
+	}).then(res => {
+		console.log(res);
+		if (res.code == 1) {
+			localStorage.setItem('token', res.data.userInfo.token)
+			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
+			setTimeout(() => {
+				loadData()
+			}, 100)
+		}
+	})
 }

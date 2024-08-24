@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-		
+
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -229,6 +229,21 @@
 				getRule()
 				getInfo()
 			}
+			// window.addEventListener('ton-connect-connection-completed', (event) => {
+			// 	console.log('Transaction init==============', event.detail.wallet_address);
+			// 	address = event.detail.wallet_address
+			// 	let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+			// 	console.log(TonConnectSDK.toUserFriendlyAddress(address, true));
+			// 	localStorage.setItem('address', addr)
+			// 	document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+			// 	let token = localStorage.getItem('token')
+			// 	let saveAddress = localStorage.getItem('address')
+			// 	if (!token || !saveAddress) {
+			// 		login()
+			// 	} else {
+			// 		loadData()
+			// 	}
+			// });
 
 			function getInfo() {
 				apiHttp($, "/api/contract/exchange/index").then(res => {
@@ -244,12 +259,12 @@
 			}
 
 			function toExchange() {
-				
+
 				if (Number(input.value) <= 0) {
 					return toast('请输入数量')
 				}
 				apiHttp($, "/api/contract/exchange/exchange", {
-					price:input.value
+					price: input.value
 				}).then(res => {
 					if (res.code == 1) {
 						toast(res.msg)
