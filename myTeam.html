@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-		
+
 		<style>
 			body {
 				padding: 0;
@@ -41,8 +41,8 @@
 
 			.inviteWrap .title {
 				align-self: flex-start;
-				padding-left:23px;
-				margin-bottom:27px;
+				padding-left: 23px;
+				margin-bottom: 27px;
 				font-size: 15px;
 			}
 
@@ -129,12 +129,12 @@
 				</div>
 			</div>
 			<!-- 加载弹窗 -->
-			<div id="loadingModal" class="loadingModal">  
-			  <div class="modal-content">  
-			    <p>加载中 . . .</p>  
-				<img src="images/loading.png" alt="" />
-			  </div>  
-			</div> 
+			<div id="loadingModal" class="loadingModal">
+				<div class="modal-content">
+					<p>加载中 . . .</p>
+					<img src="images/loading.png" alt="" />
+				</div>
+			</div>
 		</main>
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -167,9 +167,10 @@
 				})
 			}
 
-			function loadData() {
-				getIndexInfo()
-				getTeamList()
+			async function loadData() {
+				await showLoading()
+				await getIndexInfo()
+				await getTeamList()
 				let address = localStorage.getItem('address')
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)

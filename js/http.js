@@ -189,7 +189,6 @@ window.addEventListener('ton-connect-connection-completed', (event) => {
 	let address = event.detail.wallet_address
 	localStorage.setItem('address', address)
 	let token = localStorage.getItem('token')
-	showLoading()
 	if (!token) {
 		login(address,inviteCode)
 	} else {

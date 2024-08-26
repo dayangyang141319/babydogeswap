@@ -179,12 +179,12 @@
 				</div>
 			</div>
 			<!-- 加载弹窗 -->
-			<div id="loadingModal" class="loadingModal">  
-			  <div class="modal-content">  
-			    <p>加载中 . . .</p>  
-				<img src="images/loading.png" alt="" />
-			  </div>  
-			</div> 
+			<div id="loadingModal" class="loadingModal">
+				<div class="modal-content">
+					<p>加载中 . . .</p>
+					<img src="images/loading.png" alt="" />
+				</div>
+			</div>
 		</main>
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -199,7 +199,8 @@
 							item.src = res.data.avatar
 						})
 						document.getElementById('myName').innerHTML = sliceAddress(res.data.user.address.startsWith(
-							'0:') ? TonConnectSDK.toUserFriendlyAddress(res.data.user.address, true) : res.data.user
+								'0:') ? TonConnectSDK.toUserFriendlyAddress(res.data.user.address, true) : res.data
+							.user
 							.address)
 						document.getElementById('mySign').innerHTML = res.data.user.sign
 						document.getElementById('myRank').innerHTML = res.data.ranking
@@ -242,9 +243,10 @@
 				})
 			}
 
-			function loadData() {
-				getIndexInfo()
-				getRanking()
+			async function loadData() {
+				await showLoading()
+				await getIndexInfo()
+				await getRanking()
 				let address = localStorage.getItem('address')
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)

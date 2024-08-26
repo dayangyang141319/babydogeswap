@@ -216,27 +216,28 @@
 				</div>
 			</div>
 			<!-- 加载弹窗 -->
-			<div id="loadingModal" class="loadingModal">  
-			  <div class="modal-content">  
-			    <p>加载中 . . .</p>  
-				<img src="images/loading.png" alt="" />
-			  </div>  
-			</div> 
+			<div id="loadingModal" class="loadingModal">
+				<div class="modal-content">
+					<p>加载中 . . .</p>
+					<img src="images/loading.png" alt="" />
+				</div>
+			</div>
 		</main>
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script src="./js/http.js"></script>
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
-		
+
 		<script>
 			let input = document.getElementById('price')
 			let usdtPrice = 1
 
-			function loadData() {
-				getIndexInfo()
-				getRule()
-				getInfo()
+			async function loadData() {
+				await showLoading()
+				await getIndexInfo()
+				await getRule()
+				await getInfo()
 				let address = localStorage.getItem('address')
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)

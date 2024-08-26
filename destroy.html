@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-		
+
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -472,12 +472,12 @@
 				</div>
 			</div>
 			<!-- 加载弹窗 -->
-			<div id="loadingModal" class="loadingModal">  
-			  <div class="modal-content">  
-			    <p>加载中 . . .</p>  
-				<img src="images/loading.png" alt="" />
-			  </div>  
-			</div> 
+			<div id="loadingModal" class="loadingModal">
+				<div class="modal-content">
+					<p>加载中 . . .</p>
+					<img src="images/loading.png" alt="" />
+				</div>
+			</div>
 		</main>
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -500,7 +500,7 @@
 					if (res.code == 1) {
 						alert(res.msg)
 						myInput.value = ''
-						getBurn() 
+						getBurn()
 					}
 				})
 			}
@@ -512,7 +512,8 @@
 						document.getElementById('count').innerHTML = res.data.count
 						document.getElementById('userPrice').innerHTML = res.data.userPrice
 						document.getElementById('bei').innerHTML = res.data.bei
-						document.getElementById('dayCount').innerHTML = res.data.dayCount
+						document.getElementById('dayCount').innerHTML = res.data.dayCount 
+						document.getElementById('tokenB').innerHTML = res.data.dayCount 
 						document.getElementById('countCredit4').innerHTML = res.data.countCredit4
 						document.getElementById('userCredit4').innerHTML = res.data.userCredit4
 						document.getElementById('inputNum').textContent = 0;
@@ -532,9 +533,10 @@
 				document.getElementById('power').innerHTML = inputValue * bei
 			}
 
-			function loadData() {
-				getIndexInfo()
-				getBurn()
+			async function loadData() {
+				await showLoading()
+				await getIndexInfo()
+				await getBurn()
 				let address = localStorage.getItem('address')
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)

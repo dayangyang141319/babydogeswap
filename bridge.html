@@ -366,12 +366,12 @@
 				</div>
 			</div>
 			<!-- 加载弹窗 -->
-			<div id="loadingModal" class="loadingModal">  
-			  <div class="modal-content">  
-			    <p>加载中 . . .</p>  
-				<img src="images/loading.png" alt="" />
-			  </div>  
-			</div> 
+			<div id="loadingModal" class="loadingModal">
+				<div class="modal-content">
+					<p>加载中 . . .</p>
+					<img src="images/loading.png" alt="" />
+				</div>
+			</div>
 		</main>
 
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
@@ -380,8 +380,9 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
-			function loadData() {
-				getIndexInfo()
+			async function loadData() {
+				await showLoading()
+				await getIndexInfo()
 				let address = localStorage.getItem('address')
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
@@ -401,7 +402,7 @@
 					}, 200)
 				}
 			}
-			
+
 			// Init TWA
 			Telegram.WebApp.ready();
 
