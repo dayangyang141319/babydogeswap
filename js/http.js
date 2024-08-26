@@ -110,7 +110,7 @@ function closeModal() {
 }
 
 function showMore(e) {
-	console.log(6);
+	console.log('xxxxx',location.href);
 	morePopup.style.display = 'flex';
 	moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 }
