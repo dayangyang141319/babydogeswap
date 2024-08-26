@@ -109,8 +109,22 @@ function closeModal() {
 	popup.style.display = 'none';
 }
 
+function extractInviteCode(url) {
+	// 使用正则表达式匹配 inviteCode= 后面的数字  
+	const match = url.match(/inviteCode=(\d+)/);
+	if (match) {
+		// 如果匹配成功，返回匹配到的数字  
+		return match[1];
+	}
+	// 如果没有匹配到，返回 null 或其他你希望的值  
+	return null;
+}
+
 function showMore(e) {
-	console.log('xxxxx',location.href);
+	console.log('xxxxx', location.href);
+	// if (location.href.indexOf('inviteCode') != -1 && location.href.indexOf('#')) {
+	// 	let inviteCode = location.href.split('inviteCode=')[]
+	// }
 	morePopup.style.display = 'flex';
 	moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 }
@@ -170,11 +184,13 @@ function copy() {
 }
 window.addEventListener('ton-connect-connection-completed', (event) => {
 	console.log('Transaction init==============', event.detail.wallet_address);
+	let inviteCode = extractInviteCode(location.href)
+	console.log('inviteCode.........',inviteCode);
 	let address = event.detail.wallet_address
 	localStorage.setItem('address', address)
 	let token = localStorage.getItem('token')
 	if (!token) {
-		login(address)
+		login(address,inviteCode)
 	} else {
 		loadData()
 	}
@@ -185,9 +201,10 @@ window.addEventListener('ton-connect-disconnection', (event) => {
 
 });
 
-function login(address) {
+function login(address,inviteCode) {
 	apiHttp($, "/api/contract/auth/login", {
-		address: address
+		address: address,
+		inviteCode:inviteCode || ''
 	}).then(res => {
 		console.log(res);
 		if (res.code == 1) {
