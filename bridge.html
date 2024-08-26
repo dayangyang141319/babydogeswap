@@ -374,9 +374,13 @@
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
 			function loadData() {
-				getIndex()
+				getIndexInfo()
+				let address = localStorage.getItem('address')
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				localStorage.setItem('userAddress', addr)
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 			}
-			// loadData()
+			loadData()
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				if (event.target == popup) {
@@ -389,25 +393,7 @@
 					}, 200)
 				}
 			}
-			// window.addEventListener('ton-connect-connection-completed', (event) => {
-			// 	console.log('Transaction init==============', event.detail.wallet_address);
-			// 	address = event.detail.wallet_address
-			// 	let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
-			// 	console.log(TonConnectSDK.toUserFriendlyAddress(address, true));
-			// 	localStorage.setItem('address', addr)
-			// 	document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
-			// 	isLogin()
-			// });
-			function isLogin() {
-				// let token = localStorage.getItem('token')
-				// let saveAddress = localStorage.getItem('address')
-				// if (!token || !saveAddress) {
-				// 	login()
-				// } else {
-				loadData()
-				// }
-			}
-			isLogin()
+			
 			// Init TWA
 			Telegram.WebApp.ready();
 

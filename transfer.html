@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-		
+
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -122,6 +122,7 @@
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script src="./js/http.js"></script>
+		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
 			function getCredit() {
@@ -131,6 +132,11 @@
 					}
 				})
 			}
+
+			function loadData() {
+				getCredit()
+			}
+			loadData()
 
 			function toTransfer() {
 				let address = document.getElementById('address').value
@@ -153,7 +159,7 @@
 					}
 				})
 			}
-			getCredit()
+
 			// Init TWA
 			Telegram.WebApp.ready();
 

@@ -36,52 +36,67 @@ function setFooter(data) {
 	document.querySelectorAll('.twaName').forEach(item => {
 		item.innerHTML = data.name
 	})
+	document.title = data.name;
 	let ourCommunity = document.getElementById('ourCommunity')
 	let dt1 = document.getElementById('dt1')
 	let dt2 = document.getElementById('dt2')
 	let dt3 = document.getElementById('dt3')
-	dt1.innerHTML = ''
-	dt2.innerHTML = ''
-	dt3.innerHTML = ''
-	ourCommunity.innerHTML = ''
-	data.article1.forEach(item => {
-		const li = document.createElement('li');
-		li.innerHTML = item.title
-		dt1.appendChild(li);
-		li.addEventListener('click', () => {
-			window.open(item.url)
+	// let addr = localStorage.getItem('address')
+	// let walletAddress = document.getElementById('walletAddress')
+	// if (walletAddress) {
+	// 	walletAddress.innerHTML = sliceAddress(addr, 4, 4)
+	// }
+	if (dt1) {
+		dt1.innerHTML = ''
+		data.article1.forEach(item => {
+			const li = document.createElement('li');
+			li.innerHTML = item.title
+			dt1.appendChild(li);
+			li.addEventListener('click', () => {
+				window.open(item.url)
+			})
 		})
-	})
-	data.article2.forEach(item => {
-		const li = document.createElement('li');
-		li.innerHTML = item.title
-		dt2.appendChild(li);
-		li.addEventListener('click', () => {
-			window.open(item.url)
+	}
+	if (dt2) {
+		dt2.innerHTML = ''
+		data.article2.forEach(item => {
+			const li = document.createElement('li');
+			li.innerHTML = item.title
+			dt2.appendChild(li);
+			li.addEventListener('click', () => {
+				window.open(item.url)
+			})
 		})
-	})
-	data.article3.forEach(item => {
-		const li = document.createElement('li');
-		li.innerHTML = item.title
-		dt3.appendChild(li);
-		li.addEventListener('click', () => {
-			window.open(item.url)
+	}
+	if (dt3) {
+		dt3.innerHTML = ''
+		data.article3.forEach(item => {
+			const li = document.createElement('li');
+			li.innerHTML = item.title
+			dt3.appendChild(li);
+			li.addEventListener('click', () => {
+				window.open(item.url)
+			})
 		})
-	})
-	data.article4.forEach((item, i) => {
-		const div = document.createElement('div');
-		const span = document.createElement('span');
-		const img = document.createElement('img');
-		div.classList.add('flex')
-		span.innerHTML = item.title
-		img.src = './images/us' + i + '.png'
-		div.appendChild(img);
-		div.appendChild(span);
-		ourCommunity.appendChild(div);
-		div.addEventListener('click', () => {
-			window.open(item.url)
+	}
+	if (ourCommunity) {
+		ourCommunity.innerHTML = ''
+		data.article4.forEach((item, i) => {
+			const div = document.createElement('div');
+			const span = document.createElement('span');
+			const img = document.createElement('img');
+			div.classList.add('flex')
+			span.innerHTML = item.title
+			img.src = './images/us' + i + '.png'
+			div.appendChild(img);
+			div.appendChild(span);
+			ourCommunity.appendChild(div);
+			div.addEventListener('click', () => {
+				window.open(item.url)
+			})
 		})
-	})
+	}
+
 }
 let popup = document.getElementById('popup')
 let popup1 = document.getElementById('popup1')
@@ -143,42 +158,32 @@ function formatTimestamp(timestamp, type) {
 	}
 }
 
-function getIndex() {
-	let data = localStorage.getItem('twaInfo')
-	setFooter(JSON.parse(data))
-	let addr = localStorage.getItem('address')
-	document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
-}
-
 function toast(msg) {
 	alert(msg)
 	// Telegra.WebApp.showAlert(msg)
 }
 
 function copy() {
-	// navigator.clipboard.writeText 将文本内容写入剪贴板
-	let addr = localStorage.getItem('address')
+	let addr = localStorage.getItem('userAddress')
 	navigator.clipboard.writeText(addr)
 	toast('复制成功')
 }
+window.addEventListener('ton-connect-connection-completed', (event) => {
+	console.log('Transaction init==============', event.detail.wallet_address);
+	let address = event.detail.wallet_address
+	localStorage.setItem('address', address)
+	let token = localStorage.getItem('token')
+	if (!token) {
+		login(address)
+	} else {
+		loadData()
+	}
+});
+window.addEventListener('ton-connect-disconnection', (event) => {
+	console.log('断开连接！！！！！！！', event.detail.wallet_address);
+	localStorage.clear()
 
-// window.addEventListener('ton-connect-disconnection', (event) => {
-// 	console.log('断开连接！！！！！！！', event.detail.wallet_address);
-// 	localStorage.clear()
-
-// });
-
-function reLogin() {
-	apiHttp($, "/api/contract/auth/login", {
-		address: address
-	}).then(res => {
-		console.log(res);
-		if (res.code == 1) {
-			localStorage.setItem('token', res.data.userInfo.token)
-			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
-		}
-	})
-}
+});
 
 function login(address) {
 	apiHttp($, "/api/contract/auth/login", {
@@ -193,4 +198,18 @@ function login(address) {
 			}, 100)
 		}
 	})
+}
+
+function getIndexInfo() {
+	let data = localStorage.getItem('twaInfo')
+	if (data) {
+		setFooter(JSON.parse(data))
+	} else {
+		apiHttp($, "/api/contract/index/index").then(res => {
+			if (res.code == 1) {
+				localStorage.setItem('twaInfo', JSON.stringify(res.data))
+				setFooter(res.data)
+			}
+		})
+	}
 }

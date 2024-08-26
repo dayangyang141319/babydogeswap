@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-		
+
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -378,7 +378,7 @@
 	<body>
 		<main>
 			<div class="topNav flex-bw">
-				<span class="bold fs-20 twaName" ></span>
+				<span class="bold fs-20 twaName"></span>
 				<div class="flex">
 					<div class="flex notBind" id="ton-connect"></div>
 					<!-- <div class="flex bind">0D9...4646</div> -->
@@ -585,9 +585,17 @@
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script src="./js/http.js"></script>
+		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
-		
+			function loadData() {
+				getIndexInfo()
+				let address = localStorage.getItem('address')
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				localStorage.setItem('userAddress', addr)
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+			}
+			loadData()
 			let assetPopup = document.getElementById('assetPopup')
 			let assetModal = document.getElementById('assetModal')
 			let setPopup = document.getElementById('setPopup')
@@ -619,8 +627,8 @@
 				});
 			});
 
-			
-			getIndex()
+
+
 
 			function toRefresh() {
 

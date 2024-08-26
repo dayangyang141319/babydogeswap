@@ -333,18 +333,9 @@
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script src="./js/http.js"></script>
+		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
-			function getIndexInfo() {
-				let data = localStorage.getItem('twaInfo')
-				document.querySelectorAll('.twaName').forEach(item=>{
-					item.innerHTML = JSON.parse(data).name
-				})
-				let addr = localStorage.getItem('address')
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
-			}
-			
-
 			function getAsset() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
@@ -390,6 +381,10 @@
 				getIndexInfo()
 				getAsset()
 				getRebateList()
+				let address = localStorage.getItem('address')
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				localStorage.setItem('userAddress', addr)
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 			}
 			loadData()
 			// Init TWA

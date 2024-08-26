@@ -8,9 +8,6 @@
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
 
-
-
-
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -404,61 +401,15 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
 		<script>
-			let address = ''
-			console.log('url-----------', window);
-			const currentAccount = tonConnectUI.connector;
-			console.log(111, currentAccount);
-
-			function getAddress() {
-				setTimeout(function() {
-					console.log(currentAccount.wallet.account.address);
-					address = currentAccount.wallet.account.address
-					let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
-					console.log(TonConnectSDK.toUserFriendlyAddress(address, true));
-					localStorage.setItem('address', addr)
-					document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
-				}, 1000);
-			}
-
-			async function init() {
-				// let res = await getAddress()
-				// console.log('aaaa', address);
-
-			}
-			window.addEventListener('ton-connect-connection-completed', (event) => {
-				console.log('Transaction init==============', event.detail.wallet_address);
-				address = event.detail.wallet_address
-				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
-				console.log(TonConnectSDK.toUserFriendlyAddress(address, true));
-				localStorage.setItem('address', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
-				let token = localStorage.getItem('token')
-				let saveAddress = localStorage.getItem('address')
-				if (!token || !saveAddress) {
-					login(address)
-				} else {
-					loadData()
-				}
-			});
-
-			// function login(address) {
-			// 	apiHttp($, "/api/contract/auth/login", {
-			// 		address: address
-			// 	}).then(res => {
-			// 		console.log(res);
-			// 		if (res.code == 1) {
-			// 			localStorage.setItem('token', res.data.userInfo.token)
-			// 			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
-			// 			setTimeout(()=>{
-			// 				loadData()
-			// 			},100)
-			// 		}
-			// 	})
-			// }
-
 			function loadData() {
 				getSign()
 				getIndexInfo()
+				let address = localStorage.getItem('address')
+				if(address){
+					let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+					localStorage.setItem('userAddress', addr)
+					document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				}
 			}
 
 			function getSign() {
@@ -474,21 +425,11 @@
 				})
 			}
 
-			function getIndexInfo() {
-				apiHttp($, "/api/contract/index/index").then(res => {
-					if (res.code == 1) {
-						localStorage.setItem('twaInfo', JSON.stringify(res.data))
-						setFooter(res.data)
-					}
-				})
-			}
-
 			// 关闭签到弹窗
 			function toReceive() {
 				apiHttp($, "/api/contract/sign/getSign").then(res => {
 					if (res.code == 1) {
-						// popup1.style.display = 'none';
-						// toast('签到成功')
+
 					}
 				})
 			}
@@ -496,26 +437,23 @@
 			function closePopup1() {
 				popup1.style.display = 'none'
 			}
-			// init()
-			// const connector = new TonConnectSDK.TonConnect();
-			// console.log(444, connector);
 
 
 
 
 
 
-			async function toTransfer() {
-				console.log('?????????');
-				const transaction = {
-					messages: [{
-						address: "0:412410771DA82CBA306A55FA9E0D43C9D245E38133CB58F1457DFB8D5CD8892F", // destination address
-						amount: "1" //Toncoin in nanotons
-					}]
-				}
+			// async function toTransfer() {
+			// 	console.log('?????????');
+			// 	const transaction = {
+			// 		messages: [{
+			// 			address: "0:412410771DA82CBA306A55FA9E0D43C9D245E38133CB58F1457DFB8D5CD8892F", // destination address
+			// 			amount: "1" //Toncoin in nanotons
+			// 		}]
+			// 	}
 
-				const result = await tonConnectUI.sendTransaction(transaction)
-			}
+			// 	const result = await tonConnectUI.sendTransaction(transaction)
+			// }
 		</script>
 		<!-- Eruda is console for mobile browsers -->
 		<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
