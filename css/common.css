@@ -78,33 +78,37 @@ ul {
 	margin-top: 44px;
 
 }
-.ourCommunity{
-	margin-top:18px;
+
+.ourCommunity {
+	margin-top: 18px;
 }
-.ourCommunity .flex{
+
+.ourCommunity .flex {
 	height: 20px;
-	border-radius:10px;
-	padding:0 5px;
+	border-radius: 10px;
+	padding: 0 5px;
 	background-color: #2f2f2f;
 	font-size: 11px;
-	color:#888;
-	margin-right:5px;
+	color: #888;
+	margin-right: 5px;
 	justify-content: center;
-	line-height:1;
+	line-height: 1;
 }
-.ourCommunity img{
+
+.ourCommunity img {
 	width: 13px;
 	height: 13px;
-	margin-right:3px;
-	
+	margin-right: 3px;
+
 }
+
 .joinus .fs-20 {
 	font-size: 20px;
 }
 
 .joinus .flex-bw {
 	width: 100%;
-	align-items:flex-start;
+	align-items: flex-start;
 	margin-top: 38px;
 }
 
@@ -344,6 +348,48 @@ ul {
 .withdrawModal .btn {
 	height: 49.5px;
 	border-radius: 24.5px;
+}
+
+.loadingModal {
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+	/* justify-content: center;
+	align-items: center; */
+	font-size: 16px;
+}
+
+.modal-content {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	background-color: rgba(0,0,0,.8);
+	padding: 20px;
+	border-radius: 5px;
+	width: 300px;
+	text-align: center;
+}
+.modal-content img{
+	width: 40px;
+	height: 40rpx;
+	animation: spin 2s linear infinite;
+}
+
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 @keyframes slideDown {

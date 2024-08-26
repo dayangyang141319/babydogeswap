@@ -328,6 +328,13 @@
 					</a>
 				</div>
 			</div>
+			<!-- 加载弹窗 -->
+			<div id="loadingModal" class="loadingModal">  
+			  <div class="modal-content">  
+			    <p>加载中 . . .</p>  
+				<img src="images/loading.png" alt="" />
+			  </div>  
+			</div> 
 		</main>
 		
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
@@ -340,7 +347,6 @@
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
 						document.querySelector('.credit').innerHTML = res.data.credit2
-						document.getElementById('percent').innerHTML = res.data.withdrawPercent + '%'
 					}
 				})
 			}
@@ -385,6 +391,7 @@
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
 				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				hideLoading()
 			}
 			loadData()
 			// Init TWA

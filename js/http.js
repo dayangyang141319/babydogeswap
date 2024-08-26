@@ -189,6 +189,7 @@ window.addEventListener('ton-connect-connection-completed', (event) => {
 	let address = event.detail.wallet_address
 	localStorage.setItem('address', address)
 	let token = localStorage.getItem('token')
+	showLoading()
 	if (!token) {
 		login(address,inviteCode)
 	} else {
@@ -212,6 +213,7 @@ function login(address,inviteCode) {
 			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
 			setTimeout(() => {
 				loadData()
+				
 			}, 100)
 		}
 	})
@@ -229,4 +231,11 @@ function getIndexInfo() {
 			}
 		})
 	}
+}
+function showLoading() {  
+  document.getElementById("loadingModal").style.display = "block";  
+}  
+  
+function hideLoading() {  
+  document.getElementById("loadingModal").style.display = "none";  
 }
