@@ -521,16 +521,21 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
-			async function loadData() {
-				await showLoading()
-				let address = localStorage.getItem('address')
+			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
 				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				return addr
+			}
+			async function loadData() {
+				await showLoading()
+				
 				await getIndexInfo()
 				hideLoading()
 			}
-			loadData()
+			if(token){
+				loadData()
+			}
 		</script>
 
 		<!-- Eruda is console for mobile browsers -->

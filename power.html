@@ -329,6 +329,12 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
+			function trsAddress(address) {
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				localStorage.setItem('userAddress', addr)
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				return addr
+			}
 			function getCredit() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
@@ -374,13 +380,12 @@
 				await getIndexInfo()
 				await getCredit()
 				await getRebateList()
-				let address = localStorage.getItem('address')
-				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
-				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				
 				hideLoading()
 			}
-			loadData()
+			if(token){
+				loadData()
+			}
 
 			// Init TWA
 			Telegram.WebApp.ready();

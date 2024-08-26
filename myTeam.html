@@ -46,6 +46,14 @@
 				font-size: 15px;
 			}
 
+			#inviteWrap {
+				width: 100%;
+			}
+
+			.empty {
+				justify-content: center;
+			}
+
 			.teamList {
 				width: 100%;
 				font-size: 12px;
@@ -148,6 +156,13 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
+			function trsAddress(address) {
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				localStorage.setItem('userAddress', addr)
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				return addr
+			}
+
 			function getTeamList() {
 				apiHttp($, "/api/contract/user/getTeamList").then(res => {
 					if (res.code == 1) {
@@ -163,7 +178,7 @@
 						} else {
 							list.forEach(item => {
 								inviteItem += `<div class="flex teamList">
-							<span>${sliceAddress(item.address)}</span>
+							<span>${sliceAddress(item.address.startsWith('0:')?TonConnectSDK.toUserFriendlyAddress(item.address, true):item.address)}</span>
 							<span class="${item.level==1?'green':'yellow'}">${item.level==1?'直推':'间推'}</span>
 						</div>`
 							})
@@ -177,13 +192,12 @@
 				await showLoading()
 				await getIndexInfo()
 				await getTeamList()
-				let address = localStorage.getItem('address')
-				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
-				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+
 				hideLoading()
 			}
-			loadData()
+			if (token) {
+				loadData()
+			}
 		</script>
 
 		<!-- Eruda is console for mobile browsers -->

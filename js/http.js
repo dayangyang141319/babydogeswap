@@ -6,7 +6,7 @@ const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 	manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
 	buttonRootId: 'ton-connect'
 });
-
+let token = localStorage.getItem('token')
 
 function apiHttp($, url, params = {}) {
 	console.log('////////////', params);
@@ -193,9 +193,12 @@ window.addEventListener('ton-connect-connection-completed', (event) => {
 	console.log('inviteCode.........', inviteCode);
 	let address = event.detail.wallet_address
 	localStorage.setItem('address', address)
-	let token = localStorage.getItem('token')
+	let addr = trsAddress(address)
+	
 	if (!token) {
-		login(address, inviteCode)
+		setTimeout(() => {
+			login(addr || address, inviteCode)
+		}, 500)
 	} else {
 		loadData()
 	}
@@ -217,7 +220,6 @@ function login(address, inviteCode) {
 			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
 			setTimeout(() => {
 				loadData()
-
 			}, 100)
 		}
 	})

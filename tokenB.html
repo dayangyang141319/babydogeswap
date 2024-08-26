@@ -429,6 +429,13 @@
 			let withdrawModal = document.getElementById('withdrawModal')
 			let current = 0
 
+			function trsAddress(address) {
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				localStorage.setItem('userAddress', addr)
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				return addr
+			}
+
 			function toWithdraw() {
 				let price = document.getElementById('input').value
 				if (Number(price) <= 0) {
@@ -558,13 +565,12 @@
 				await showLoading()
 				await getIndexInfo()
 				await getAsset()
-				let address = localStorage.getItem('address')
-				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
-				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				
 				hideLoading()
 			}
-			loadData()
+			if(token){
+				loadData()
+			}
 
 			function changeTab(index) {
 				console.log(index);

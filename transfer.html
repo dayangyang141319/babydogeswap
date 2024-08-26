@@ -138,6 +138,11 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
+			function trsAddress(address) {
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				localStorage.setItem('userAddress', addr)
+				return addr
+			}
 			function getCredit() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
@@ -151,7 +156,9 @@
 				await getCredit()
 				hideLoading()
 			}
-			loadData()
+			if(token){
+				loadData()
+			}
 
 			function toTransfer() {
 				let address = document.getElementById('address').value

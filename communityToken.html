@@ -239,15 +239,17 @@
 			let input = document.getElementById('price')
 			let usdtPrice = 1
 
+			function trsAddress(address) {
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				localStorage.setItem('userAddress', addr)
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				return addr
+			}
 			async function loadData() {
 				await showLoading()
 				await getIndexInfo()
 				await getRule()
 				await getInfo()
-				let address = localStorage.getItem('address')
-				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
-				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 				hideLoading()
 			}
 
@@ -261,7 +263,7 @@
 			}
 
 			function updateValue() {
-				document.getElementById('tokenA').value = (input.value * usdtPrice).toFixed(2)
+				document.getElementById('tokenA').value = (input.value * usdtPrice).toFixed(6)
 			}
 
 			function toExchange() {
@@ -288,7 +290,9 @@
 					}
 				})
 			}
-			loadData()
+			if(token){
+				loadData()
+			}
 		</script>
 
 		<!-- Eruda is console for mobile browsers -->

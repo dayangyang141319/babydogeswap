@@ -247,6 +247,13 @@
 			let inviteModal = document.getElementById('inviteModal')
 			let posterUrl = ''
 
+			function trsAddress(address) {
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				localStorage.setItem('userAddress', addr)
+				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				return addr
+			}
+
 			function getInfo() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
@@ -270,13 +277,12 @@
 				await showLoading()
 				await getIndexInfo()
 				await getInfo()
-				let address = localStorage.getItem('address')
-				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
-				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				
 				hideLoading()
 			}
-			loadData()
+			if(token){
+				loadData()
+			}
 			// 点击模态框外部时，也关闭它
 			window.onclick = function(event) {
 				console.log('window.onclick10011111111111111');
