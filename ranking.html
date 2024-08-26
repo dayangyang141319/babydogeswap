@@ -191,7 +191,9 @@
 						document.querySelectorAll('.avatar').forEach(item => {
 							item.src = res.data.avatar
 						})
-						document.getElementById('myName').innerHTML = res.data.nickname
+						document.getElementById('myName').innerHTML = sliceAddress(res.data.user.address.startsWith(
+							'0:') ? TonConnectSDK.toUserFriendlyAddress(res.data.user.address, true) : res.data.user
+							.address)
 						document.getElementById('mySign').innerHTML = res.data.user.sign
 						document.getElementById('myRank').innerHTML = res.data.ranking
 						let rankList = document.getElementById('rankList')
@@ -202,7 +204,7 @@
 									<div class="flex">
 										<img class="logo avatar" src="${res.data.avatar}" alt="" />
 										<div class="flex1">
-											<span id="">${sliceAddress(item.address)}</span>
+											<span id="">${sliceAddress(item.address.startsWith('0:')?TonConnectSDK.toUserFriendlyAddress(item.address, true):item.address)}</span>
 											<div class="flex">
 												<span class="mainColor">${item.sign}</span>
 												<span class="fs-12">代币A</span>
@@ -216,7 +218,7 @@
 									<div class="flex">
 										<img class="logo avatar" src="${res.data.avatar}" alt="" />
 										<div class="flex1">
-											<span id="">${sliceAddress(item.address)}</span>
+											<span id="">${sliceAddress(item.address.startsWith('0:')?TonConnectSDK.toUserFriendlyAddress(item.address, true):item.address)}</span>
 											<div class="flex">
 												<span class="mainColor">${item.sign}</span>
 												<span class="fs-12">代币A</span>
