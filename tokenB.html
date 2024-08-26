@@ -411,6 +411,12 @@
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
+			<!-- 提示弹窗 -->
+			<div id="toastModal" class="toastModal">
+				<div class="modal-content">
+					<p id="toastMsg"></p>
+				</div>
+			</div>
 		</main>
 
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
@@ -426,14 +432,14 @@
 			function toWithdraw() {
 				let price = document.getElementById('input').value
 				if (Number(price) <= 0) {
-					return alert('请输入提取数量')
+					return toast('请输入提取数量')
 				}
 				apiHttp($, "/api/contract/withdraw/index", {
 					price: price,
 					credittype: 'credit3'
 				}).then(res => {
 					if (res.code == 1) {
-						alert(res.msg)
+						toast(res.msg)
 						document.getElementById('input').value = ''
 						withdrawModal.style.animation = "slideUp 0.4s forwards"; // 应用上滑动画
 						// moreModal.classList.remove('active')

@@ -173,8 +173,13 @@ function formatTimestamp(timestamp, type) {
 }
 
 function toast(msg) {
-	alert(msg)
+	// alert(msg)
 	// Telegra.WebApp.showAlert(msg)
+	document.getElementById("toastModal").style.display = "block";
+	document.getElementById("toastMsg").innerHTML = msg
+	setTimeout(() => {
+		document.getElementById("toastModal").style.display = "none";
+	}, 1000)
 }
 
 function copy() {
@@ -185,12 +190,12 @@ function copy() {
 window.addEventListener('ton-connect-connection-completed', (event) => {
 	console.log('Transaction init==============', event.detail.wallet_address);
 	let inviteCode = extractInviteCode(location.href)
-	console.log('inviteCode.........',inviteCode);
+	console.log('inviteCode.........', inviteCode);
 	let address = event.detail.wallet_address
 	localStorage.setItem('address', address)
 	let token = localStorage.getItem('token')
 	if (!token) {
-		login(address,inviteCode)
+		login(address, inviteCode)
 	} else {
 		loadData()
 	}
@@ -201,10 +206,10 @@ window.addEventListener('ton-connect-disconnection', (event) => {
 
 });
 
-function login(address,inviteCode) {
+function login(address, inviteCode) {
 	apiHttp($, "/api/contract/auth/login", {
 		address: address,
-		inviteCode:inviteCode || ''
+		inviteCode: inviteCode || ''
 	}).then(res => {
 		console.log(res);
 		if (res.code == 1) {
@@ -212,7 +217,7 @@ function login(address,inviteCode) {
 			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
 			setTimeout(() => {
 				loadData()
-				
+
 			}, 100)
 		}
 	})
@@ -231,10 +236,11 @@ function getIndexInfo() {
 		})
 	}
 }
-function showLoading() {  
-  document.getElementById("loadingModal").style.display = "block";  
-}  
-  
-function hideLoading() {  
-  document.getElementById("loadingModal").style.display = "none";  
+
+function showLoading() {
+	document.getElementById("loadingModal").style.display = "block";
+}
+
+function hideLoading() {
+	document.getElementById("loadingModal").style.display = "none";
 }

@@ -478,6 +478,12 @@
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
+			<!-- 提示弹窗 -->
+			<div id="toastModal" class="toastModal">
+				<div class="modal-content">
+					<p id="toastMsg"></p>
+				</div>
+			</div>
 		</main>
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -492,13 +498,13 @@
 
 			function createBurn() {
 				if (Number(myInput.value) <= 0) {
-					return alert('请输入提取数量')
+					return toast('请输入提取数量')
 				}
 				apiHttp($, "/api/contract/burn/createBurn", {
 					price: myInput.value,
 				}).then(res => {
 					if (res.code == 1) {
-						alert(res.msg)
+						toast(res.msg)
 						myInput.value = ''
 						getBurn()
 					}
