@@ -143,6 +143,7 @@
 				localStorage.setItem('userAddress', addr)
 				return addr
 			}
+
 			function getCredit() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
@@ -156,9 +157,7 @@
 				await getCredit()
 				hideLoading()
 			}
-			if(token){
-				loadData()
-			}
+			loadData()
 
 			function toTransfer() {
 				let address = document.getElementById('address').value

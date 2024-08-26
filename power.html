@@ -87,6 +87,11 @@
 				text-align: center;
 			}
 
+			.recordWrap .red {
+				color: #FF0000;
+				text-align: center;
+			}
+
 			.empty {
 				justify-content: center;
 			}
@@ -335,6 +340,7 @@
 				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 				return addr
 			}
+
 			function getCredit() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
@@ -362,7 +368,7 @@
 							list.forEach(item => {
 								recordItem += `<div class="flex">
 								<span>${typesInfo[item.types]}</span>
-								<span class="green">+${item.price}</span>
+								<span class="${Number(item.price) < 0?'red':'green'}">${Number(item.price) < 0 ?item.price:'+'+item.price}</span>
 								<div class="flex1">
 									<span>${formatTimestamp(item.createtime,'date')}</span>
 									<span>${formatTimestamp(item.createtime,'time')}</span>
@@ -380,10 +386,10 @@
 				await getIndexInfo()
 				await getCredit()
 				await getRebateList()
-				
+
 				hideLoading()
 			}
-			if(token){
+			if (token) {
 				loadData()
 			}
 
