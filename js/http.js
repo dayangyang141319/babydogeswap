@@ -1,6 +1,7 @@
 const baseUrl = 'https://ton.hnbangyao.net'
 let token = localStorage.getItem('token') || ''
-let baseLang = 'cn'
+let baseLang = localStorage.getItem('lang') || 'CN'
+$('#setLang').text(baseLang)
 const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 	manifestUrl: 'https://dayangyang141319.github.io/babydogeswap/tonconnect-manifest.json',
 	buttonRootId: 'ton-connect'
@@ -252,15 +253,53 @@ function showLoading() {
 function hideLoading() {
 	document.getElementById("loadingModal").style.display = "none";
 }
-document.getElementById('setLang').addEventListener('click', () => {
-	let lang = $('#setLang').text()
-	console.log(lang);
-	if (lang == 'CN') {
-		baseLang = 'en'
-		$('#setLang').text('EN')
+let setLang = document.getElementById('setLang')
+if (setLang) {
+	setLang.addEventListener('click', () => {
+		let lang = $('#setLang').text()
+		console.log(lang);
+		if (lang == 'CN') {
+			baseLang = 'EN'
+		} else {
+			baseLang = 'CN'
+		}
+		$('#setLang').text(baseLang)
+		localStorage.setItem('lang', baseLang)
+		location.reload()
+	})
+}
+
+function loadFooterText() {
+	if (baseLang == 'EN') {
+		$('#joinus') && $('#joinus').html('Join our community')
+		$('#joinText1') && $('#joinText1').html('explore')
+		$('#joinText2') && $('#joinText2').html('user')
+		$('#joinText3') && $('#joinText3').html('develop')
+		$('#tabbarText1') && $('#tabbarText1').html('transaction')
+		$('#tabbarText2') && $('#tabbarText2').html('pond')
+		$('#tabbarText3') && $('#tabbarText3').html('Destruction')
+		$('#tabbarText4') && $('#tabbarText4').html('bridge')
+		$('#tabbarText5') && $('#tabbarText5').html('Community token')
+		$('#moreText1') && $('#moreText1').html('address ')
+		$('#moreText2') && $('#moreText2').html('home page')
+		$('#moreText3') && $('#moreText3').html('My assets')
+		$('#moreText4') && $('#moreText4').html('the charts')
+		$('#moreText5') && $('#moreText5').html('invite')
 	} else {
-		baseLang = 'cn'
-		$('#setLang').text('CN')
+		$('#joinus') && $('#joinus').html('加入我们的社区')
+		$('#joinText1') && $('#joinText1').html('探索')
+		$('#joinText2') && $('#joinText2').html('用户')
+		$('#joinText3') && $('#joinText3').html('开发')
+		$('#tabbarText1') && $('#tabbarText1').html('交易')
+		$('#tabbarText2') && $('#tabbarText2').html('池子')
+		$('#tabbarText3') && $('#tabbarText3').html('销毁')
+		$('#tabbarText4') && $('#tabbarText4').html('跨链桥')
+		$('#tabbarText5') && $('#tabbarText5').html('社区代币')
+		$('#moreText1') && $('#moreText1').html('钱包地址')
+		$('#moreText2') && $('#moreText2').html('首页')
+		$('#moreText3') && $('#moreText3').html('我的资产')
+		$('#moreText4') && $('#moreText4').html('排行榜')
+		$('#moreText5') && $('#moreText5').html('邀请')
+
 	}
-	location.reload()
-})
+}

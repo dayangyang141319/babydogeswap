@@ -255,7 +255,7 @@ ul {
 }
 
 .moreModal {
-	width: 194px;
+	min-width: 194px;
 	height: 100vh;
 	background: #161616;
 	border-radius: 20px 20px 20px 0px;
@@ -271,7 +271,7 @@ ul {
 }
 
 .moreModal .walletBtn {
-	width: 171.5px;
+	min-width: 171.5px;
 	height: 34px;
 	background: #ec502c;
 	border-radius: 17px;
@@ -291,7 +291,9 @@ ul {
 	font-size: 13px;
 	margin-bottom: 20px;
 }
-
+#walletAddress{
+	margin-left: 8px;
+}
 .moreModal .flex-bw img {
 	width: 13px;
 	height: 13px;
