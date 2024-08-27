@@ -194,7 +194,7 @@ window.addEventListener('ton-connect-connection-completed', (event) => {
 	let address = event.detail.wallet_address
 	localStorage.setItem('address', address)
 	let addr = trsAddress(address)
-	
+
 	if (!token) {
 		setTimeout(() => {
 			login(addr || address, inviteCode)

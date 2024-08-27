@@ -408,17 +408,19 @@
 				</div>
 			</div>
 		</main>
+		
 		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script src="./js/http.js"></script>
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
 		<script>
-			console.log(789, location.href);
+			
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				// $('#walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
 			}
 			async function loadData() {
