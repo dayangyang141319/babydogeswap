@@ -150,15 +150,15 @@
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
 			}
 			function getAsset() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
-						document.getElementById('credit1').innerHTML = res.data.credit1
-						document.getElementById('credit2').innerHTML = res.data.credit2
-						document.getElementById('credit3').innerHTML = res.data.credit3
+						$('#credit1').text(res.data.credit1)
+						$('#credit2').text(res.data.credit2)
+						$('#credit3').text(res.data.credit3)
 					}
 				})
 			}

@@ -432,7 +432,7 @@
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
 			}
 

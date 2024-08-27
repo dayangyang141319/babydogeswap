@@ -108,6 +108,9 @@
 			#title {
 				font-size: 17px;
 			}
+			#usdtPrice{
+				margin-right: 5px;;
+			}
 		</style>
 	</head>
 
@@ -242,7 +245,7 @@
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
 			}
 			async function loadData() {
@@ -257,7 +260,7 @@
 				apiHttp($, "/api/contract/exchange/index").then(res => {
 					if (res.code == 1) {
 						usdtPrice = res.data.usdtPrice
-						document.getElementById('usdtPrice').innerHTML = usdtPrice
+						$('#usdtPrice').text(usdtPrice)
 					}
 				})
 			}
@@ -285,8 +288,8 @@
 			function getRule() {
 				apiHttp($, "/api/contract/auth/getRule").then(res => {
 					if (res.code == 1) {
-						document.getElementById('title').innerHTML = res.data.title
-						document.getElementById('cont').innerHTML = res.data.info
+						$('#title').html(res.data.title)
+						$('#cont').html(res.data.info)
 					}
 				})
 			}

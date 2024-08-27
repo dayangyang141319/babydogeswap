@@ -147,7 +147,7 @@
 			function getCredit() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
-						document.getElementById('credit4').innerHTML = res.data.credit4
+						$('#credit4').text(res.data.credit4)
 					}
 				})
 			}

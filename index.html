@@ -408,14 +408,7 @@
 				</div>
 			</div>
 		</main>
-		
-		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-		<script src="./js/http.js"></script>
-		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-		<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
 		<script>
-			
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
@@ -423,6 +416,15 @@
 				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
 			}
+		</script>
+		<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<script src="./js/http.js"></script>
+		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+		<!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
+		<script>
+			
+			
 			async function loadData() {
 				await showLoading()
 				await getSign()
@@ -437,7 +439,7 @@
 						if (res.data.sign == 0) {
 							// 签到弹窗显示
 							popup1.style.display = 'flex';
-							document.getElementById('signPrice').innerHTML = res.data.price
+							$('#signPrice').text(res.data.price)
 							toReceive()
 						}
 					}

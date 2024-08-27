@@ -337,14 +337,14 @@
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
 			}
 
 			function getCredit() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
-						document.getElementById('userCredit4').innerHTML = res.data.credit4
+						$('#userCredit4').text(res.data.credit4)
 					}
 				})
 			}

@@ -499,7 +499,7 @@
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
-				document.getElementById('walletAddress').innerHTML = sliceAddress(addr, 4, 4)
+				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
 			}
 
@@ -522,16 +522,16 @@
 				apiHttp($, "/api/contract/burn/index").then(res => {
 					if (res.code == 1) {
 						let inputValue = myInput.value || 0;
-						document.getElementById('count').innerHTML = res.data.count
-						document.getElementById('userPrice').innerHTML = res.data.userPrice
-						document.getElementById('bei').innerHTML = res.data.bei
-						document.getElementById('dayCount').innerHTML = res.data.dayCount
-						document.getElementById('tokenB').innerHTML = res.data.dayCount
-						document.getElementById('countCredit4').innerHTML = res.data.countCredit4
-						document.getElementById('userCredit4').innerHTML = res.data.userCredit4
-						document.getElementById('inputNum').textContent = 0;
-						document.getElementById('tokenA').innerHTML = 0
-						document.getElementById('power').innerHTML = 0
+						$('#count').text(res.data.count)
+						$('#userPrice').text(res.data.userPrice)
+						$('#bei').text(res.data.bei)
+						$('#dayCount').text(res.data.dayCount)
+						$('#tokenB').text(res.data.dayCount)
+						$('#countCredit4').text(res.data.countCredit4)
+						$('#userCredit4').text(res.data.userCredit4)
+						$('#inputNum').text(0)
+						$('#tokenA').text(0)
+						$('#power').text(0)
 						percent = res.data.percent
 						linePrice = res.data.linePrice
 						bei = res.data.bei

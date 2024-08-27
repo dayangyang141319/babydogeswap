@@ -1,22 +1,26 @@
 const baseUrl = 'https://ton.hnbangyao.net'
-var tokenToken = { // 要发送给后端的数据
-	'token': localStorage.getItem('token') || '',
-}
+let token = localStorage.getItem('token') || ''
+
 const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 	manifestUrl: 'https://dayangyang141319.github.io/babydogeswap/tonconnect-manifest.json',
 	buttonRootId: 'ton-connect'
 });
-let token = localStorage.getItem('token')
+
+function updateToken() {
+	var tokenPramas = { // 要发送给后端的数据
+		'token': token,
+	}
+	return tokenPramas
+}
 
 function apiHttp($, url, params = {}) {
-	console.log('////////////', params);
-	// console.log(Object.assign(tokenToken,params));
+	let tokenPramas = updateToken()
 	return new Promise((resolve, reject) => {
 		$.ajax({
 			url: baseUrl + url,
 			dataType: "jsonp",
 			jsonp: 'callback',
-			data: Object.assign(tokenToken, params),
+			data: Object.assign(tokenPramas, params),
 			success: (res) => {
 				resolve(res)
 				if (res.code != 1) {
@@ -216,6 +220,8 @@ function login(address, inviteCode) {
 	}).then(res => {
 		console.log(res);
 		if (res.code == 1) {
+			token = res.data.userInfo.token
+			updateToken(token)
 			localStorage.setItem('token', res.data.userInfo.token)
 			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
 			setTimeout(() => {
