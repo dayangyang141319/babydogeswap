@@ -1,6 +1,6 @@
 const baseUrl = 'https://ton.hnbangyao.net'
 let token = localStorage.getItem('token') || ''
-
+let baseLang = 'cn'
 const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 	manifestUrl: 'https://dayangyang141319.github.io/babydogeswap/tonconnect-manifest.json',
 	buttonRootId: 'ton-connect'
@@ -252,3 +252,15 @@ function showLoading() {
 function hideLoading() {
 	document.getElementById("loadingModal").style.display = "none";
 }
+document.getElementById('setLang').addEventListener('click', () => {
+	let lang = $('#setLang').text()
+	console.log(lang);
+	if (lang == 'CN') {
+		baseLang = 'en'
+		$('#setLang').text('EN')
+	} else {
+		baseLang = 'cn'
+		$('#setLang').text('CN')
+	}
+	location.reload()
+})

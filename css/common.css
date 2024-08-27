@@ -180,8 +180,12 @@ ul {
 	background-color: transparent !important;
 }
 
-.topNav .notBind button {
+.topNav .flex span {
+	margin-right: 10px;
+}
 
+.topNav .notBind button {
+	min-width: 82.5px !important;
 	width: 82.5px !important;
 	height: 26.5px !important;
 	border: none !important;
@@ -380,6 +384,7 @@ ul {
 	width: 40px;
 	height: 40rpx;
 }
+
 .loadingModal .modal-content img {
 	animation: spin 2s linear infinite;
 }
