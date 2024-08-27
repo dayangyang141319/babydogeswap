@@ -3,7 +3,7 @@ var tokenToken = { // 要发送给后端的数据
 	'token': localStorage.getItem('token') || '',
 }
 const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-	manifestUrl: 'https://slinadan.github.io/babySwap/tonconnect-manifest.json',
+	manifestUrl: 'https://dayangyang141319.github.io/babySwap/tonconnect-manifest.json',
 	buttonRootId: 'ton-connect'
 });
 let token = localStorage.getItem('token')
