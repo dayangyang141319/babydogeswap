@@ -256,16 +256,16 @@ function hideLoading() {
 let setLang = document.getElementById('setLang')
 if (setLang) {
 	setLang.addEventListener('click', () => {
-		let lang = $('#setLang').text()
-		console.log(lang);
-		if (lang == 'CN') {
-			baseLang = 'EN'
-		} else {
-			baseLang = 'CN'
-		}
-		$('#setLang').text(baseLang)
-		localStorage.setItem('lang', baseLang)
-		location.reload()
+		// let lang = $('#setLang').text()
+		// console.log(lang);
+		// if (lang == 'CN') {
+		// 	baseLang = 'EN'
+		// } else {
+		// 	baseLang = 'CN'
+		// }
+		// $('#setLang').text(baseLang)
+		// localStorage.setItem('lang', baseLang)
+		// location.reload()
 	})
 }
 
@@ -280,7 +280,7 @@ function loadFooterText() {
 		$('#tabbarText3') && $('#tabbarText3').html('Destruction')
 		$('#tabbarText4') && $('#tabbarText4').html('bridge')
 		$('#tabbarText5') && $('#tabbarText5').html('Community token')
-		$('#moreText1') && $('#moreText1').html('address ')
+		$('#moreText1') && $('#moreText1').html('address:')
 		$('#moreText2') && $('#moreText2').html('home page')
 		$('#moreText3') && $('#moreText3').html('My assets')
 		$('#moreText4') && $('#moreText4').html('the charts')
@@ -295,7 +295,7 @@ function loadFooterText() {
 		$('#tabbarText3') && $('#tabbarText3').html('销毁')
 		$('#tabbarText4') && $('#tabbarText4').html('跨链桥')
 		$('#tabbarText5') && $('#tabbarText5').html('社区代币')
-		$('#moreText1') && $('#moreText1').html('钱包地址')
+		$('#moreText1') && $('#moreText1').html('钱包地址:')
 		$('#moreText2') && $('#moreText2').html('首页')
 		$('#moreText3') && $('#moreText3').html('我的资产')
 		$('#moreText4') && $('#moreText4').html('排行榜')
