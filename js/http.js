@@ -211,7 +211,7 @@ window.addEventListener('ton-connect-connection-completed', (event) => {
 window.addEventListener('ton-connect-disconnection', (event) => {
 	console.log('断开连接！！！！！！！', event.detail.wallet_address);
 	localStorage.clear()
-
+	token = ''
 });
 
 function login(address, inviteCode) {
@@ -255,18 +255,18 @@ function hideLoading() {
 }
 let setLang = document.getElementById('setLang')
 if (setLang) {
-	setLang.addEventListener('click', () => {
-		// let lang = $('#setLang').text()
-		// console.log(lang);
-		// if (lang == 'CN') {
-		// 	baseLang = 'EN'
-		// } else {
-		// 	baseLang = 'CN'
-		// }
-		// $('#setLang').text(baseLang)
-		// localStorage.setItem('lang', baseLang)
-		// location.reload()
-	})
+	// setLang.addEventListener('click', () => {
+	// 	let lang = $('#setLang').text()
+	// 	console.log(lang);
+	// 	if (lang == 'CN') {
+	// 		baseLang = 'EN'
+	// 	} else {
+	// 		baseLang = 'CN'
+	// 	}
+	// 	$('#setLang').text(baseLang)
+	// 	localStorage.setItem('lang', baseLang)
+	// 	location.reload()
+	// })
 }
 
 function loadFooterText() {
@@ -285,6 +285,8 @@ function loadFooterText() {
 		$('#moreText3') && $('#moreText3').html('My assets')
 		$('#moreText4') && $('#moreText4').html('the charts')
 		$('#moreText5') && $('#moreText5').html('invite')
+		$('#loadText') && $('#loadText').html('loading')
+
 	} else {
 		$('#joinus') && $('#joinus').html('加入我们的社区')
 		$('#joinText1') && $('#joinText1').html('探索')
@@ -300,6 +302,7 @@ function loadFooterText() {
 		$('#moreText3') && $('#moreText3').html('我的资产')
 		$('#moreText4') && $('#moreText4').html('排行榜')
 		$('#moreText5') && $('#moreText5').html('邀请')
+		$('#loadText') && $('#loadText').html('加载中')
 
 	}
 }
