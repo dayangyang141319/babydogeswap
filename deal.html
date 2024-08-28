@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-
+		<link rel="shortcut icon" href="favicon.ico">
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -387,7 +387,7 @@
 				</div>
 			</div>
 			<div class="flex-bw dealTitle">
-				<span class="fs-20" id="">交易</span>
+				<span class="fs-20" id="dealText1">交易</span>
 				<div id="">
 					<img class="refresh" onclick="toRefresh()" id="refresh" src="./images/refresh.png" alt="">
 					<img class="set" onclick="showSet()" src="./images/set.png" alt="">
@@ -396,7 +396,7 @@
 			<div class="flex1 flexCenter">
 				<div class="dealWrap">
 					<div class="flex-bw token">
-						<span id="">从</span>
+						<span id="dealText2">从</span>
 						<div class="flex" onclick="showPopup()">
 							<img class="logo" src="./images/eth.png" alt="">
 							<span id="">TON</span>
@@ -411,7 +411,7 @@
 				<img class="exchangeImg" src="./images/exchange.png" alt="" />
 				<div class="dealWrap">
 					<div class="flex-bw token">
-						<span id="">至</span>
+						<span id="dealText3">至</span>
 						<div class="flex" onclick="showPopup()">
 							<img class="logo" src="./images/usdt.png" alt="">
 							<span id="">Lon</span>
@@ -424,26 +424,26 @@
 					</div>
 				</div>
 				<span class="computed">1Ton≈1Lon</span>
-				<div class="btn">兑换</div>
+				<div class="btn" id="dealText4">兑换</div>
 			</div>
 			<!-- 设置弹窗 -->
 			<div class="popup setPopup" id="setPopup">
 				<div class="flex1 setModal" id="setModal">
-					<span class="title">高级设置</span>
-					<div class="fs-18">滑移</div>
-					<div class="tip">如果价格不利变化超过该百分比，您的交易将会撤销。</div>
+					<span class="title" id="dealText5">高级设置</span>
+					<div class="fs-18" id="dealText6">滑移</div>
+					<div class="tip" id="dealText7">如果价格不利变化超过该百分比，您的交易将会撤销。</div>
 					<div class="flex-bw">
 						<div class="flex">1%</div>
 						<div class="flex">5%</div>
 						<div class="flex">10%</div>
 					</div>
-					<div class="btn">保存</div>
+					<div class="btn" id="dealText8">保存</div>
 				</div>
 			</div>
 			<!-- 选择资产弹窗 -->
 			<div class="popup assetPopup" id="assetPopup">
 				<div class="flex1 assetModal" id="assetModal">
-					<span class="title">选择资产</span>
+					<span class="title" id="dealText9">选择资产</span>
 					<div class="listWrap">
 						<div class="flex-bw">
 							<div class="flex">
@@ -611,9 +611,10 @@
 			async function loadData() {
 				await showLoading()
 				await getIndexInfo()
+				reloadText()
 				hideLoading()
 			}
-			if(token){
+			if (token) {
 				loadData()
 			}
 			let assetPopup = document.getElementById('assetPopup')
@@ -664,6 +665,30 @@
 				setModal.style.animation = "slideDown 0.4s forwards"; // 应用下滑动画  
 			}
 
+			function reloadText() {
+				if (baseLang == 'EN') {
+					$('#dealText1').html('transaction')
+					$('#dealText2').html('from')
+					$('#dealText3').html('to')
+					$('#dealText4').html('exchange')
+					$('#dealText5').html('advanced setting')
+					$('#dealText6').html('drift')
+					$('#dealText7').html(
+						'If the unfavorable price change exceeds this percentage, your transaction will be cancelled.')
+					$('#dealText8').html('save')
+					$('#dealText9').html('Select assets')
+				} else {
+					$('#dealText1').html('交易')
+					$('#dealText2').html('从')
+					$('#dealText3').html('至')
+					$('#dealText4').html('兑换')
+					$('#dealText5').html('高级设置')
+					$('#dealText6').html('滑移')
+					$('#dealText7').html('如果价格不利变化超过该百分比，您的交易将会撤销。')
+					$('#dealText8').html('保存')
+					$('#dealText9').html('选择资产')
+				}
+			}
 			// 点击模态框外部时，也关闭它  
 			window.onclick = function(event) {
 				if (event.target == popup) {

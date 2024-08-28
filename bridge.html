@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-
+		<link rel="shortcut icon" href="favicon.ico">
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -242,7 +242,7 @@
 			<div class="flex1 flexCenter">
 				<div class="dealWrap mb-34">
 					<div class="flex-bw token">
-						<span   id="bridgeText2">资产</span>
+						<span id="bridgeText2">资产</span>
 						<div class="flex">
 							<img class="logo" src="./images/eth.png" alt="">
 							<span id="">ton</span>
@@ -255,7 +255,7 @@
 				</div>
 				<div class="dealWrap mb-137">
 					<div class="flex-bw token">
-						<span  id="bridgeText3">你收到的</span>
+						<span id="bridgeText3">你收到的</span>
 						<div class="flex">
 							<img class="logo" src="./images/eth.png" alt="">
 							<span id="">wton</span>
@@ -308,7 +308,7 @@
 					<span id="tabbarText5">社区代币</span>
 				</a>
 			</div>
-			
+
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
@@ -341,7 +341,7 @@
 			<!-- 加载弹窗 -->
 			<div id="loadingModal" class="loadingModal">
 				<div class="modal-content">
-					<p  id="loadText">加载中 . . .</p>
+					<p id="loadText">加载中 . . .</p>
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
@@ -368,13 +368,14 @@
 			async function loadData() {
 				await showLoading()
 				await getIndexInfo()
-				reloadText() 
+				reloadText()
 				loadFooterText()
 				hideLoading()
 			}
-			if(token){
+			if (token) {
 				loadData()
 			}
+
 			function reloadText() {
 				if (baseLang == 'EN') {
 					$('#bridgeText1').html('bridge')
@@ -408,7 +409,7 @@
 			});
 
 
-			
+
 
 
 

@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-
+		<link rel="shortcut icon" href="favicon.ico">
 		<style>
 			body {
 				position: relative;
@@ -205,6 +205,7 @@
 				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
 			}
+
 			function getRanking() {
 				apiHttp($, "/api/contract/sign/getRanking").then(res => {
 					if (res.code == 1) {
@@ -260,10 +261,10 @@
 				await showLoading()
 				await getIndexInfo()
 				await getRanking()
-				
+
 				hideLoading()
 			}
-			if(token){
+			if (token) {
 				loadData()
 			}
 		</script>

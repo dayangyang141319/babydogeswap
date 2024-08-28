@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-
+		<link rel="shortcut icon" href="favicon.ico">
 		<style>
 			body {
 				padding: 0;
@@ -264,8 +264,14 @@
 			}
 
 			function toCopy() {
-				navigator.clipboard.writeText(posterUrl)
-				toast('复制成功')
+				console.log('posterUrl',posterUrl);
+				if(posterUrl){
+					navigator.clipboard.writeText(posterUrl)
+					toast('复制成功')
+				}
+				if(!token){
+					toast('请先连接钱包')
+				}
 			}
 
 			function showPopup() {
@@ -278,10 +284,10 @@
 				await showLoading()
 				await getIndexInfo()
 				await getInfo()
-				
+
 				hideLoading()
 			}
-			if(token){
+			if (token) {
 				loadData()
 			}
 			// 点击模态框外部时，也关闭它

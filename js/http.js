@@ -1,4 +1,4 @@
-const baseUrl = 'https://ton.hnbangyao.net'
+const baseUrl = 'https://ton.babysdogeswap.net'
 let token = localStorage.getItem('token') || ''
 let baseLang = localStorage.getItem('lang') || 'CN'
 $('#setLang').text(baseLang)
@@ -222,7 +222,7 @@ function login(address, inviteCode) {
 		console.log(res);
 		if (res.code == 1) {
 			token = res.data.userInfo.token
-			updateToken(token)
+			updateToken()
 			localStorage.setItem('token', res.data.userInfo.token)
 			localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
 			setTimeout(() => {

@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-
+		<link rel="shortcut icon" href="favicon.ico">
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -147,13 +147,13 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
-			
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
 				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
 			}
+
 			function getAsset() {
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
@@ -168,10 +168,10 @@
 				await showLoading()
 				await getIndexInfo()
 				await getAsset()
-				
+
 				hideLoading()
 			}
-			if(token){
+			if (token) {
 				loadData()
 			}
 		</script>

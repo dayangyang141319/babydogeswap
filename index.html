@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title>babydogeswap</title>
 		<link rel="stylesheet" href="./css/common.css" />
-
+		<link rel="shortcut icon" href="favicon.ico">
 		<style>
 			body {
 				padding-bottom: 90px;
@@ -397,7 +397,7 @@
 			<!-- 加载弹窗 -->
 			<div id="loadingModal" class="loadingModal">
 				<div class="modal-content">
-					<p  id="loadText">加载中 . . .</p>
+					<p id="loadText">加载中 . . .</p>
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
@@ -415,10 +415,10 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script>
 			function trsAddress(address) {
-				let addr = TonConnectSDK.toUserFriendlyAddress(address,true)
+				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
-				console.log('addr1111111',TonConnectSDK.toUserFriendlyAddress(address));
-				console.log('addr222222',TonConnectSDK.toUserFriendlyAddress(address,true));
+				console.log('addr1111111', TonConnectSDK.toUserFriendlyAddress(address));
+				console.log('addr222222', TonConnectSDK.toUserFriendlyAddress(address, true));
 				// $('#walletAddress').innerHTML = sliceAddress(addr, 4, 4)
 				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr
