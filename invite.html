@@ -246,7 +246,7 @@
 		<script>
 			let invitePopup = document.getElementById('invitePopup')
 			let inviteModal = document.getElementById('inviteModal')
-			let posterUrl = ''
+			let posterUrl = localStorage.getItem('posterUrl') || ''
 
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
@@ -259,18 +259,16 @@
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
 						posterUrl = res.data.posterUrl
+						localStorage.setItem('posterUrl', posterUrl)
 					}
 				})
 			}
 
 			function toCopy() {
-				console.log('posterUrl',posterUrl);
-				if(posterUrl){
+				console.log('posterUrl', posterUrl);
+				if (posterUrl) {
 					navigator.clipboard.writeText(posterUrl)
 					toast('复制成功')
-				}
-				if(!token){
-					toast('请先连接钱包')
 				}
 			}
 
@@ -283,7 +281,9 @@
 			async function loadData() {
 				await showLoading()
 				await getIndexInfo()
-				await getInfo()
+				if (!posterUrl) {
+					getInfo()
+				}
 
 				hideLoading()
 			}
