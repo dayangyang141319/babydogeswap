@@ -10,7 +10,7 @@ const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 function updateToken() {
 	var tokenPramas = { // 要发送给后端的数据
 		'token': token,
-		lang:baseLang=='EN'?'en':'zh-cn'
+		lang: baseLang == 'EN' ? 'en' : 'zh-cn'
 	}
 	return tokenPramas
 }
@@ -267,16 +267,12 @@ function login(address, inviteCode) {
 
 function getIndexInfo() {
 	let data = localStorage.getItem('twaInfo')
-	// if (data) {
-	// 	setFooter(JSON.parse(data))
-	// } else {
-		apiHttp($, "/api/contract/index/index").then(res => {
-			if (res.code == 1) {
-				localStorage.setItem('twaInfo', JSON.stringify(res.data))
-				setFooter(res.data)
-			}
-		})
-	// }
+	apiHttp($, "/api/contract/index/index").then(res => {
+		if (res.code == 1) {
+			localStorage.setItem('twaInfo', JSON.stringify(res.data))
+			setFooter(res.data)
+		}
+	})
 }
 
 function showLoading() {
