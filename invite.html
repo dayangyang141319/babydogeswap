@@ -115,7 +115,7 @@
 
 			.inviteModal {
 				width: 374.5px;
-				height: 242px;
+				min-height: 242px;
 				background: #161616;
 				border-radius: 20px 20px 0 0;
 				align-items: center;
@@ -163,6 +163,12 @@
 				color: #EC502C;
 				background-color: #161616;
 			}
+			#link{
+				color: #fff;
+				word-break: break-all;
+				padding: 0 10px;
+				text-align: center;
+			}
 		</style>
 	</head>
 
@@ -191,6 +197,7 @@
 			<div class="popup invitePopup" id="invitePopup">
 				<div class="flex1 inviteModal" id="inviteModal">
 					<span>邀请好友</span>
+					<div class="btn btn1" id="link"></div>
 					<div class="btn btn1" onclick="toCopy()">复制邀请链接</div>
 					<div class="btn">分享邀请链接</div>
 				</div>
@@ -259,6 +266,7 @@
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
 						posterUrl = res.data.posterUrl
+						$('#link').text(posterUrl)
 						localStorage.setItem('posterUrl', posterUrl)
 					}
 				})
@@ -283,6 +291,8 @@
 				await getIndexInfo()
 				if (!posterUrl) {
 					getInfo()
+				} else {
+					$('#link').text(posterUrl)
 				}
 
 				hideLoading()
