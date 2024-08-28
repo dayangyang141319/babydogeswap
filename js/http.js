@@ -187,10 +187,42 @@ function toast(msg) {
 	}, 1000)
 }
 
-function copy() {
+async function copy() {
 	let addr = localStorage.getItem('userAddress')
-	navigator.clipboard.writeText(addr)
+	// navigator.clipboard.writeText(addr)
+	copyTextToClipboard(addr)
 	toast('复制成功')
+}
+
+function copyTextToClipboard(text) {
+	// 创建一个临时的textarea元素  
+	const textarea = document.createElement('textarea');
+
+	// 设置textarea为不可见  
+	textarea.style.position = 'fixed'; // 固定定位  
+	textarea.style.opacity = 0; // 透明度为0  
+	textarea.style.left = '-9999px'; // 移到屏幕外  
+
+	// 将需要复制的文本设置到textarea中  
+	textarea.value = text;
+
+	// 将textarea添加到body中  
+	document.body.appendChild(textarea);
+
+	// 选中textarea的全部内容  
+	textarea.select();
+
+	try {
+		// 执行复制操作  
+		const successful = document.execCommand('copy');
+		const msg = successful ? 'successful' : 'unsuccessful';
+		console.log('Copying text command was ' + msg);
+	} catch (err) {
+		console.error('Oops, unable to copy', err);
+	}
+
+	// 移除textarea  
+	document.body.removeChild(textarea);
 }
 window.addEventListener('ton-connect-connection-completed', (event) => {
 	console.log('Transaction init==============', event.detail.wallet_address);
@@ -285,7 +317,7 @@ function loadFooterText() {
 		$('#moreText3') && $('#moreText3').html('My assets')
 		$('#moreText4') && $('#moreText4').html('the charts')
 		$('#moreText5') && $('#moreText5').html('invite')
-		$('#loadText') && $('#loadText').html('loading')
+		$('#loadText') && $('#loadText').html('loading...')
 
 	} else {
 		$('#joinus') && $('#joinus').html('加入我们的社区')
@@ -302,7 +334,7 @@ function loadFooterText() {
 		$('#moreText3') && $('#moreText3').html('我的资产')
 		$('#moreText4') && $('#moreText4').html('排行榜')
 		$('#moreText5') && $('#moreText5').html('邀请')
-		$('#loadText') && $('#loadText').html('加载中')
+		$('#loadText') && $('#loadText').html('加载中...')
 
 	}
 }

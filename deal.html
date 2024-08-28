@@ -484,20 +484,20 @@
 				</div>
 			</div>
 			<div class="joinus">
-				<div class="fs-20">加入我们的社区</div>
+				<div class="fs-20" id="joinus">加入我们的社区</div>
 				<div class="ourCommunity flex" id="ourCommunity">
 				</div>
 				<div class="flex-bw" id="footerAbout">
 					<div class="flex1">
-						<span>探索</span>
+						<span id="joinText1">探索</span>
 						<ul id="dt1"></ul>
 					</div>
 					<div class="flex1">
-						<span>用户</span>
+						<span id="joinText2">用户</span>
 						<ul id="dt2"></ul>
 					</div>
 					<div class="flex1">
-						<span>开发</span>
+						<span id="joinText3">开发</span>
 						<ul id="dt3"></ul>
 					</div>
 				</div>
@@ -505,79 +505,51 @@
 			<div class="tabbar flex">
 				<a class="flex1" href="deal.html">
 					<img src="./images/tabs1.png" alt="">
-					<span class="mainColor">交易</span>
+					<span class="mainColor" id="tabbarText1">交易</span>
 				</a>
 				<a class="flex1" href="pool.html">
 					<img src="./images/tab2.png" alt="">
-					<span>池子</span>
+					<span id="tabbarText2">池子</span>
 				</a>
 				<a class="flex1" href="destroy.html">
 					<img src="./images/tab3.png" alt="">
-					<span>销毁</span>
+					<span id="tabbarText3">销毁</span>
 				</a>
 				<a class="flex1" href="bridge.html">
 					<img src="./images/tab4.png" alt="">
-					<span>跨链桥</span>
+					<span id="tabbarText4">跨链桥</span>
 				</a>
 				<a class="flex1" href="communityToken.html">
 					<img src="./images/tab5.png" alt="">
-					<span>社区代币</span>
+					<span id="tabbarText5">社区代币</span>
 				</a>
 			</div>
-			<!-- 连接钱包弹窗 -->
-			<div class="popup" id="popup">
-				<div class="modal flex1" id="modal">
-					<img onclick="closeModal()" class="close" src="./images/close.png" alt="">
-					<span>连接您的钱包</span>
-					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
-					<img class="qrcode" src="" alt="">
-					<span class="fs-12 mb-20">可用钱包</span>
-					<div class="flex">
-						<div class="flex1">
-							<img src="./images/wallet1.png" alt="">
-							<span>Wallet inTelegram</span>
-						</div>
-						<div class="flex1">
-							<img src="./images/wallet2.png" alt="">
-							<span>Tonkeeper Popular</span>
-						</div>
-						<div class="flex1">
-							<img src="./images/wallet2.png" alt="">
-							<span>Bitget Wal...</span>
-						</div>
-						<div class="flex1">
-							<img src="./images/wallet3.png" alt="">
-							<span>View allWallets</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
 					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<div class="flex">
-							<span>钱包地址：</span>
+							<span id="moreText1">钱包地址：</span>
 							<span id="walletAddress"></span>
 						</div>
 						<img src="./images/copy.png" onclick="copy()" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
-						<span>首页</span>
+						<span id="moreText2">首页</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="wallet.html">
-						<span>我的资产</span>
+						<span id="moreText3">我的资产</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="ranking.html">
-						<span>排行榜</span>
+						<span id="moreText4">排行榜</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="invite.html">
-						<span>邀请</span>
+						<span id="moreText5">邀请</span>
 						<img src="./images/right.png" alt="">
 					</a>
 				</div>
@@ -585,7 +557,7 @@
 			<!-- 加载弹窗 -->
 			<div id="loadingModal" class="loadingModal">
 				<div class="modal-content">
-					<p>加载中 . . .</p>
+					<p id="loadText">加载中 . . .</p>
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
@@ -612,6 +584,7 @@
 				await showLoading()
 				await getIndexInfo()
 				reloadText()
+				loadFooterText()
 				hideLoading()
 			}
 			if (token) {

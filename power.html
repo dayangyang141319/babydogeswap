@@ -278,11 +278,11 @@
 				<img src="images/back.png" alt="">
 			</div>
 			<div class="flex1 dataWrap">
-				<span class="grey">我当前算力</span>
+				<span class="grey" id="powerText1">我当前算力</span>
 				<span id="userCredit4">0</span>
-				<a class="btn" href="transfer.html">算力转赠</a>
+				<a class="btn" id="powerText2" href="transfer.html">算力转赠</a>
 			</div>
-			<div class="">算力记录</div>
+			<div class="" id="powerText3">算力记录</div>
 			<div class="flex1 recordWrap" id="recordWrap">
 
 			</div>
@@ -292,25 +292,25 @@
 					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<div class="flex">
-							<span>钱包地址：</span>
+							<span id="moreText1">钱包地址：</span>
 							<span id="walletAddress"></span>
 						</div>
 						<img src="./images/copy.png" onclick="copy()" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
-						<span>首页</span>
+						<span id="moreText2">首页</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="wallet.html">
-						<span>我的资产</span>
+						<span id="moreText3">我的资产</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="ranking.html">
-						<span>排行榜</span>
+						<span id="moreText4">排行榜</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="invite.html">
-						<span>邀请</span>
+						<span id="moreText5">邀请</span>
 						<img src="./images/right.png" alt="">
 					</a>
 				</div>
@@ -318,7 +318,7 @@
 			<!-- 加载弹窗 -->
 			<div id="loadingModal" class="loadingModal">
 				<div class="modal-content">
-					<p>加载中 . . .</p>
+					<p id="loadText">加载中 . . .</p>
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
@@ -362,7 +362,7 @@
 
 						if (!list.length) {
 							recordItem = `<div class="empty flex">
-								暂无记录
+								${baseLang == 'EN'?'No records available at the moment':'暂无记录'}
 							</div>`
 							recordWrap.innerHTML = recordItem
 						} else {
@@ -387,13 +387,25 @@
 				await getIndexInfo()
 				await getCredit()
 				await getRebateList()
-
+				reloadText()
+				loadFooterText()
 				hideLoading()
 			}
 			if (token) {
 				loadData()
 			}
 
+			function reloadText() {
+				if (baseLang == 'EN') {
+					$('#powerText1').html('My current computing power')
+					$('#powerText2').html('Computing power transfer gift')
+					$('#powerText3').html('Computing power record')
+				} else {
+					$('#powerText1').html('我当前算力')
+					$('#powerText2').html('算力转赠')
+					$('#powerText3').html('算力记录')
+				}
+			}
 			// Init TWA
 			Telegram.WebApp.ready();
 

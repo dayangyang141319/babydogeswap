@@ -320,19 +320,19 @@
 				</div>
 			</div>
 			<div class="pagetop">
-				<div class="fs-20">池子</div>
+				<div class="fs-20" id="poolText1">池子</div>
 				<div class="btn">
 					<img src="./images/right1.png" alt="">
 					<img class="left" src="./images/right1.png" alt="">
-					<span>提高流动性</span>
+					<span id="poolText2">提高流动性</span>
 				</div>
 				<div class="searchWrap flex1">
 					<div class="flex border">
 						<img src="./images/ser.png" alt="">
-						<span id="">搜索</span>
+						<span  id="poolText3">搜索</span>
 					</div>
 					<div class="flex">
-						<span id="">筛选器</span>
+						<span  id="poolText4">筛选器</span>
 						<img src="./images/ton.png" alt="">
 						<img src="./images/scale.png" alt="">
 						<img src="./images/usdt1.png" alt="">
@@ -344,13 +344,13 @@
 			</div>
 			<div class="poolWrap">
 				<div class="mainColor bold">
-					<span>池子</span>
+					<span id="poolText5">池子</span>
 					<span class="fs-12">（854）</span>
 				</div>
 				<div class="flex title">
-					<span>名称</span>
-					<span>价格</span>
-					<span>涨幅</span>
+					<span id="poolText6">名称</span>
+					<span id="poolText7">价格</span>
+					<span id="poolText8">涨幅</span>
 				</div>
 				<div class="flex record">
 					<div class="flex">
@@ -404,20 +404,20 @@
 					</div>
 				</div>
 				<div class="joinus">
-					<div class="fs-20">加入我们的社区</div>
+					<div class="fs-20" id="joinus">加入我们的社区</div>
 					<div class="ourCommunity flex" id="ourCommunity">
 					</div>
 					<div class="flex-bw" id="footerAbout">
 						<div class="flex1">
-							<span>探索</span>
+							<span id="joinText1">探索</span>
 							<ul id="dt1"></ul>
 						</div>
 						<div class="flex1">
-							<span>用户</span>
+							<span id="joinText2">用户</span>
 							<ul id="dt2"></ul>
 						</div>
 						<div class="flex1">
-							<span>开发</span>
+							<span id="joinText3">开发</span>
 							<ul id="dt3"></ul>
 						</div>
 					</div>
@@ -426,78 +426,51 @@
 			<div class="tabbar flex">
 				<a class="flex1" href="deal.html">
 					<img src="./images/tab1.png" alt="">
-					<span>交易</span>
+					<span id="tabbarText1">交易</span>
 				</a>
 				<a class="flex1" href="pool.html">
 					<img src="./images/tabs2.png" alt="">
-					<span class="mainColor">池子</span>
+					<span class="mainColor" id="tabbarText2">池子</span>
 				</a>
 				<a class="flex1" href="destroy.html">
 					<img src="./images/tab3.png" alt="">
-					<span>销毁</span>
+					<span id="tabbarText3">销毁</span>
 				</a>
 				<a class="flex1" href="bridge.html">
 					<img src="./images/tab4.png" alt="">
-					<span>跨链桥</span>
+					<span id="tabbarText4">跨链桥</span>
 				</a>
 				<a class="flex1" href="communityToken.html">
 					<img src="./images/tab5.png" alt="">
-					<span>社区代币</span>
+					<span id="tabbarText5">社区代币</span>
 				</a>
 			</div>
-			<!-- 连接钱包弹窗 -->
-			<div class="popup" id="popup">
-				<div class="modal flex1" id="modal">
-					<img onclick="closeModal()" class="close" src="./images/close.png" alt="">
-					<span>连接您的钱包</span>
-					<span class="fs-12 mt-20">请使用您的手机钱包扫描</span>
-					<img class="qrcode" src="" alt="">
-					<span class="fs-12 mb-20">可用钱包</span>
-					<div class="flex" id="walletWrap">
-						<!-- <div class="flex1">
-							<img src="./images/wallet1.png" alt="">
-							<span>Wallet inTelegram</span>
-						</div>
-						<div class="flex1">
-							<img src="./images/wallet2.png" alt="">
-							<span>Tonkeeper Popular</span>
-						</div>
-						<div class="flex1">
-							<img src="./images/wallet2.png" alt="">
-							<span>Bitget Wal...</span>
-						</div>
-						<div class="flex1">
-							<img src="./images/wallet3.png" alt="">
-							<span>View allWallets</span>
-						</div> -->
-					</div>
-				</div>
-			</div>
+			
 			<!-- 更多菜单 -->
 			<div class="popup rightPopup" id="morePopup">
 				<div class="moreModal flex1" id="moreModal">
 					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<div class="flex">
-							<span>钱包地址：</span>
+							<span id="moreText1">钱包地址：</span>
 							<span id="walletAddress"></span>
 						</div>
 						<img src="./images/copy.png" onclick="copy()" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
-						<span>首页</span>
+						<span id="moreText2">首页</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="wallet.html">
-						<span>我的资产</span>
+						<span id="moreText3">我的资产</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="ranking.html">
-						<span>排行榜</span>
+						<span id="moreText4">排行榜</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="invite.html">
-						<span>邀请</span>
+						<span id="moreText5">邀请</span>
 						<img src="./images/right.png" alt="">
 					</a>
 				</div>
@@ -505,7 +478,7 @@
 			<!-- 加载弹窗 -->
 			<div id="loadingModal" class="loadingModal">
 				<div class="modal-content">
-					<p>加载中 . . .</p>
+					<p id="loadText">加载中 . . .</p>
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
@@ -530,12 +503,35 @@
 			}
 			async function loadData() {
 				await showLoading()
-
 				await getIndexInfo()
+				reloadText()
+				loadFooterText()
 				hideLoading()
 			}
 			if (token) {
 				loadData()
+			}
+			
+			function reloadText() {
+				if (baseLang == 'EN') {
+					$('#poolText1').html('pond')
+					$('#poolText2').html('Improve liquidity')
+					$('#poolText3').html('search for')
+					$('#poolText4').html('filter')
+					$('#poolText5').html('pond')
+					$('#poolText6').html('name')
+					$('#poolText7').html('price')
+					$('#poolText8').html('Increase in price')
+				} else {
+					$('#poolText1').html('池子')
+					$('#poolText2').html('提高流动性')
+					$('#poolText3').html('搜索')
+					$('#poolText4').html('筛选器')
+					$('#poolText5').html('池子')
+					$('#poolText6').html('名称')
+					$('#poolText7').html('价格')
+					$('#poolText8').html('涨幅')
+				}
 			}
 		</script>
 

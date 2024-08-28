@@ -338,18 +338,18 @@
 				<img src="images/back.png" alt="">
 			</a>
 			<div class="flex1 dataWrap">
-				<span class="grey">可提现BDS</span>
+				<span class="grey" id="tokenBText1">可提现BDS</span>
 				<span class="credit">0</span>
-				<div class="btn" onclick="showPopup()">提取</div>
+				<div class="btn" id="tokenBText2" onclick="showPopup()">提取</div>
 			</div>
 			<div class="flex-bw tabs">
 				<div class="flex1 tab-link" id="tabs-1" onclick="changeTab(0)">
-					<span id="">收益记录</span>
+					<span id="tokenBText3">收益记录</span>
 				</div>
 				<div class="flex1 tab-link" id="tabs-2" onclick="changeTab(1)">
-					<span id="">提取记录</span>
+					<span id="tokenBText4">提取记录</span>
 				</div>
-				<div class="indicator"></div>
+				<div class="indicator" id="indicator"></div>
 			</div>
 			<div class="tab-content">
 				<div class=" recordWrap tab-panel" id="tab-1">
@@ -362,18 +362,18 @@
 			<!-- 提取弹窗 -->
 			<div class="popup withdrawPopup" id="withdrawPopup">
 				<div class="flex1 withdrawModal" id="withdrawModal">
-					<span class="title">提取</span>
+					<span class="title" id="tokenBText5">提取</span>
 					<div class="flex balance">
-						<div>当前BDS：</div>
+						<div id="tokenBText6">当前BDS：</div>
 						<span class="mainColor credit">0</span>
 					</div>
-					<div class="tip">请输入提取数量</div>
+					<div class="tip" id="tokenBText7">请输入提取数量</div>
 					<input type="number" id="input" placeholder="请输入提取数量">
 					<div class="fee flex">
-						<span>手续费：</span>
+						<span  id="tokenBText8">手续费：</span>
 						<span class="percent" id="percent">0%</span>
 					</div>
-					<div class="btn" onclick="toWithdraw()">提取</div>
+					<div class="btn"  id="tokenBText9" onclick="toWithdraw()">提取</div>
 				</div>
 			</div>
 			<!-- 更多菜单 -->
@@ -382,25 +382,25 @@
 					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<div class="flex">
-							<span>钱包地址：</span>
+							<span id="moreText1">钱包地址：</span>
 							<span id="walletAddress"></span>
 						</div>
 						<img src="./images/copy.png" onclick="copy()" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
-						<span>首页</span>
+						<span id="moreText2">首页</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="wallet.html">
-						<span>我的资产</span>
+						<span id="moreText3">我的资产</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="ranking.html">
-						<span>排行榜</span>
+						<span id="moreText4">排行榜</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="invite.html">
-						<span>邀请</span>
+						<span id="moreText5">邀请</span>
 						<img src="./images/right.png" alt="">
 					</a>
 				</div>
@@ -408,7 +408,7 @@
 			<!-- 加载弹窗 -->
 			<div id="loadingModal" class="loadingModal">
 				<div class="modal-content">
-					<p>加载中 . . .</p>
+					<p id="loadText">加载中 . . .</p>
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
@@ -428,6 +428,7 @@
 		<script>
 			let withdrawPopup = document.getElementById('withdrawPopup')
 			let withdrawModal = document.getElementById('withdrawModal')
+			let input = document.getElementById('input')
 			let current = 0
 
 			function trsAddress(address) {
@@ -438,9 +439,9 @@
 			}
 
 			function toWithdraw() {
-				let price = document.getElementById('input').value
+				let price = input.value
 				if (Number(price) <= 0) {
-					return toast('请输入提取数量')
+					return toast(baseLang=='EN'?'Please enter the extraction quantity':'请输入提取数量')
 				}
 				apiHttp($, "/api/contract/withdraw/index", {
 					price: price,
@@ -448,7 +449,7 @@
 				}).then(res => {
 					if (res.code == 1) {
 						toast(res.msg)
-						document.getElementById('input').value = ''
+						input.value = ''
 						withdrawModal.style.animation = "slideUp 0.4s forwards"; // 应用上滑动画
 						// moreModal.classList.remove('active')
 						setTimeout(() => {
@@ -491,7 +492,7 @@
 						let tab1 = document.getElementById('tab-1')
 						if (!list.length) {
 							recordItem = `<div class="empty flex">
-								暂无记录
+								${baseLang=='EN'?'No records available at the moment':'暂无记录'}
 							</div>`
 							tab1.innerHTML = recordItem
 
@@ -525,7 +526,7 @@
 
 						if (!list.length) {
 							recordItem = `<div class="empty flex">
-								暂无记录
+								${baseLang=='EN'?'No records available at the moment':'暂无记录'}
 							</div>`
 							tab2.innerHTML = recordItem
 
@@ -533,19 +534,19 @@
 							list.forEach(item => {
 								if (item.status == 2) {
 									recordItem += `<div class="flex">
-								<span>提取</span>
+								<span>${baseLang=='EN'?'extract':'提取'}</span>
 								<span class="red">${item.price}</span>
 								<div class="flex">
 									<div class="flex1">
 										<span>${formatTimestamp(item.createtime,'date')}</span>
 										<span>${formatTimestamp(item.createtime,'time')}</span>
 									</div>
-									<div class="btn" onclick="${toReceive()}">领取</div>
+									<div class="btn" onclick="${toReceive()}">${baseLang=='EN'?'receive':'领取'}</div>
 								</div>
 							</div>`
 								} else {
 									recordItem += `<div class="flex">
-								<span>提取</span>
+								<span>${baseLang=='EN'?'extract':'提取'}</span>
 								<span class="red">${item.price}</span>
 								<div class="flex">
 									<div class="flex1">
@@ -566,11 +567,46 @@
 				await showLoading()
 				await getIndexInfo()
 				await getAsset()
-
+				reloadText()
+				loadFooterText()
 				hideLoading()
 			}
 			if (token) {
 				loadData()
+			}
+
+			function reloadText() {
+				if (baseLang == 'EN') {
+					$('#tokenBText1').html('Withdrawable BDS')
+					$('#tokenBText2').html('extract')
+					$('#tokenBText3').html('Revenue records')
+					$('#tokenBText4').html('Extract Records')
+					$('#tokenBText5').html('extract')
+					$('#tokenBText6').html('Current BDS:')
+					$('#tokenBText7').html('Please enter the extraction quantity')
+					$('#tokenBText8').html('Service Charge:')
+					$('#tokenBText9').html('extract')
+					input.placeholder = "Please enter the extraction quantity";
+				} else {
+					$('#tokenBText1').html('可提现BDS')
+					$('#tokenBText2').html('提取')
+					$('#tokenBText3').html('收益记录')
+					$('#tokenBText4').html('提取记录')
+					$('#tokenBText5').html('提取')
+					$('#tokenBText6').html('当前BDS：')
+					$('#tokenBText7').html('请输入提取数量')
+					$('#tokenBText8').html('手续费：')
+					$('#tokenBText9').html('提取')
+					input.placeholder = "请输入提取数量";
+				}
+				initTab()
+			}
+
+			function initTab() {
+				let element = document.getElementById('tokenBText3')
+				let style = window.getComputedStyle(element);
+				let width = parseFloat(style.width); // 注意：这可能需要处理单位  
+				document.querySelector('.indicator').style.left = `${(width - 30) / 2}px`;
 			}
 
 			function changeTab(index) {
@@ -584,9 +620,13 @@
 					panel.classList.remove('active');
 				});
 				// 添加active类到选中的tab-panel  
+				let element = document.getElementById('tokenBText3')
+				let style = window.getComputedStyle(element);
+				let width = parseFloat(style.width); // 注意：这可能需要处理单位  
 				document.getElementById('tabs-' + (index + 1)).classList.add('active');
 				document.getElementById('tab-' + (index + 1)).classList.add('active');
-				const newLeft = index * (window.innerWidth - 95) + 'px'; // 计算新的left值  
+				const newLeft = index * (window.innerWidth - 40 - width) + 'px'; // 计算新的left值  
+				document.querySelector('.indicator').style.left = `${(width - 30) / 2}px`;
 				document.querySelector('.indicator').style.transform = `translateX(${newLeft})`;
 				if (index == 0) {
 					getRebateList()

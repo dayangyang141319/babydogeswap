@@ -356,13 +356,13 @@
 			<!-- 签到弹窗 -->
 			<div class="popup " id="popup1">
 				<div class="modal1 flex1" id="modal1">
-					<span>恭喜您获得</span>
+					<span id="indexText9">恭喜您获得</span>
 					<div class="flex">
 						<span class="amount" id="signPrice"></span>
 						<span>babydoge</span>
 					</div>
 					<img src="./images/sign.png" alt="">
-					<div class="btn flex" onclick="closePopup1()">开心收下</div>
+					<div class="btn flex" id="indexText10" onclick="closePopup1()">开心收下</div>
 				</div>
 			</div>
 			<!-- 更多菜单 -->
@@ -446,6 +446,8 @@
 					$('#indexText6').html('bridge')
 					$('#indexText7').html('Community token')
 					$('#indexText8').html('exchange')
+					$('#indexText9').html('Congratulations on obtaining')
+					$('#indexText10').html('Please accept with joy')
 				} else {
 					$('#indexText1').html('交易')
 					$('#indexText2').html('您可以在TON链上买卖交易代币')
@@ -455,6 +457,8 @@
 					$('#indexText6').html('桥')
 					$('#indexText7').html('社区代币')
 					$('#indexText8').html('去兑换')
+					$('#indexText9').html('恭喜您获得')
+					$('#indexText10').html('开心收下')
 				}
 			}
 

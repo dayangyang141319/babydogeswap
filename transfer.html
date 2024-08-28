@@ -95,15 +95,15 @@
 				<a href="power.html">
 					<img src="images/back.png" alt="">
 				</a>
-				<span>算力转赠</span>
+				<span id="transText1">算力转赠</span>
 				<span></span>
 			</div>
-			<div class="mb-14">接收人钱包地址</div>
+			<div class="mb-14" id="transText2">接收人钱包地址</div>
 			<input class="mb-42" type="text" id="address" placeholder="接收人钱包地址">
-			<div class="mb-14">赠送数量</div>
+			<div class="mb-14" id="transText3">赠送数量</div>
 			<input class="mb-17" type="number" id="price" placeholder="赠送数量">
 			<div class="mb-20">
-				<span>拥有算力：</span>
+				<span id="transText4">拥有算力：</span>
 				<span class="mainColor" id="credit4">0</span>
 				<span>USDT</span>
 			</div>
@@ -117,11 +117,11 @@
 				<span class="mainColor">1000</span>
 				<span>USDT</span>
 			</div> -->
-			<div class="btn" onclick="toTransfer()">赠送</div>
+			<div class="btn" id="transText5" onclick="toTransfer()">赠送</div>
 			<!-- 加载弹窗 -->
 			<div id="loadingModal" class="loadingModal">
 				<div class="modal-content">
-					<p>加载中 . . .</p>
+					<p id="loadText">加载中 . . .</p>
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
@@ -138,6 +138,8 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
+			let addressIpt = document.getElementById('address')
+			let priceIpt = document.getElementById('price')
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
 				localStorage.setItem('userAddress', addr)
@@ -155,18 +157,19 @@
 			async function loadData() {
 				await showLoading()
 				await getCredit()
+				reloadText()
 				hideLoading()
 			}
 			loadData()
 
 			function toTransfer() {
-				let address = document.getElementById('address').value
-				let price = document.getElementById('price').value
+				let address = addressIpt.value
+				let price = priceIpt.value
 				if (!address) {
-					return toast('请输入地址')
+					return toast(baseLang == 'EN'?'Please enter the address':'请输入地址')
 				}
 				if (Number(price) <= 0) {
-					return toast('请输入数量')
+					return toast(baseLang == 'EN'?'Please enter the quantity':'请输入数量')
 				}
 				apiHttp($, "/api/contract/exchange/transfer", {
 					address,
@@ -174,11 +177,31 @@
 				}).then(res => {
 					if (res.code == 1) {
 						toast(res.msg)
-						document.getElementById('address').value = ''
-						document.getElementById('price').value = ''
+						addressIpt.value = ''
+						priceIpt.value = ''
 						getCredit()
 					}
 				})
+			}
+
+			function reloadText() {
+				if (baseLang == 'EN') {
+					$('#transText1').html('Computing power transfer gift')
+					$('#transText2').html("Recipient's wallet address")
+					$('#transText3').html('Gift quantity')
+					$('#transText4').html('Having computing power:')
+					$('#transText5').html('give')
+					addressIpt.placeholder = "Recipient's wallet address";
+					priceIpt.placeholder = "Gift quantity";
+				} else {
+					$('#transText1').html('算力转赠')
+					$('#transText2').html('接收人钱包地址')
+					$('#transText3').html('赠送数量')
+					$('#transText4').html('拥有算力：')
+					$('#transText5').html('赠送')
+					addressIpt.placeholder = "接收人钱包地址";
+					priceIpt.placeholder = "赠送数量";
+				}
 			}
 
 			// Init TWA

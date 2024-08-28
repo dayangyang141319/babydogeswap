@@ -96,13 +96,13 @@
 				</div>
 			</div>
 			<div class="inviteBg">
-				<div class="fs-27">我的团队</div>
+				<div class="fs-27" id="teamText1">我的团队</div>
 			</div>
 			<div class="inviteWrap flex1">
-				<div class="title">邀请数据</div>
+				<div class="title" id="teamText2">邀请数据</div>
 				<div class="flex teamList">
-					<span>地址</span>
-					<span>关系</span>
+					<span id="teamText3">地址</span>
+					<span id="teamText4">关系</span>
 				</div>
 				<div id="inviteWrap">
 
@@ -114,25 +114,25 @@
 					<span class="bold twaName"></span>
 					<div class="walletBtn flex">
 						<div class="flex">
-							<span>钱包地址：</span>
+							<span id="moreText1">钱包地址：</span>
 							<span id="walletAddress"></span>
 						</div>
 						<img src="./images/copy.png" onclick="copy()" alt="">
 					</div>
 					<a class="flex-bw" href="index.html">
-						<span>首页</span>
+						<span id="moreText2">首页</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="wallet.html">
-						<span>我的资产</span>
+						<span id="moreText3">我的资产</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="ranking.html">
-						<span>排行榜</span>
+						<span id="moreText4">排行榜</span>
 						<img src="./images/right.png" alt="">
 					</a>
 					<a class="flex-bw" href="invite.html">
-						<span>邀请</span>
+						<span id="moreText5">邀请</span>
 						<img src="./images/right.png" alt="">
 					</a>
 				</div>
@@ -140,7 +140,7 @@
 			<!-- 加载弹窗 -->
 			<div id="loadingModal" class="loadingModal">
 				<div class="modal-content">
-					<p>加载中 . . .</p>
+					<p id="loadText">加载中 . . .</p>
 					<img src="images/loading.png" alt="" />
 				</div>
 			</div>
@@ -173,14 +173,14 @@
 						let inviteItem = ''
 						if (!list.length) {
 							inviteItem = `<div class="empty flex">
-								暂无记录
+								${baseLang=='EN'?'No records available at the moment':'暂无记录'}
 							</div>`
 							inviteWrap.innerHTML = inviteItem
 						} else {
 							list.forEach(item => {
 								inviteItem += `<div class="flex teamList">
 							<span>${sliceAddress(item.address.startsWith('0:')?TonConnectSDK.toUserFriendlyAddress(item.address, true):item.address)}</span>
-							<span class="${item.level==1?'green':'yellow'}">${item.level==1?'直推':'间推'}</span>
+							<span class="${item.level==1?'green':'yellow'}">${item.level==1?baseLang=='EN'?'Direct push':'直推':baseLang=='EN'?'Inter push':'间推'}</span>
 						</div>`
 							})
 							inviteWrap.innerHTML = inviteItem
@@ -193,11 +193,26 @@
 				await showLoading()
 				await getIndexInfo()
 				await getTeamList()
-
+				reloadText()
+				loadFooterText()
 				hideLoading()
 			}
 			if (token) {
 				loadData()
+			}
+
+			function reloadText() {
+				if (baseLang == 'EN') {
+					$('#teamText1').html('my team')
+					$('#teamText2').html('Invite data')
+					$('#teamText3').html('address')
+					$('#teamText4').html('relationship')
+				} else {
+					$('#teamText1').html('我的团队')
+					$('#teamText2').html('邀请数据')
+					$('#teamText3').html('地址')
+					$('#teamText4').html('关系')
+				}
 			}
 		</script>
 
