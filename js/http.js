@@ -10,6 +10,7 @@ const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 function updateToken() {
 	var tokenPramas = { // 要发送给后端的数据
 		'token': token,
+		lang:baseLang=='EN'?'en':'zh-cn'
 	}
 	return tokenPramas
 }
@@ -266,16 +267,16 @@ function login(address, inviteCode) {
 
 function getIndexInfo() {
 	let data = localStorage.getItem('twaInfo')
-	if (data) {
-		setFooter(JSON.parse(data))
-	} else {
+	// if (data) {
+	// 	setFooter(JSON.parse(data))
+	// } else {
 		apiHttp($, "/api/contract/index/index").then(res => {
 			if (res.code == 1) {
 				localStorage.setItem('twaInfo', JSON.stringify(res.data))
 				setFooter(res.data)
 			}
 		})
-	}
+	// }
 }
 
 function showLoading() {
@@ -287,18 +288,18 @@ function hideLoading() {
 }
 let setLang = document.getElementById('setLang')
 if (setLang) {
-	// setLang.addEventListener('click', () => {
-	// 	let lang = $('#setLang').text()
-	// 	console.log(lang);
-	// 	if (lang == 'CN') {
-	// 		baseLang = 'EN'
-	// 	} else {
-	// 		baseLang = 'CN'
-	// 	}
-	// 	$('#setLang').text(baseLang)
-	// 	localStorage.setItem('lang', baseLang)
-	// 	location.reload()
-	// })
+	setLang.addEventListener('click', () => {
+		let lang = $('#setLang').text()
+		console.log(lang);
+		if (lang == 'CN') {
+			baseLang = 'EN'
+		} else {
+			baseLang = 'CN'
+		}
+		$('#setLang').text(baseLang)
+		localStorage.setItem('lang', baseLang)
+		location.reload()
+	})
 }
 
 function loadFooterText() {
