@@ -117,7 +117,7 @@ function closeModal() {
 
 function extractInviteCode(url) {
 	// 使用正则表达式匹配 inviteCode= 后面的数字  
-	const match = url.match(/inviteCode=(\d+)/);
+	const match = url.match(/tgWebAppStartParam=(\d+)/);
 	if (match) {
 		// 如果匹配成功，返回匹配到的数字  
 		return match[1];
@@ -192,7 +192,11 @@ async function copy() {
 	let addr = localStorage.getItem('userAddress')
 	// navigator.clipboard.writeText(addr)
 	copyTextToClipboard(addr)
-	toast('复制成功')
+	if (baseLang == 'EN') {
+		toast('Replicating Success')
+	} else {
+		toast('复制成功')
+	}
 }
 
 function copyTextToClipboard(text) {

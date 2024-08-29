@@ -257,6 +257,8 @@
 			let invitePopup = document.getElementById('invitePopup')
 			let inviteModal = document.getElementById('inviteModal')
 			let posterUrl = localStorage.getItem('posterUrl') || ''
+			let tmeUrl = localStorage.getItem('tmeUrl') || ''
+		
 
 			function trsAddress(address) {
 				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
@@ -269,17 +271,28 @@
 				apiHttp($, "/api/contract/user/index").then(res => {
 					if (res.code == 1) {
 						posterUrl = res.data.posterUrl
-						$('#link').text(posterUrl)
-						localStorage.setItem('posterUrl', posterUrl)
+						tmeUrl = res.data.tmeUrl
+						// $('#link').text(posterUrl)
+						// localStorage.setItem('posterUrl', posterUrl)
+						$('#link').text(tmeUrl)
+						localStorage.setItem('tmeUrl', tmeUrl)
 					}
 				})
 			}
 
 			function toCopy() {
-				console.log('posterUrl', posterUrl);
-				if (posterUrl) {
-					// navigator.clipboard.writeText(posterUrl)
-					copyTextToClipboard(posterUrl)
+				// console.log('posterUrl', posterUrl);
+				// if (posterUrl) {
+				// 	copyTextToClipboard(posterUrl)
+				// 	if (baseLang == 'EN') {
+				// 		toast('Replicating Success')
+				// 	} else {
+				// 		toast('复制成功')
+				// 	}
+				// }
+				console.log('tmeUrl', tmeUrl);
+				if (tmeUrl) {
+					copyTextToClipboard(tmeUrl)
 					if (baseLang == 'EN') {
 						toast('Replicating Success')
 					} else {
@@ -297,10 +310,15 @@
 			async function loadData() {
 				await showLoading()
 				await getIndexInfo()
-				if (!posterUrl) {
+				// if (!posterUrl) {
+				// 	getInfo()
+				// } else {
+				// 	$('#link').text(posterUrl)
+				// }
+				if (!tmeUrl) {
 					getInfo()
 				} else {
-					$('#link').text(posterUrl)
+					$('#link').text(tmeUrl)
 				}
 				reloadText()
 				loadFooterText()
