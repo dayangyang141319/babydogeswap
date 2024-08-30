@@ -142,7 +142,7 @@
 			let addressIpt = document.getElementById('address')
 			let priceIpt = document.getElementById('price')
 			function trsAddress(address) {
-				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				let addr = TonConnectSDK.toUserFriendlyAddress(address)
 				localStorage.setItem('userAddress', addr)
 				return addr
 			}

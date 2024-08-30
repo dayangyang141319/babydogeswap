@@ -337,7 +337,7 @@
 		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 		<script>
 			function trsAddress(address) {
-				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				let addr = TonConnectSDK.toUserFriendlyAddress(address)
 				localStorage.setItem('userAddress', addr)
 				$('#walletAddress').text(sliceAddress(addr, 4, 4))
 				return addr

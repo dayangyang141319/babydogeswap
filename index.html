@@ -415,7 +415,7 @@
 		<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 		<script>
 			function trsAddress(address) {
-				let addr = TonConnectSDK.toUserFriendlyAddress(address, true)
+				let addr = TonConnectSDK.toUserFriendlyAddress(address)
 				localStorage.setItem('userAddress', addr)
 				console.log('addr1111111', TonConnectSDK.toUserFriendlyAddress(address));
 				console.log('addr222222', TonConnectSDK.toUserFriendlyAddress(address, true));
