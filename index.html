@@ -465,13 +465,21 @@
 
 			function getSign() {
 				apiHttp($, "/api/contract/sign/index").then(res => {
-					if (res.code == 1) {
-						if (res.data.sign == 0) {
+					// if (res.code == 1) {
+					// 	if (res.data.sign == 0) {
+					// 		// 签到弹窗显示
+					// 		popup1.style.display = 'flex';
+					// 		$('#signPrice').text(res.data.price)
+					// 		toReceive()
+					// 	}
+					// }
+					if (res.code == 1 && res.data.sign == 0) {
+						// if (res.data.sign == 0) {
 							// 签到弹窗显示
 							popup1.style.display = 'flex';
 							$('#signPrice').text(res.data.price)
 							toReceive()
-						}
+						// }
 					}
 				})
 			}
