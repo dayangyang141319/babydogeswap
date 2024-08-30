@@ -239,7 +239,7 @@ window.addEventListener('ton-connect-connection-completed', (event) => {
 
 	if (!token) {
 		setTimeout(() => {
-			login(addr || address, inviteCode)
+			login(addr, inviteCode)
 		}, 500)
 	} else {
 		loadData()
@@ -252,9 +252,13 @@ window.addEventListener('ton-connect-disconnection', (event) => {
 });
 
 function login(address, inviteCode) {
+	let res = md5(address);
+	let sign = md5(res);
+	console.log(333,sign);
 	apiHttp($, "/api/contract/auth/login", {
 		address: address,
-		inviteCode: inviteCode || ''
+		inviteCode: inviteCode || '',
+		sign:sign
 	}).then(res => {
 		console.log(res);
 		if (res.code == 1) {
