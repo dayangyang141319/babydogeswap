@@ -30,6 +30,22 @@
 				font-size: 20px;
 			}
 
+			.inviteBg .flex {
+				font-size: 13px;
+			}
+
+			.inviteBg .dot {
+				width: 4px;
+				height: 4px;
+				background: #ec502c;
+				border-radius: 2px;
+				margin-right: 7px;
+			}
+
+			.inviteBg .mainColor {
+				margin-left: 2px;
+			}
+
 			.inviteWrap {
 				width: 100%;
 				min-height: calc(100vh - 76px);
@@ -95,8 +111,13 @@
 					<img class="menu" onclick="showMore()" src="./images/menu.png" alt="">
 				</div>
 			</div>
-			<div class="inviteBg">
+			<div class="inviteBg flex-bw">
 				<div class="fs-27" id="teamText1"></div>
+				<div class="flex">
+					<div class="dot"></div>
+					<span id="teamText5">团队总人数：</span>
+					<span class="mainColor" id="teamCount">0</span>
+				</div>
 			</div>
 			<div class="inviteWrap flex1">
 				<div class="title" id="teamText2"></div>
@@ -168,7 +189,7 @@
 			function getTeamList() {
 				apiHttp($, "/api/contract/user/getTeamList").then(res => {
 					if (res.code == 1) {
-
+						$('#teamCount').text(res.data.count)
 						let list = res.data.list
 						let inviteWrap = document.getElementById('inviteWrap')
 						let inviteItem = ''
@@ -208,11 +229,13 @@
 					$('#teamText2').html('Invite data')
 					$('#teamText3').html('address')
 					$('#teamText4').html('relationship')
+					$('#teamText5').html('Total number of team: ')
 				} else {
 					$('#teamText1').html('我的团队')
 					$('#teamText2').html('邀请数据')
 					$('#teamText3').html('地址')
 					$('#teamText4').html('关系')
+					$('#teamText5').html('团队总人数：')
 				}
 			}
 		</script>
