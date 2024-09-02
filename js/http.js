@@ -117,7 +117,13 @@ function closeModal() {
 
 function extractInviteCode(url) {
 	// 使用正则表达式匹配 inviteCode= 后面的数字  
-	const match = url.match(/tgWebAppStartParam=(\d+)/);
+	let  match = ''
+	if(url.indexOf('tgWebAppStartParam') != -1){
+		match = url.match(/tgWebAppStartParam=(\d+)/);
+	}
+	if(url.indexOf('inviteCode') != -1){
+		match = url.match(/inviteCode=(\d+)/);
+	}
 	if (match) {
 		// 如果匹配成功，返回匹配到的数字  
 		return match[1];
@@ -128,9 +134,6 @@ function extractInviteCode(url) {
 
 function showMore(e) {
 	console.log('xxxxx', location.href);
-	// if (location.href.indexOf('inviteCode') != -1 && location.href.indexOf('#')) {
-	// 	let inviteCode = location.href.split('inviteCode=')[]
-	// }
 	morePopup.style.display = 'flex';
 	moreModal.style.animation = "toLeftAnimate 0.4s forwards"; // 应用上滑动画  
 }
@@ -142,9 +145,7 @@ window.onclick = function(event) {
 	} else if (event.target == popup1) {
 		popup1.style.display = "none";
 	} else if (event.target == morePopup) {
-		// moreModal.style.animationDirection = 'reverse'
 		moreModal.style.animation = "toRightAnimate 0.4s forwards"; // 应用上滑动画  
-		// moreModal.classList.remove('active')
 		setTimeout(() => {
 			morePopup.style.display = "none";
 		}, 200)
