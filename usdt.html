@@ -499,7 +499,7 @@
 							list.forEach(item => {
 								recordItem += `<div class="flex">
 								<span>${typesInfo[item.types]}</span>
-								<span class="green">+${item.price}</span>
+								<span class="${Number(item.price) < 0?'red':'green'}">${Number(item.price) < 0 ?item.price:'+'+item.price}</span>
 								<div class="flex1">
 									<span>${formatTimestamp(item.createtime,'date')}</span>
 									<span>${formatTimestamp(item.createtime,'time')}</span>

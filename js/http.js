@@ -117,11 +117,11 @@ function closeModal() {
 
 function extractInviteCode(url) {
 	// 使用正则表达式匹配 inviteCode= 后面的数字  
-	let  match = ''
-	if(url.indexOf('tgWebAppStartParam') != -1){
+	let match = ''
+	if (url.indexOf('tgWebAppStartParam') != -1) {
 		match = url.match(/tgWebAppStartParam=(\d+)/);
 	}
-	if(url.indexOf('inviteCode') != -1){
+	if (url.indexOf('inviteCode') != -1) {
 		match = url.match(/inviteCode=(\d+)/);
 	}
 	if (match) {
@@ -231,7 +231,7 @@ function copyTextToClipboard(text) {
 	document.body.removeChild(textarea);
 }
 window.addEventListener('ton-connect-connection-completed', (event) => {
-	console.log('Transaction init==============',event, event.detail.wallet_address);
+	console.log('Transaction init==============', event, event.detail.wallet_address);
 	let inviteCode = extractInviteCode(location.href)
 	console.log('inviteCode.........', inviteCode);
 	let address = event.detail.wallet_address
@@ -246,6 +246,17 @@ window.addEventListener('ton-connect-connection-completed', (event) => {
 		loadData()
 	}
 });
+
+// window.addEventListener('beforeunload', (event) => {
+// 	console.log('22222222222222');
+// 	if (event.clientX > document.body.clientWidth && event.clientY < 0 || event.altKey) {
+// 		tonConnectUI.disconnect();
+// 		console.log("你关闭了浏览器");
+// 	} else {
+// 		console.log("你正在刷新页面");
+// 	}
+
+// });
 window.addEventListener('ton-connect-disconnection', (event) => {
 	console.log('断开连接！！！！！！！', event.detail.wallet_address);
 	sessionStorage.clear()
@@ -255,11 +266,11 @@ window.addEventListener('ton-connect-disconnection', (event) => {
 function login(address, inviteCode) {
 	let res = md5(address);
 	let sign = md5(res);
-	console.log(333,sign);
+	console.log(333, sign);
 	apiHttp($, "/api/contract/auth/login", {
 		address: address,
 		inviteCode: inviteCode || '',
-		sign:sign
+		sign: sign
 	}).then(res => {
 		console.log(res);
 		if (res.code == 1) {
