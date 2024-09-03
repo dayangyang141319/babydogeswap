@@ -231,7 +231,7 @@ function copyTextToClipboard(text) {
 	document.body.removeChild(textarea);
 }
 window.addEventListener('ton-connect-connection-completed', (event) => {
-	console.log('Transaction init==============', event.detail.wallet_address);
+	console.log('Transaction init==============',event, event.detail.wallet_address);
 	let inviteCode = extractInviteCode(location.href)
 	console.log('inviteCode.........', inviteCode);
 	let address = event.detail.wallet_address
